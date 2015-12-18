@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Pablo on 16/12/2015.
  */
 public class BaseHelper extends SQLiteOpenHelper{
-    String tabla = "CREATE TABLE EQUIPOS(Id INTEGER PRIMARY KEY AUTOINCREMENT, Nombre Text, NumTel Text)";
+    String tabla = "CREATE TABLE EQUIPOS(Id INTEGER PRIMARY KEY AUTOINCREMENT, Nombre Text, NumTel Text," +
+            " Sal1 Text, Sal2 Text, Sal3 Text, TipoEquipo Text)";
 
     public BaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

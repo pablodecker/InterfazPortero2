@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void cargar_datos(){
 
-        BaseHelper myBaseHelper = new BaseHelper(this,"DBInterfaz",null,1);
+        BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
         SQLiteDatabase db = myBaseHelper.getReadableDatabase();
         if (db != null){
             Cursor c =  db.rawQuery("SELECT * FROM Equipos",null);
@@ -51,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
             if (c.moveToFirst()){
                 do{
 //                    String stDato = c.getInt(0) + " " + c.getString(0) + c.getInt(1) + " " + c.getString(1);
-                    String stDato = c.getString(1) +  " " + c.getString(2);
+                      String stDato = c.getInt(0) +
+                            " - " + c.getString(1) +
+                            " - " + c.getString(2) +
+                            " - " + c.getString(3) +
+                            " - " + c.getString(4) +
+                            " - " + c.getString(5);
+
                     stArreglo[i++] = stDato;
                 }while (c.moveToNext());
             }
