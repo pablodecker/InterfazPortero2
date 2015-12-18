@@ -15,20 +15,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
-    //cambio v1.2
+    //cambio v1.3
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        cargar_datos();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(MainActivity.this , DatosEquipo.class );
+                startActivity(i);
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         BaseHelper myBaseHelper = new BaseHelper(this,"DBInterfaz",null,1);
         SQLiteDatabase db = myBaseHelper.getReadableDatabase();
-        if (db !=null){
+        if (db != null){
             Cursor c =  db.rawQuery("SELECT * FROM Equipos",null);
             int cantidad = c.getCount();
             String[] stArreglo = new String[cantidad];

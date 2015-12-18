@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +32,9 @@ public class DatosEquipo extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        //para crear el boton hacia atras(tambien agregar en el manifest el parentActivityName ....
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
     public void guardar_datos(View v){
 
