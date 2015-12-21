@@ -11,18 +11,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     //cambio v1.3
+    ListView lista;
+    String[] stArreglo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        cargar_datos();
+        lista = (ListView)findViewById(R.id.listViewEquipos);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int idSeleccionado = Integer.parseInt(stArreglo[position].split(" ")[0]);
+                    Intent intent = new Intent(MainActivity.this,DatosEquipo.class);
+                    intent.putExtra("idSeleccionado",idSeleccionado);
+                    startActivity(intent);
+             }
+        });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,14 +51,21 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this , DatosEquipo.class );
         startActivity(i);
     }
-    public void cargar_datos(){
 
+    @Override
+    protected void onResume() {
+        //esto es despues del onCreate, entra tambien cuando se vuelve desde otra activity
+        super.onResume();
+        cargar_datos();
+    }
+
+    public void cargar_datos(){
         BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
         SQLiteDatabase db = myBaseHelper.getReadableDatabase();
         if (db != null){
             Cursor c =  db.rawQuery("SELECT * FROM Equipos",null);
             int cantidad = c.getCount();
-            String[] stArreglo = new String[cantidad];
+            stArreglo = new String[cantidad];
             int i = 0;
             if (c.moveToFirst()){
                 do{
@@ -59,11 +78,10 @@ public class MainActivity extends AppCompatActivity {
                             " - " + c.getString(5);
 
                     stArreglo[i++] = stDato;
-                }while (c.moveToNext());
+            }while (c.moveToNext());
             }
             //Creo un adapter para despues setearselo a la lista
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,stArreglo);
-            ListView lista = (ListView)findViewById(R.id.listViewEquipos);
             lista.setAdapter(adapter);
         }
     }

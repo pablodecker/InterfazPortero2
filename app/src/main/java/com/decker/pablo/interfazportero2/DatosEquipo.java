@@ -1,6 +1,7 @@
 package com.decker.pablo.interfazportero2;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 public class DatosEquipo extends AppCompatActivity {
 
     EditText etNombre, etNumTel, etTipoEquipo, etSal1, etSal2, etSal3;
+    Bundle b;
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,10 @@ public class DatosEquipo extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                guardar_datos(view);
+                if (b == null)
+                    insertar_datos(view);
+                else
+                    modificar_datos(view);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
@@ -40,23 +46,66 @@ public class DatosEquipo extends AppCompatActivity {
 //        para crear el boton hacia atras(tambien agregar en el manifest el parentActivityName ....
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-    public void guardar_datos(View v){
+        b = this.getIntent().getExtras();
+        if (b != null){
+            id = b.getInt("idSeleccionado");
+            RecuperarDatos(id);
+        }
 
-        BaseHelper myBaseHelper = new BaseHelper(this,"DBInterfaz",null,1);
+
+    }
+    public void RecuperarDatos(int id){
+            BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
+            SQLiteDatabase db = myBaseHelper.getReadableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("SELECT * FROM Equipos WHERE Id=" + id, null);
+                //Tabla: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+                try {
+                    if (c.moveToFirst()) {
+                        etNombre.setText(c.getString(1));
+                        etNumTel.setText(c.getString(2));
+                        etTipoEquipo.setText(c.getString(3));
+                        etSal1.setText(c.getString(4));
+                        etSal2.setText(c.getString(5));
+                        etSal3.setText(c.getString(6));
+                    }
+                } finally {
+                    c.close();
+                }
+            }
+    }
+
+
+    public void insertar_datos(View v){
+        BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
         SQLiteDatabase db = myBaseHelper.getWritableDatabase();
         if (db !=null){
             ContentValues registronuevo = new ContentValues();
             registronuevo.put("Nombre",etNombre.getText().toString());
             registronuevo.put("NumTel",etNumTel.getText().toString());
-            registronuevo.put("TipoEquipo",etTipoEquipo.getText().toString());
             registronuevo.put("Sal1",etSal1.getText().toString());
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
+            registronuevo.put("TipoEquipo",etTipoEquipo.getText().toString());
             if (db.insert("Equipos",null,registronuevo) > 0){
                 Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
             }
         }
-
+    }
+    public void modificar_datos(View v){
+        BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
+        SQLiteDatabase db = myBaseHelper.getWritableDatabase();
+        if (db !=null){
+            ContentValues registronuevo = new ContentValues();
+            registronuevo.put("Nombre",etNombre.getText().toString());
+            registronuevo.put("NumTel",etNumTel.getText().toString());
+            registronuevo.put("Sal1",etSal1.getText().toString());
+            registronuevo.put("Sal2",etSal2.getText().toString());
+            registronuevo.put("Sal3",etSal3.getText().toString());
+            registronuevo.put("TipoEquipo",etTipoEquipo.getText().toString());
+            if (db.update("Equipos", registronuevo, "Id=" + id, null) > 0){
+                Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
