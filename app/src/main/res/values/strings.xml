@@ -6,4 +6,11 @@
     <string name="title_activity_config_basica">ConfigBasica</string>
     <string name="configurar">configurar</string>
     <string name="habilitacion">Habilitacion</string>
+    <string-array name="lista_de_equipos">
+        <item>KP-AL911 - Alarma Clasica</item>
+        <item>KP-PE014 - Portero GSM</item>
+        <item>KP-PE015 - Interfaz Portero</item>
+        <item>KP-TM900 - Alarma Clasica Nueva</item>
+        <item>KP-TM005 - Alarma Boya</item>
+    </string-array>
 </resources>

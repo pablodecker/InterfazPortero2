@@ -10,12 +10,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class DatosEquipo extends AppCompatActivity {
 
     EditText etNombre, etNumTel, etTipoEquipo, etSal1, etSal2, etSal3;
+    Spinner spTipoEquipo;
+    String[] listaEquipos;
     Bundle b;
     int id;
     @Override
@@ -26,10 +30,15 @@ public class DatosEquipo extends AppCompatActivity {
         setSupportActionBar(toolbar);
         etNombre = (EditText) findViewById(R.id.editTextNombreEquipo);
         etNumTel = (EditText) findViewById(R.id.editTextNumTelEquipo);
-        etTipoEquipo = (EditText) findViewById(R.id.editTextTipoEquipo);
+//        etTipoEquipo = (EditText) findViewById(R.id.editTextTipoEquipo);
+        spTipoEquipo = (Spinner)findViewById(R.id.spTipoEquipo);
         etSal1 = (EditText) findViewById(R.id.editTextSal1);
         etSal2 = (EditText) findViewById(R.id.editTextSal2);
         etSal3 = (EditText) findViewById(R.id.editTextSal3);
+        listaEquipos = getResources().getStringArray(R.array.lista_de_equipos);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, listaEquipos);
+        spTipoEquipo = (Spinner)findViewById(R.id.spTipoEquipo);
+        spTipoEquipo.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,20 +63,28 @@ public class DatosEquipo extends AppCompatActivity {
 
 
     }
+    private void cargar_tipo_equipo(){
+
+
+
+    }
+
+
+
     public void RecuperarDatos(int id){
             BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
             SQLiteDatabase db = myBaseHelper.getReadableDatabase();
             if (db != null) {
                 Cursor c = db.rawQuery("SELECT * FROM Equipos WHERE Id=" + id, null);
-                //Tabla: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+                //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
                 try {
                     if (c.moveToFirst()) {
                         etNombre.setText(c.getString(1));
                         etNumTel.setText(c.getString(2));
-                        etTipoEquipo.setText(c.getString(3));
-                        etSal1.setText(c.getString(4));
-                        etSal2.setText(c.getString(5));
-                        etSal3.setText(c.getString(6));
+                        etSal1.setText(c.getString(3));
+                        etSal2.setText(c.getString(4));
+                        etSal3.setText(c.getString(5));
+                        spTipoEquipo.setSelection(c.getInt(6));
                     }
                 } finally {
                     c.close();
@@ -86,7 +103,8 @@ public class DatosEquipo extends AppCompatActivity {
             registronuevo.put("Sal1",etSal1.getText().toString());
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
-            registronuevo.put("TipoEquipo",etTipoEquipo.getText().toString());
+
+            registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItemPosition());
             if (db.insert("Equipos",null,registronuevo) > 0){
                 Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
             }
@@ -102,7 +120,7 @@ public class DatosEquipo extends AppCompatActivity {
             registronuevo.put("Sal1",etSal1.getText().toString());
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
-            registronuevo.put("TipoEquipo",etTipoEquipo.getText().toString());
+            registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItemPosition());
             if (db.update("Equipos", registronuevo, "Id=" + id, null) > 0){
                 Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
             }
