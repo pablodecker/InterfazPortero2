@@ -30,6 +30,10 @@
         <activity
             android:name=".ConfigBasica"
             android:label="@string/title_activity_config_basica"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EquipoParticular"
+            android:label="@string/title_activity_equipo_particular"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

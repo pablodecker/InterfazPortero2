@@ -13,4 +13,5 @@
         <item>KP-TM900 - Alarma Clasica Nueva</item>
         <item>KP-TM005 - Alarma Boya</item>
     </string-array>
+    <string name="title_activity_equipo_particular">EquipoParticular</string>
 </resources>

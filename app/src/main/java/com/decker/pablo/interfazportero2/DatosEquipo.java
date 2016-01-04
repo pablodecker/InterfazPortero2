@@ -60,8 +60,6 @@ public class DatosEquipo extends AppCompatActivity {
             id = b.getInt("idSeleccionado");
             RecuperarDatos(id);
         }
-
-
     }
     private void cargar_tipo_equipo(){
 
