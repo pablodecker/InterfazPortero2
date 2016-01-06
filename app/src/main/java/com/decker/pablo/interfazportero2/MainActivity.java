@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void agregar_equipo(MainActivity v)
     {
-        Intent i = new Intent(MainActivity.this , DatosEquipo.class );
+//        Intent i = new Intent(MainActivity.this , DatosEquipo.class );
+        Intent i = new Intent(MainActivity.this , EquipoParticular.class );
         startActivity(i);
     }
 
