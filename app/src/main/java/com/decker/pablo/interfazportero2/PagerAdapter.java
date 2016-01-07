@@ -23,14 +23,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 TabEstado tabEstado = new TabEstado();
                 return tabEstado;
             case 1:
-                Tab2 tab2 = new Tab2();
-                return tab2;
+                TabSalidas tabSalidas = new TabSalidas();
+                return tabSalidas;
             case 2:
-                Tab3 tab3 = new Tab3();
-                return tab3;
+                TabConfig1 tabConfig1 = new TabConfig1();
+                return tabConfig1;
             case 3:
-                Tab4 tab4 = new Tab4();
-                return tab4;
+                TabConfig2 tabConfig2 = new TabConfig2();
+                return tabConfig2;
             default:
                 return null;
         }

@@ -8,16 +8,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.EditText;
+import android.widget.Switch;
 
 
 public class EquipoParticular extends AppCompatActivity {
-
+    EditText etTe1,etTe2,etTe3,etTe4,etTe5;
+    Switch swHab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo_particular);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        etTe1 = (EditText) findViewById(R.id.etTelefono1);
+        etTe2 = (EditText) findViewById(R.id.etTelefono2);
+        etTe3 = (EditText) findViewById(R.id.etTelefono3);
+        etTe4 = (EditText) findViewById(R.id.etTelefono4);
+        etTe5 = (EditText) findViewById(R.id.etTelefono5);
+        swHab = (Switch) findViewById(R.id.switchHabilitacion);
+
         //esto es para crear los Tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Estado"));
@@ -36,13 +47,18 @@ public class EquipoParticular extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+
+//        etTe1.setText("3114563781");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewGroup;;
 
 /**
  * Created by Pablo on 03/01/2016.
  */
-public class Tab4 extends Fragment {
+public class TabSalidas extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab4, container, false);
+        return inflater.inflate(R.layout.tab_salidas, container, false);
     }
 }
