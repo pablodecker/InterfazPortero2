@@ -110,6 +110,5 @@
         android:layout_height="wrap_content"
         android:text="@string/configurar"
         android:id="@+id/buttonConfigurar"
-        android:layout_gravity="center_horizontal"
-        android:onClick="enviar_sms_config" />
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

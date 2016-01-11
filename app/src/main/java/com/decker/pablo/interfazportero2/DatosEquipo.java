@@ -69,7 +69,8 @@ public class DatosEquipo extends AppCompatActivity {
 
 
 
-    public void RecuperarDatos(int id){
+    public void RecuperarDatos(int id)
+    {
             BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
             SQLiteDatabase db = myBaseHelper.getReadableDatabase();
             if (db != null) {
