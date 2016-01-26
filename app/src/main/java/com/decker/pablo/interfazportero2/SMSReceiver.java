@@ -15,16 +15,17 @@ import android.widget.Toast;
  */
 public class SMSReceiver extends BroadcastReceiver {
 
-    private String TAG = SMSReceiver.class.getSimpleName();
+    private String TAG = "Pablito";
 
     public SMSReceiver() {
     }
     public void onReceive(Context context, Intent intent)
     {
+        Log.d(TAG, "** Recibi algun SMS");
+        Toast.makeText(context, "Recibi Algo", Toast.LENGTH_SHORT).show();
         Bundle myBundle = intent.getExtras();
         SmsMessage [] messages = null;
         String strMessage = "";
-
         if (myBundle != null)
         {
             Object [] pdus = (Object[]) myBundle.get("pdus");
@@ -46,38 +47,9 @@ public class SMSReceiver extends BroadcastReceiver {
                 strMessage += "\n";
             }
 
-            Log.e("SMS", strMessage);
+            Log.d(TAG, strMessage);
             Toast.makeText(context, strMessage, Toast.LENGTH_SHORT).show();
         }
     }
-//    @Override
-//    public void onReceive(Context context, Intent intent) {
-//        // Get the data (SMS data) bound to intent
-//        Bundle bundle = intent.getExtras();
-//
-//        SmsMessage[] msgs = null;
-//
-//        String str = "";
-//
-//        if (bundle != null) {
-//            // Retrieve the SMS Messages received
-//            Object[] pdus = (Object[]) bundle.get("pdus");
-//            msgs = new SmsMessage[pdus.length];
-//
-//            // For every SMS message received
-//            for (int i=0; i < msgs.length; i++) {
-//                // Convert Object array
-//                msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-//                // Sender's phone number
-//                str += "SMS from " + msgs[i].getOriginatingAddress() + " : ";
-//                // Fetch the text message
-//                str += msgs[i].getMessageBody().toString();
-//                // Newline <img src="http://codetheory.in/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;">
-//                str += "\n";
-//            }
-//
-//            // Display the entire SMS Message
-//            Log.d(TAG, str);
-//        }
-//    }
+
 }
