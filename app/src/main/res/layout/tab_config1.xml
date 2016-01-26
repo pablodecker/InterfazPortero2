@@ -12,11 +12,12 @@
         android:checked="false" />
 
     <GridLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rowCount="6"
         android:columnCount="2"
-        android:id="@+id/gridTelefonos">
+        android:id="@+id/gridTelefonos"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"

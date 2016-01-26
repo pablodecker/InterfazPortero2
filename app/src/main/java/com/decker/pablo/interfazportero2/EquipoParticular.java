@@ -17,6 +17,8 @@ import android.widget.Toast;
 public class EquipoParticular extends AppCompatActivity {
     EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     Switch swHab;
+    TabLayout tabLayout;
+    int iTabPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class EquipoParticular extends AppCompatActivity {
         swHab = (Switch) findViewById(R.id.switchHabilitacion);
 
         //esto es para crear los Tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Estado"));
         tabLayout.addTab(tabLayout.newTab().setText("Sal"));
         tabLayout.addTab(tabLayout.newTab().setText("Conf1"));
@@ -50,6 +52,7 @@ public class EquipoParticular extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                  iTabPosition = tab.getPosition();
 //                switch (tab.getPosition()) {
 //                    case 0:
 //                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_LONG).show();
@@ -81,6 +84,9 @@ public class EquipoParticular extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
+
             }
         });
     }

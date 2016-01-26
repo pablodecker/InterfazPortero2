@@ -14,4 +14,7 @@
         <item>KP-TM005 - Alarma Boya</item>
     </string-array>
     <string name="title_activity_equipo_particular">EquipoParticular</string>
+    <string name="salida_2">Salida 2</string>
+    <string name="salida1">Salida 1</string>
+    <string name="salida_3">Salida 2</string>
 </resources>
