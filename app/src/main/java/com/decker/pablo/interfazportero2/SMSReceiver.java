@@ -45,6 +45,11 @@ public class SMSReceiver extends BroadcastReceiver {
                 strMessage += "\n";
             }
 
+            if ( strMessage.contains("sal")){
+
+
+            }
+
             Log.d(TAG, strMessage);
             Toast.makeText(context, strMessage, Toast.LENGTH_SHORT).show();
         }

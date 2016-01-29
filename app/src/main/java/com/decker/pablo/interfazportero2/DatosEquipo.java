@@ -52,9 +52,11 @@ public class DatosEquipo extends AppCompatActivity {
 //                        .setAction("Action", null).show();
             }
         });
-//        para crear el boton hacia atras(tambien agregar en el manifest el parentActivityName ....
+//        para crear el boton hacia atras (Back)(tambien agregar en el manifest el parentActivityName ....
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         b = this.getIntent().getExtras();
         if (b != null){
             id = b.getInt("idSeleccionado");

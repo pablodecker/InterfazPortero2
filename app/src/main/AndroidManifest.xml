@@ -36,6 +36,7 @@
             android:label="@string/title_activity_datos_equipo"
             android:theme="@style/AppTheme.NoActionBar">
             android:parentActivityName=".MainActivity" >
+            <!--para que vuelva al main cuando apreto el back button-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -44,6 +45,10 @@
             android:name=".EquipoParticular"
             android:label="@string/title_activity_equipo_particular"
             android:theme="@style/AppTheme.NoActionBar">
+            <!--para que vuelva al main cuando apreto el back button-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
     </application>
 </manifest>

@@ -3,6 +3,7 @@ package com.decker.pablo.interfazportero2;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
@@ -43,6 +44,11 @@ public class EquipoParticular extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(myEquipoCAPE.getNombre());
         setSupportActionBar(toolbar);
+        //        para crear el boton hacia atras (Back)(tambien agregar en el manifest el parentActivityName ....
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         listaEquipos = getResources().getStringArray(R.array.lista_de_equipos);
 
         etTe1 = (EditText) findViewById(R.id.etTelefono1);
