@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     //cambio v1.3
+    EquipoCAPE myEquipoCAPE;
     ListView lista;
     String[] stArreglo;
     private String TAG = "Pablito";
@@ -25,15 +26,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "** Entro al Main");
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)getApplicationContext();
+
+
+        Log.d(TAG, "**" + myEquipoCAPE.getNombre());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         lista = (ListView)findViewById(R.id.listViewEquipos);
+        //Aca es cuando hace click en el item
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int idSeleccionado = Integer.parseInt(stArreglo[position].split(" ")[0]);
-                    Intent intent = new Intent(MainActivity.this,DatosEquipo.class);
+                    cargarDatosSeleccion(idSeleccionado);
+
+//                    Intent intent = new Intent(MainActivity.this,DatosEquipo.class);
+                    Intent intent = new Intent(MainActivity.this,EquipoParticular.class);
                     intent.putExtra("idSeleccionado",idSeleccionado);
                     startActivity(intent);
              }
@@ -89,6 +98,38 @@ public class MainActivity extends AppCompatActivity {
             lista.setAdapter(adapter);
         }
     }
+
+    public void cargarDatosSeleccion(int id)
+    {
+        BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
+        SQLiteDatabase db = myBaseHelper.getReadableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT * FROM Equipos WHERE Id=" + id, null);
+            //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+            try {
+                if (c.moveToFirst()) {
+//                    etNombre.setText(c.getString(1));
+//                    etNumTel.setText(c.getString(2));
+//                    etSal1.setText(c.getString(3));
+//                    etSal2.setText(c.getString(4));
+//                    etSal3.setText(c.getString(5));
+//                    spTipoEquipo.setSelection(c.getInt(6));
+
+                    myEquipoCAPE.setNombre(c.getString(1));
+                    myEquipoCAPE.setNumTel(c.getString(2));
+                    myEquipoCAPE.setSal1(c.getString(3));
+                    myEquipoCAPE.setSal2(c.getString(4));
+                    myEquipoCAPE.setSal3(c.getString(5));
+                    myEquipoCAPE.setTipoEquipo(c.getInt(6));
+                }
+            } finally {
+                c.close();
+            }
+        }
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

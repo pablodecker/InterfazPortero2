@@ -62,9 +62,6 @@ public class DatosEquipo extends AppCompatActivity {
         }
     }
     private void cargar_tipo_equipo(){
-
-
-
     }
 
 

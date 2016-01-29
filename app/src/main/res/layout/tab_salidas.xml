@@ -5,7 +5,7 @@
 
         <ToggleButton
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:text="@string/salida1"
             android:id="@+id/toggleButtonSalida1"
             android:layout_gravity="center_horizontal"
@@ -13,7 +13,7 @@
 
         <ToggleButton
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:text="@string/salida_2"
             android:id="@+id/toggleButtonSalida2"
             android:layout_gravity="center_horizontal"
@@ -21,8 +21,8 @@
 
         <ToggleButton
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="@string/salida_3"
+            android:layout_height="100dp"
+            android:text="Salida3"
             android:id="@+id/toggleButtonSalida3"
             android:layout_gravity="center_horizontal"
             android:checked="false" />

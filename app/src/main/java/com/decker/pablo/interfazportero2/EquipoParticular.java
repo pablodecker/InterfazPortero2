@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -18,13 +19,31 @@ public class EquipoParticular extends AppCompatActivity {
     EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     Switch swHab;
     TabLayout tabLayout;
-    int iTabPosition;
+    int iTabPosition, idEquipoDB;
+    EquipoCAPE myEquipoCAPE;
+    private String TAG = "Pablito";
+    private String[] listaEquipos;
+    Bundle b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo_particular);
+
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)getApplicationContext();
+        //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+        Log.d(TAG, "NombreLeido:" + myEquipoCAPE.getNombre());
+        Log.d(TAG, "NumTel:" + myEquipoCAPE.getNumTel());
+        Log.d(TAG, "Sal1:" + myEquipoCAPE.getSal1());
+        Log.d(TAG, "Sal2:" + myEquipoCAPE.getSal2());
+        Log.d(TAG, "Sal3:" + myEquipoCAPE.getSal3());
+        Log.d(TAG, "TipoEquipo:" + Integer.toString(myEquipoCAPE.getTipoEquipo()));
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(myEquipoCAPE.getNombre());
         setSupportActionBar(toolbar);
+        listaEquipos = getResources().getStringArray(R.array.lista_de_equipos);
 
         etTe1 = (EditText) findViewById(R.id.etTelefono1);
         etTe2 = (EditText) findViewById(R.id.etTelefono2);
@@ -77,7 +96,7 @@ public class EquipoParticular extends AppCompatActivity {
 
 
 //        etTe1.setText("3114563781");
-
+        //BOTON "?"
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,23 +106,39 @@ public class EquipoParticular extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
 
+                //Estados
+                if (iTabPosition == 0){
+
+                }
+                //Salidas
+                else if (iTabPosition == 1){
+                    enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
+                }
+                //Config1
+                else if (iTabPosition == 2){
+                    enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                }
+                //Config2
+                else if (iTabPosition == 3){
+
+                }
+
             }
         });
     }
 
-//    public void enviar_sms_config(View v){
+    public void enviar_sms(String sNumTel, String sTxtSMS){
 //        String phoneNo = "3415555781";//textPhoneNo.getText().toString();
 //        String sms = "Config: Te1:" + etTe1.getText().toString() + etTe2.getText().toString();
-//
-//        try {
-//            SmsManager smsManager = SmsManager.getDefault();
-//            smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-//            Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();
-//        }
-//        catch (Exception e) {
-//            Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
-//            e.printStackTrace();
-//        }
-//    }
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
+            Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
 
 }

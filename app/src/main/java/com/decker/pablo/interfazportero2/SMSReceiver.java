@@ -17,8 +17,6 @@ public class SMSReceiver extends BroadcastReceiver {
 
     private String TAG = "Pablito";
 
-    public SMSReceiver() {
-    }
     public void onReceive(Context context, Intent intent)
     {
         Log.d(TAG, "** Recibi algun SMS");
