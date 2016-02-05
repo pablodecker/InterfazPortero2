@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "**" + myEquipoCAPE.getNombre());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Equipos CAPE");
         setSupportActionBar(toolbar);
         lista = (ListView)findViewById(R.id.listViewEquipos);
         //Aca es cuando hace click en el item
