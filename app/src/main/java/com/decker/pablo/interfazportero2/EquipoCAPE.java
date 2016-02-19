@@ -4,12 +4,16 @@ import android.app.Application;
 
 /**
  * Created by Pablo on 26/01/2016.
+ * Esta clase es para setear y obtener todos los datos acerca de un equipo en particular
  */
 public class EquipoCAPE extends Application{
 
     private String sNombre, sNumTel, sSal1, sSal2, sSal3;
-    private int iTipoEquipo;
+    private int iIdDB, iTipoEquipo;
     //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+    public void setIdDB(int iIdDB){
+        this.iIdDB = iIdDB;
+    }
     public void setNombre(String sNombre){
         this.sNombre = sNombre;
     }
@@ -29,9 +33,9 @@ public class EquipoCAPE extends Application{
     public void setTipoEquipo(int iTipoEquipo){
         this.iTipoEquipo = iTipoEquipo;
     }
-
-
-
+    public int getIdDB() {
+        return iIdDB;
+    }
     public String getNombre(){
         return sNombre;
     }
@@ -50,6 +54,5 @@ public class EquipoCAPE extends Application{
     public int getTipoEquipo(){
         return iTipoEquipo;
     }
-
 
 }

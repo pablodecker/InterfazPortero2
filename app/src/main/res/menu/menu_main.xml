@@ -13,16 +13,4 @@
         android:title="@string/action_agregar"
         android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_edit"
-        android:orderInCategory="200"
-        android:title="Search"
-        android:icon="@android:drawable/ic_menu_edit"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_search"
-        android:orderInCategory="200"
-        android:title="Search"
-        android:icon="@android:drawable/ic_menu_delete"
-        app:showAsAction="ifRoom" />
 </menu>

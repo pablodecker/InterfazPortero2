@@ -56,7 +56,7 @@ public class EquipoParticular extends AppCompatActivity {
         etTe3 = (EditText) findViewById(R.id.etTelefono3);
         etTe4 = (EditText) findViewById(R.id.etTelefono4);
         etTe5 = (EditText) findViewById(R.id.etTelefono5);
-        swHab = (Switch) findViewById(R.id.switchHabilitacion);
+        swHab = (Switch)   findViewById(R.id.switchHabilitacion);
 
         //esto es para crear los Tabs
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);

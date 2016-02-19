@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,19 +14,23 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class DatosEquipo extends AppCompatActivity {
+public class EditEquipo extends AppCompatActivity {
 
     EditText etNombre, etNumTel, etTipoEquipo, etSal1, etSal2, etSal3;
     Spinner spTipoEquipo;
     String[] listaEquipos;
     Bundle b;
+    int iEditar = 0;
+    EquipoCAPE myEquipoCAPE;
     int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_equipo);
+        setContentView(R.layout.activity_edit_equipo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)getApplicationContext();
         etNombre = (EditText) findViewById(R.id.editTextNombreEquipo);
         etNumTel = (EditText) findViewById(R.id.editTextNumTelEquipo);
 //        etTipoEquipo = (EditText) findViewById(R.id.editTextTipoEquipo);
@@ -40,11 +43,26 @@ public class DatosEquipo extends AppCompatActivity {
         spTipoEquipo = (Spinner)findViewById(R.id.spTipoEquipo);
         spTipoEquipo.setAdapter(adapter);
 
+
+        b = this.getIntent().getExtras();
+        if (b != null){
+            iEditar = b.getInt("Editar");
+            if (iEditar == 1){
+                id = myEquipoCAPE.getIdDB();
+                etNombre.setText(myEquipoCAPE.getNombre());
+                etNumTel.setText(myEquipoCAPE.getNumTel());
+                etSal1.setText(myEquipoCAPE.getSal1());
+                etSal2.setText(myEquipoCAPE.getSal2());
+                etSal3.setText(myEquipoCAPE.getSal3());
+                spTipoEquipo.setSelection(myEquipoCAPE.getTipoEquipo());
+            }
+        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (b == null)
+                if (iEditar == 0)
                     insertar_datos(view);
                 else
                     modificar_datos(view);
@@ -57,16 +75,9 @@ public class DatosEquipo extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
-        b = this.getIntent().getExtras();
-        if (b != null){
-            id = b.getInt("idSeleccionado");
-            RecuperarDatos(id);
-        }
     }
     private void cargar_tipo_equipo(){
     }
-
-
 
     public void RecuperarDatos(int id)
     {
@@ -89,7 +100,6 @@ public class DatosEquipo extends AppCompatActivity {
                 }
             }
     }
-
 
     public void insertar_datos(View v){
         BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);

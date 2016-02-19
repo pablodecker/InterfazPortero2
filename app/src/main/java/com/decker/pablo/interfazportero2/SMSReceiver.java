@@ -49,7 +49,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
 
             }
-
+            // log .d = debug
             Log.d(TAG, strMessage);
             Toast.makeText(context, strMessage, Toast.LENGTH_SHORT).show();
         }

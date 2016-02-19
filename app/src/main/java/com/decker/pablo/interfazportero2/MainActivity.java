@@ -5,22 +5,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //cambio v1.3
     EquipoCAPE myEquipoCAPE;
     ListView lista;
-    String[] stArreglo;
+    ListViewAdapter lvAdapter;
+    String[] saListaEquipos;
+    int[] iaIndiceDB;
+    int idSeleccionado;
+    protected Object mActionMode;
     private String TAG = "Pablito";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,29 +44,46 @@ public class MainActivity extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int idSeleccionado = Integer.parseInt(stArreglo[position].split(" ")[0]);
-                    cargarDatosSeleccion(idSeleccionado);
-
-//                    Intent intent = new Intent(MainActivity.this,DatosEquipo.class);
-                    Intent intent = new Intent(MainActivity.this,EquipoParticular.class);
-                    intent.putExtra("idSeleccionado",idSeleccionado);
-                    startActivity(intent);
+//                idSeleccionado = Integer.parseInt(saArreglo[position].split(" ")[0]);
+                 idSeleccionado = iaIndiceDB[position];
+                cargarDatosSeleccion(idSeleccionado);
+//                    Intent intent = new Intent(MainActivity.this,EditEquipo.class);
+                Intent intent = new Intent(MainActivity.this,EquipoParticular.class);
+                intent.putExtra("idSeleccionado",idSeleccionado);
+                startActivity(intent);
              }
         });
+        //Aca es cuando hace un click y lo deja apretado sobre un item
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                idSeleccionado = Integer.parseInt(saArreglo[position].split(" ")[0]);
+                idSeleccionado = iaIndiceDB[position];
+                cargarDatosSeleccion(idSeleccionado);
+                //si ya estoy en el menu retornar falso
+                if (mActionMode != null)
+                    return false;
+//                setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
+                mActionMode = MainActivity.this.startSupportActionMode(amc);
+                view.setSelected(true);
+                return true;
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this , DatosEquipo.class );
+                Intent i = new Intent(MainActivity.this , EditEquipo.class );
+                i.putExtra("Editar",0);
                 startActivity(i);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
         });
     }
-    public void agregar_equipo(MainActivity v)
-    {
-//        Intent i = new Intent(MainActivity.this , DatosEquipo.class );
+
+    public void agregar_equipo(MainActivity v){
         Intent i = new Intent(MainActivity.this , EquipoParticular.class );
         startActivity(i);
     }
@@ -70,38 +92,67 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         //esto es despues del onCreate, entra tambien cuando se vuelve desde otra activity
         super.onResume();
-        cargar_datos();
+        cargar_datos_db_listview();
     }
 
-    public void cargar_datos(){
+    public void cargar_datos_db_listview(){
         BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
         SQLiteDatabase db = myBaseHelper.getReadableDatabase();
         if (db != null){
             Cursor c =  db.rawQuery("SELECT * FROM Equipos",null);
             int cantidad = c.getCount();
-            stArreglo = new String[cantidad];
+            String[] saArreglo = new String[cantidad];
+            String[] saArregloSoloNombre = new String[cantidad];
+            //Obtengo la lista de equipos de un array
+            saListaEquipos = getResources().getStringArray(R.array.lista_de_equipos);
+            int[] iImagenes = new int[cantidad];
+            //aca voy a guardar los indices que tiene la DB en ram
+            iaIndiceDB = new int[cantidad];
             int i = 0;
             if (c.moveToFirst()){
                 do{
-//                    String stDato = c.getInt(0) + " " + c.getString(0) + c.getInt(1) + " " + c.getString(1);
-                      String stDato = c.getInt(0) +
-                            " - " + c.getString(1) +
-                            " - " + c.getString(2) +
-                            " - " + c.getString(3) +
-                            " - " + c.getString(4) +
-                            " - " + c.getString(5);
+                   //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
+// String stDato = c.getInt(0) + " " + c.getString(0) + c.getInt(1) + " " + c.getString(1);
+//                      String stInfo = c.getInt(0) +
+//                            " - " + c.getString(1) +
+//                            " - " + c.getString(2) +
+//                            " - " + c.getString(3) +
+//                            " - " + c.getString(4) +
+//                            " - " + c.getString(5);
+                    iaIndiceDB[i] = c.getInt(0);
+                    String sInfo = saListaEquipos[c.getInt(6)];// + "\r\n" + c.getString(2);
+                   sInfo = "Tipo Equipo:  " + sInfo.replace(" - ","\r\n");
+//                    sInfo = "Es la plaza principal de la ciudad de San Juan y es donde se encuentra el kilómetro 0 de la provincia";
+                    saArreglo[i] = sInfo;
+                    String sDatoSoloNombre = c.getString(1);
+                    saArregloSoloNombre[i] = sDatoSoloNombre;
+                    //aca seleccionar la imagen correspondiente a cada equipo en particular
+                    iImagenes[i] = R.drawable.ic_interfaz1;
+                    i++;
 
-                    stArreglo[i++] = stDato;
             }while (c.moveToNext());
             }
+
+
             //Creo un adapter para despues setearselo a la lista
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,stArreglo);
-            lista.setAdapter(adapter);
+            lvAdapter = new ListViewAdapter(this,iImagenes, saArregloSoloNombre, saArreglo);
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,saArregloSoloNombre);
+            lista.setAdapter(lvAdapter);
         }
     }
 
-    public void cargarDatosSeleccion(int id)
-    {
+    public void borrar_datos_db(int id){
+        BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
+        SQLiteDatabase db = myBaseHelper.getWritableDatabase();
+        if (db !=null){
+            if (db.delete("Equipos", "Id=" + id, null) > 0){
+                Toast.makeText(this, "Datos Eliminados Con Exito", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    public void cargarDatosSeleccion(int id) {
         BaseHelper myBaseHelper = new BaseHelper(this,"DBEquipos",null,1);
         SQLiteDatabase db = myBaseHelper.getReadableDatabase();
         if (db != null) {
@@ -115,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 //                    etSal2.setText(c.getString(4));
 //                    etSal3.setText(c.getString(5));
 //                    spTipoEquipo.setSelection(c.getInt(6));
-
+                    myEquipoCAPE.setIdDB(c.getInt(0));
                     myEquipoCAPE.setNombre(c.getString(1));
                     myEquipoCAPE.setNumTel(c.getString(2));
                     myEquipoCAPE.setSal1(c.getString(3));
@@ -128,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,4 +204,43 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Esta es la clase abstracta para poner en el toolbar el Edit y Delete item
+    private ActionMode.Callback amc = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater mi = mode.getMenuInflater();
+            mi.inflate(R.menu.menucontexto, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            if (item.getItemId() == R.id.menu_delete){
+                borrar_datos_db(idSeleccionado);
+                cargar_datos_db_listview();
+                mode.finish();
+                return true;
+            }
+            else if (item.getItemId() == R.id.menu_edit){
+                Intent intent = new Intent(MainActivity.this,EditEquipo.class);
+                intent.putExtra("Editar",1);
+                startActivity(intent);
+                mode.finish();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+             amc = null;
+        }
+    };
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.decker.pablo.interfazportero2">
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
+
+    <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
 
     <application
         android:name=".EquipoCAPE"
@@ -19,24 +19,29 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".SMSReceiver"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
         <activity
-            android:name=".DatosEquipo"
+            android:name=".EditEquipo"
             android:label="@string/title_activity_datos_equipo"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             android:parentActivityName=".MainActivity" >
-            <!--para que vuelva al main cuando apreto el back button-->
+            <!-- para que vuelva al main cuando apreto el back button -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -45,10 +50,16 @@
             android:name=".EquipoParticular"
             android:label="@string/title_activity_equipo_particular"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--para que vuelva al main cuando apreto el back button-->
+
+            <!-- para que vuelva al main cuando apreto el back button -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".Splash"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+
 </manifest>

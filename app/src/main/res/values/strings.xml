@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Interfaz Portero 2</string>
+    <string name="app_name">Equipos CAPE</string>
     <string name="action_settings">Configuracion</string>
     <string name="title_activity_datos_equipo">DatosEquipo</string>
     <string name="action_agregar">Agregar</string>
@@ -17,4 +17,5 @@
     <string name="salida_2">Salida 2</string>
     <string name="salida1">Salida 1</string>
     <string name="salida_3">Salida 2</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>
