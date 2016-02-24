@@ -12,6 +12,7 @@
         <item>KP-PE015 - Interfaz Portero</item>
         <item>KP-TM900 - Alarma Clasica Nueva</item>
         <item>KP-TM005 - Alarma Boya</item>
+        <item>KP-PE050 - Poste SOS</item>
     </string-array>
     <string name="title_activity_equipo_particular">EquipoParticular</string>
     <string name="salida_2">Salida 2</string>

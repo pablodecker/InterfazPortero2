@@ -3,11 +3,69 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_height="match_parent">
-        <TextView
-        android:id="@+id/textViewEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Estado"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:columnCount="4"
+            android:rowCount="4">
+
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton0"
+                    android:layout_row="0"
+                    android:layout_column="0" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton1"
+                    android:layout_row="0"
+                    android:layout_column="1" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton2"
+                    android:layout_row="0"
+                    android:layout_column="2" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton3"
+                    android:layout_row="0"
+                    android:layout_column="3" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton4"
+                    android:layout_row="1"
+                    android:layout_column="0" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton5"
+                    android:layout_row="1"
+                    android:layout_column="1" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton6"
+                    android:layout_row="1"
+                    android:layout_column="2" />
+                <ToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/toggleButton7"
+                    android:layout_row="1"
+                    android:layout_column="3" />
+        </GridLayout>
 </LinearLayout>

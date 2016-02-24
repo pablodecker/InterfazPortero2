@@ -127,12 +127,14 @@ public class MainActivity extends AppCompatActivity {
                     String sDatoSoloNombre = c.getString(1);
                     saArregloSoloNombre[i] = sDatoSoloNombre;
                     //aca seleccionar la imagen correspondiente a cada equipo en particular
-                    iImagenes[i] = R.drawable.ic_interfaz1;
+                    if (sInfo.contains("KP-PE015"))
+                        iImagenes[i] = R.drawable.ic_interfaz1;
+                    else if(sInfo.contains("KP-PE050"))
+                        iImagenes[i] = R.drawable.ic_poste_nuevo_02;
                     i++;
 
             }while (c.moveToNext());
             }
-
 
             //Creo un adapter para despues setearselo a la lista
             lvAdapter = new ListViewAdapter(this,iImagenes, saArregloSoloNombre, saArreglo);
