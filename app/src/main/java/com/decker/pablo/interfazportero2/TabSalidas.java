@@ -32,7 +32,6 @@ public class TabSalidas extends Fragment {
         toggleSal1 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida1);
         toggleSal2 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida2);
         toggleSal3 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida3);
-        tv1 = (TextView) rootView.findViewById(R.id.textViewPruebaSalidas);
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
