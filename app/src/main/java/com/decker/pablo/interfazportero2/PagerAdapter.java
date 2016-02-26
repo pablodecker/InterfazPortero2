@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
+    EquipoCAPE myEquipoCAPE;
+    String[] saListaEquipos;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -29,7 +31,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 TabConfig1 tabConfig1 = new TabConfig1();
                 return tabConfig1;
             case 3:
-                TabConfig2 tabConfig2 = new TabConfig2();
+                TabConfig2_alarma_gprs tabConfig2 = new TabConfig2_alarma_gprs();
                 return tabConfig2;
             default:
                 return null;

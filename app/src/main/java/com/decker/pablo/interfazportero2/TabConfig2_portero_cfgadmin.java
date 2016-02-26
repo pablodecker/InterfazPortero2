@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 /**
  * Created by Pablo on 03/01/2016.
  */
-public class TabConfig2 extends Fragment {
+public class TabConfig2_portero_cfgadmin extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_config2, container, false);
+        return inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
     }
 }

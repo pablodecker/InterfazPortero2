@@ -139,7 +139,7 @@ public class EquipoParticular extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
-            Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
         }
         catch (Exception e) {
             Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
