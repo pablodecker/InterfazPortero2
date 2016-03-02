@@ -16,7 +16,7 @@ import android.widget.Toast;
  */
 public class TabConfig1 extends Fragment {
     private static EditText etTe1,etTe2,etTe3,etTe4,etTe5;
-    Switch swHab;
+    private static Switch swHab;
     EquipoCAPE myEquipoCAPE;
     View rootView;
 
@@ -80,16 +80,12 @@ public class TabConfig1 extends Fragment {
 
 
     public static void SetControles(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5){
-
-
-
+        swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1);
         etTe2.setText(sTe2);
         etTe3.setText(sTe3);
         etTe4.setText(sTe4);
         etTe5.setText(sTe5);
-
-
     }
 
 }

@@ -71,6 +71,11 @@ public class SMSReceiver extends BroadcastReceiver {
                         TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
                     }
                     if ( sMensaje.contains("config:")){
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "";
+                        int iindice = sMensaje.indexOf("te1:")
+                        if (iindice >= 0 ){
+
+                        }
 
 
 
