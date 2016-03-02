@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class EditEquipo extends AppCompatActivity {
 
-    EditText etNombre, etNumTel, etTipoEquipo, etSal1, etSal2, etSal3;
+    EditText etNombre, etNumTel, etSal1, etSal2, etSal3;
     Spinner spTipoEquipo;
     String[] listaEquipos;
     Bundle b;
@@ -54,7 +54,16 @@ public class EditEquipo extends AppCompatActivity {
                 etSal1.setText(myEquipoCAPE.getSal1());
                 etSal2.setText(myEquipoCAPE.getSal2());
                 etSal3.setText(myEquipoCAPE.getSal3());
-                spTipoEquipo.setSelection(myEquipoCAPE.getTipoEquipo());
+                String sAux = myEquipoCAPE.getTipoEquipo();
+                int j = 0;
+                for (String s : listaEquipos) {
+                    int i = s.indexOf(sAux);
+                    if (i >= 0) {
+                        spTipoEquipo.setSelection(j);
+                        break;
+                    }
+                    j++;
+                }
             }
         }
 
@@ -93,7 +102,19 @@ public class EditEquipo extends AppCompatActivity {
                         etSal1.setText(c.getString(3));
                         etSal2.setText(c.getString(4));
                         etSal3.setText(c.getString(5));
-                        spTipoEquipo.setSelection(c.getInt(6));
+                        String sAux = c.getString(6);
+                        int j = 0;
+                        for (String s : listaEquipos) {
+                            int i = s.indexOf(sAux);
+                            if (i >= 0) {
+                                spTipoEquipo.setSelection(j);
+                                break;
+                            }
+                            j++;
+                        }
+
+//                        spTipoEquipo.setSelection(c.getString(6));
+
                     }
                 } finally {
                     c.close();
@@ -111,8 +132,8 @@ public class EditEquipo extends AppCompatActivity {
             registronuevo.put("Sal1",etSal1.getText().toString());
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
-
-            registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItemPosition());
+            String sAux = spTipoEquipo.getSelectedItem().toString();
+            registronuevo.put("TipoEquipo",sAux);
             if (db.insert("Equipos",null,registronuevo) > 0){
                 Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
             }
@@ -128,7 +149,7 @@ public class EditEquipo extends AppCompatActivity {
             registronuevo.put("Sal1",etSal1.getText().toString());
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
-            registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItemPosition());
+            registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItem().toString());
             if (db.update("Equipos", registronuevo, "Id=" + id, null) > 0){
                 Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
             }

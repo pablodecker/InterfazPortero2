@@ -15,9 +15,9 @@ import android.widget.Toast;
  * Created by Pablo on 03/01/2016.
  */
 public class TabConfig1 extends Fragment {
-    EditText etTe1,etTe2,etTe3,etTe4,etTe5;
+    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     Switch swHab;
-
+    EquipoCAPE myEquipoCAPE;
     View rootView;
 
     @Override
@@ -25,13 +25,16 @@ public class TabConfig1 extends Fragment {
 
         rootView = inflater.inflate(R.layout.tab_config1, container, false);
 
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
+        String sTipoEquipo = myEquipoCAPE.getTipoEquipo();
+
         etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
         etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
         etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
         etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
         etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
         swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
-        etTe1.setText("5555555");
         return rootView;
 //        return inflater.inflate(R.layout.tab_config1, container, false);
     }
@@ -47,8 +50,16 @@ public class TabConfig1 extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                String phoneNo = "3415555781";//textPhoneNo.getText().toString();
-                String sms = "Config: Te1:" + etTe1.getText().toString() + etTe2.getText().toString();
+                String phoneNo = myEquipoCAPE.getNumTel();
+                String sHab = " Hab:No";
+                if(swHab.isChecked())
+                    sHab = " Hab:Si";
+                String sms = "Config:" + sHab +
+                        " Te1:" + etTe1.getText().toString() +
+                        " Te2:" + etTe2.getText().toString() +
+                        " Te3:" + etTe3.getText().toString() +
+                        " Te4:" + etTe4.getText().toString() +
+                        " Te5:" + etTe5.getText().toString();
                 enviar_sms_config(phoneNo, sms);
             }
 
@@ -66,4 +77,19 @@ public class TabConfig1 extends Fragment {
             e.printStackTrace();
         }
     }
+
+
+    public static void SetControles(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5){
+
+
+
+        etTe1.setText(sTe1);
+        etTe2.setText(sTe2);
+        etTe3.setText(sTe3);
+        etTe4.setText(sTe4);
+        etTe5.setText(sTe5);
+
+
+    }
+
 }

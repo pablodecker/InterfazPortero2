@@ -8,8 +8,8 @@ import android.app.Application;
  */
 public class EquipoCAPE extends Application{
 
-    private String sNombre, sNumTel, sSal1, sSal2, sSal3;
-    private int iIdDB, iTipoEquipo;
+    private String sNombre, sNumTel, sSal1, sSal2, sSal3, sTipoEquipo;
+    private int iIdDB;
     //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
     public void setIdDB(int iIdDB){
         this.iIdDB = iIdDB;
@@ -30,9 +30,13 @@ public class EquipoCAPE extends Application{
         this.sSal3 = sSal3;
     }
 
-    public void setTipoEquipo(int iTipoEquipo){
-        this.iTipoEquipo = iTipoEquipo;
+//    public void setTipoEquipo(int iTipoEquipo){
+//        this.iTipoEquipo = iTipoEquipo;
+//    }
+    public void setTipoEquipo(String sTipoEquipo){
+        this.sTipoEquipo = sTipoEquipo;
     }
+
     public int getIdDB() {
         return iIdDB;
     }
@@ -51,8 +55,11 @@ public class EquipoCAPE extends Application{
     public String getSal3(){
         return sSal3;
     }
-    public int getTipoEquipo(){
-        return iTipoEquipo;
+    public String getTipoEquipo(){
+        return sTipoEquipo;
     }
+//    public int getTipoEquipo(){
+//        return iTipoEquipo;
+//    }
 
 }

@@ -22,9 +22,8 @@ public class EquipoParticular extends AppCompatActivity {
     TabLayout tabLayout;
     int iTabPosition, idEquipoDB;
     EquipoCAPE myEquipoCAPE;
+    String sTipoEquipo = "";
     private String TAG = "Pablito";
-    private String[] listaEquipos;
-    Bundle b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,8 @@ public class EquipoParticular extends AppCompatActivity {
         Log.d(TAG, "Sal1:" + myEquipoCAPE.getSal1());
         Log.d(TAG, "Sal2:" + myEquipoCAPE.getSal2());
         Log.d(TAG, "Sal3:" + myEquipoCAPE.getSal3());
-        Log.d(TAG, "TipoEquipo:" + Integer.toString(myEquipoCAPE.getTipoEquipo()));
+        sTipoEquipo = myEquipoCAPE.getTipoEquipo();
+        Log.d(TAG, "TipoEquipo:" + sTipoEquipo);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -47,9 +47,6 @@ public class EquipoParticular extends AppCompatActivity {
         //        para crear el boton hacia atras (Back)(tambien agregar en el manifest el parentActivityName ....
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-
-        listaEquipos = getResources().getStringArray(R.array.lista_de_equipos);
 
         etTe1 = (EditText) findViewById(R.id.etTelefono1);
         etTe2 = (EditText) findViewById(R.id.etTelefono2);
@@ -62,8 +59,16 @@ public class EquipoParticular extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Estado"));
         tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-        tabLayout.addTab(tabLayout.newTab().setText("Conf1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Conf2"));
+        tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
+        if (sTipoEquipo.contains("KP-PE015")) {
+            tabLayout.addTab(tabLayout.newTab().setText("Conf A").setIcon(R.drawable.ic_action_action_settings));
+        }
+        else if(sTipoEquipo.contains("KP-AL911")){
+            tabLayout.addTab(tabLayout.newTab().setText("GPRS").setIcon(R.drawable.ic_action_communication_import_export));
+        }
+        else{
+            tabLayout.addTab(tabLayout.newTab().setText("Conf2").setIcon(R.drawable.ic_action_action_settings));
+        }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 //                            " - " + c.getString(4) +
 //                            " - " + c.getString(5);
                     iaIndiceDB[i] = c.getInt(0);
-                    String sInfo = saListaEquipos[c.getInt(6)];// + "\r\n" + c.getString(2);
+                    String sInfo = c.getString(6);
                    sInfo = "Tipo Equipo:  " + sInfo.replace(" - ","\r\n");
 //                    sInfo = "Es la plaza principal de la ciudad de San Juan y es donde se encuentra el kilómetro 0 de la provincia";
                     saArreglo[i] = sInfo;
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     myEquipoCAPE.setSal1(c.getString(3));
                     myEquipoCAPE.setSal2(c.getString(4));
                     myEquipoCAPE.setSal3(c.getString(5));
-                    myEquipoCAPE.setTipoEquipo(c.getInt(6));
+                    myEquipoCAPE.setTipoEquipo(c.getString(6));
                 }
             } finally {
                 c.close();

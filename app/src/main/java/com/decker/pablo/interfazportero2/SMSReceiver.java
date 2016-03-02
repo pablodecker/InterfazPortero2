@@ -16,12 +16,18 @@ import android.widget.Toast;
 public class SMSReceiver extends BroadcastReceiver {
 
     private String TAG = "Pablito";
+    EquipoCAPE myEquipoCAPE;
 
     public void onReceive(Context context, Intent intent)
     {
         Log.d(TAG, "** Recibi algun SMS");
         Toast.makeText(context, "Recibi Algo", Toast.LENGTH_SHORT).show();
         Bundle myBundle = intent.getExtras();
+
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)context.getApplicationContext();
+
+
         SmsMessage [] messages = null;
         String sMensaje = "",sNumeroOrigen = "";
         if (myBundle != null)
@@ -46,18 +52,44 @@ public class SMSReceiver extends BroadcastReceiver {
             Log.d(TAG, "Llego antes de lowercase");
             sMensaje = sMensaje.toLowerCase();
 
-            boolean bSalida1 = false, bSalida2 = false, bSalida3 = false;
-            if ( sMensaje.contains("salida"))
-            {
-                Log.d(TAG, "Conmutar salidas");
-                if (sMensaje.contains("salida1:1"))
-                    bSalida1 = true;
-                if (sMensaje.contains("salida2:1"))
-                    bSalida2 = true;
-                if (sMensaje.contains("salida3:1"))
-                    bSalida3 = true;
-                TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
+            String sNumEquipoSeleccionado = myEquipoCAPE.getNumTel();
+            String sTipoEquipoSelcccionado = myEquipoCAPE.getTipoEquipo();
+            if (sNumeroOrigen.contains(sNumEquipoSeleccionado)){
+
+                if (sTipoEquipoSelcccionado.contains("KP-PE015") ){
+
+                    if ( sMensaje.contains("salida"))
+                    {
+                        boolean bSalida1 = false, bSalida2 = false, bSalida3 = false;
+                        Log.d(TAG, "Conmutar salidas");
+                        if (sMensaje.contains("salida1:1"))
+                            bSalida1 = true;
+                        if (sMensaje.contains("salida2:1"))
+                            bSalida2 = true;
+                        if (sMensaje.contains("salida3:1"))
+                            bSalida3 = true;
+                        TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
+                    }
+                    if ( sMensaje.contains("config:")){
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
             }
+
+
+
+
+
             // log .d = debug
             Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
             Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
