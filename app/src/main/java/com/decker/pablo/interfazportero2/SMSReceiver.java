@@ -70,24 +70,27 @@ public class SMSReceiver extends BroadcastReceiver {
                             bSalida3 = true;
                         TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
                     }
-                    if ( sMensaje.contains("config:")){
+                    if ( sMensaje.contains("config")){
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "";
-                        int iindice = sMensaje.indexOf("te1:")
-                        if (iindice >= 0 ){
+                        Boolean bHab = false;
+                        if (sMensaje.contains("hab:si"))
+                            bHab = true;
+                        String sMensajeBack = sMensaje;
+                        if(sMensaje.contains("te1:"))
+                            sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
+                        if(sMensaje.contains("te2:"))
+                            sTe2 = sMensaje.substring(sMensaje.indexOf("te2:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te2:")));
+                        if(sMensaje.contains("te3:"))
+                            sTe3 = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
+                        if(sMensaje.contains("te4:"))
+                            sTe4 = sMensaje.substring(sMensaje.indexOf("te4:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te4:")));
+                        if(sMensaje.contains("te5:"))
+                            sTe5 = sMensaje.substring(sMensaje.indexOf("te5:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te5:")));
 
-                        }
 
-
-
+                        TabConfig1.SetControles(bHab,sTe1, sTe2, sTe3, sTe4, sTe5);
                     }
-
-
-
                 }
-
-
-
-
 
             }
 
