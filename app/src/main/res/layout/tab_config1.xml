@@ -36,6 +36,7 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etTelefono1"
@@ -54,6 +55,7 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etTelefono2"
@@ -71,6 +73,7 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etTelefono3"
@@ -88,6 +91,7 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etTelefono4"
@@ -105,6 +109,7 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etTelefono5"
@@ -112,6 +117,75 @@
             android:layout_row="5"
             android:layout_column="1" />
     </GridLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Secuencia\r\n de Llamada"
+            android:id="@+id/textViewSecLlamada"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_llamada_1" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_llamada_2" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_llamada_3"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_llamada_4" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_llamada_5"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Secuencia\r\n de Alarmas"
+            android:id="@+id/textViewSecalarma"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_alarma_1" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_alarma_2" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_alarma_3"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_alarma_4" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sec_alarma_5"/>
+    </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -6,8 +6,10 @@ import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import android.widget.Toast;
 public class TabConfig1 extends Fragment {
     private static EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     private static Switch swHab;
+    private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
+                            spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5;
     EquipoCAPE myEquipoCAPE;
     View rootView;
 
@@ -35,6 +39,40 @@ public class TabConfig1 extends Fragment {
         etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
         etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
         swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
+
+        String[] listaNumeros = {"1","2","3","4","5"};
+        ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
+
+        spSecLlamada1 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_1);
+        spSecLlamada1.setAdapter(adapterSec);
+
+        spSecLlamada2 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_2);
+        spSecLlamada2.setAdapter(adapterSec);
+
+        spSecLlamada3 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_3);
+        spSecLlamada3.setAdapter(adapterSec);
+
+        spSecLlamada4 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_4);
+        spSecLlamada4.setAdapter(adapterSec);
+
+        spSecLlamada5 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_5);
+        spSecLlamada5.setAdapter(adapterSec);
+
+        spSecAlarma1 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_1);
+        spSecAlarma1.setAdapter(adapterSec);
+
+        spSecAlarma2 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_2);
+        spSecAlarma2.setAdapter(adapterSec);
+
+        spSecAlarma3 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_3);
+        spSecAlarma3.setAdapter(adapterSec);
+
+        spSecAlarma4 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_4);
+        spSecAlarma4.setAdapter(adapterSec);
+
+        spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
+        spSecAlarma5.setAdapter(adapterSec);
+
         return rootView;
 //        return inflater.inflate(R.layout.tab_config1, container, false);
     }
@@ -79,13 +117,26 @@ public class TabConfig1 extends Fragment {
     }
 
 
-    public static void SetControles(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5){
+    public static void SetControles(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,
+                                    int iSecLlamada1,int iSecLlamada2,int iSecLlamada3,int iSecLlamada4,int iSecLlamada5,
+                                    int iSecAlarma1,int iSecAlarma2,int iSecAlarma3,int iSecAlarma4,int iSecAlarma5 )
+    {
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1);
         etTe2.setText(sTe2);
         etTe3.setText(sTe3);
         etTe4.setText(sTe4);
         etTe5.setText(sTe5);
+        spSecLlamada1.setSelection(iSecLlamada1-1);
+        spSecLlamada2.setSelection(iSecLlamada2-1);
+        spSecLlamada3.setSelection(iSecLlamada3-1);
+        spSecLlamada4.setSelection(iSecLlamada4-1);
+        spSecLlamada5.setSelection(iSecLlamada5-1);
+        spSecAlarma1.setSelection(iSecAlarma1-1);
+        spSecAlarma2.setSelection(iSecAlarma2-1);
+        spSecAlarma3.setSelection(iSecAlarma3-1);
+        spSecAlarma4.setSelection(iSecAlarma4-1);
+        spSecAlarma5.setSelection(iSecAlarma5-1);
     }
 
 }

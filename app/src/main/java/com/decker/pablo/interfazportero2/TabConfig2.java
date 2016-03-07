@@ -14,6 +14,7 @@ import android.widget.Spinner;
 public class TabConfig2 extends Fragment {
     EquipoCAPE myEquipoCAPE;
     View rootView;
+    private static Spinner spAudio1,spAudio2,spAudio3,spAudio4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,43 +42,16 @@ public class TabConfig2 extends Fragment {
             ArrayAdapter adapter3 = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaEntradas3);
             spTipoEntrada3.setAdapter(adapter3);
 
-
-            String[] listaNumeros = {"1","2","3","4","5"};
+            String[] listaNumeros = {"0","1","2","3","4","5","6","7","8","9"};
             ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
-
-            Spinner spSecLlamada1 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_1);
-            spSecLlamada1.setAdapter(adapterSec);
-
-            Spinner spSecLlamada2 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_2);
-            spSecLlamada2.setAdapter(adapterSec);
-
-            Spinner spSecLlamada3 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_3);
-            spSecLlamada3.setAdapter(adapterSec);
-
-            Spinner spSecLlamada4 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_4);
-            spSecLlamada4.setAdapter(adapterSec);
-
-            Spinner spSecLlamada5 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_5);
-            spSecLlamada5.setAdapter(adapterSec);
-
-            Spinner spSecAlarma1 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_1);
-            spSecAlarma1.setAdapter(adapterSec);
-
-            Spinner spSecAlarma2 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_2);
-            spSecAlarma2.setAdapter(adapterSec);
-
-            Spinner spSecAlarma3 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_3);
-            spSecAlarma3.setAdapter(adapterSec);
-
-            Spinner spSecAlarma4 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_4);
-            spSecAlarma4.setAdapter(adapterSec);
-
-            Spinner spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
-            spSecAlarma5.setAdapter(adapterSec
-
-            );
-
-
+            spAudio1 = (Spinner)rootView.findViewById(R.id.spinner_audio_1);
+            spAudio1.setAdapter(adapterSec);
+            spAudio2 = (Spinner)rootView.findViewById(R.id.spinner_audio_2);
+            spAudio2.setAdapter(adapterSec);
+            spAudio3 = (Spinner)rootView.findViewById(R.id.spinner_audio_3);
+            spAudio3.setAdapter(adapterSec);
+            spAudio4 = (Spinner)rootView.findViewById(R.id.spinner_audio_4);
+            spAudio4.setAdapter(adapterSec);
 
         }
         else if(sInfo.contains("KP-AL911"))

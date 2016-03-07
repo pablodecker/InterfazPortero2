@@ -70,7 +70,7 @@ public class SMSReceiver extends BroadcastReceiver {
                             bSalida3 = true;
                         TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
                     }
-                    if ( sMensaje.contains("config")){
+                    if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "";
                         Boolean bHab = false;
                         if (sMensaje.contains("hab:si"))
@@ -87,8 +87,50 @@ public class SMSReceiver extends BroadcastReceiver {
                         if(sMensaje.contains("te5:"))
                             sTe5 = sMensaje.substring(sMensaje.indexOf("te5:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te5:")));
 
+                        if (sTe1.contains(",p"))
+                            sTe1 = sTe1.replace(",p","");
+                        if (sTe2.contains(",p"))
+                            sTe2 = sTe2.replace(",p","");
+                        if (sTe3.contains(",p"))
+                            sTe3 = sTe3.replace(",p","");
+                        if (sTe4.contains(",p"))
+                            sTe4 = sTe4.replace(",p","");
+                        if (sTe5.contains(",p"))
+                            sTe5 = sTe5.replace(",p","");
+                        int iSecLlamada1 = 1,iSecLlamada2 = 1 ,iSecLlamada3 = 1,iSecLlamada4 = 1,iSecLlamada5 = 1,
+                            iSecAlarma1 = 1,iSecAlarma2 = 1,iSecAlarma3 = 1,iSecAlarma4 = 1,iSecAlarma5 = 1;
+                        //secll:1,2,3,4,5
+                        if (sMensaje.contains("secll:")){
+                            String sAux = sMensaje.substring(sMensaje.indexOf("secll:")+6,sMensaje.indexOf("secll:")+7);
+                            iSecLlamada1 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secll:")+8,sMensaje.indexOf("secll:")+9);
+                            iSecLlamada2 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secll:")+10,sMensaje.indexOf("secll:")+11 );
+                            iSecLlamada3 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secll:")+12,sMensaje.indexOf("secll:")+13);
+                            iSecLlamada4 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secll:")+14,sMensaje.indexOf("secll:")+15 );
+                            iSecLlamada5 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+6,sMensaje.indexOf("secll:")+7);
+                            iSecAlarma1 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+8,sMensaje.indexOf("secll:")+9);
+                            iSecAlarma2 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+10,sMensaje.indexOf("secll:")+11);
+                            iSecAlarma3 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+12,sMensaje.indexOf("secll:")+13);
+                            iSecAlarma4 = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+14,sMensaje.indexOf("secll:")+15);
+                            iSecAlarma5 = Integer.parseInt(sAux);
 
-                        TabConfig1.SetControles(bHab,sTe1, sTe2, sTe3, sTe4, sTe5);
+                        }
+
+                        TabConfig1.SetControles(bHab,sTe1, sTe2, sTe3, sTe4, sTe5,
+                                                iSecLlamada1,iSecLlamada2,iSecLlamada3,iSecLlamada4,iSecLlamada5,
+                                                iSecAlarma1,iSecAlarma2,iSecAlarma3,iSecAlarma4,iSecAlarma5 );
+                    }
+                    if ( sMensaje.contains("config") && sMensaje.contains("en1:")){
+
+
                     }
                 }
 
