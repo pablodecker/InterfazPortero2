@@ -20,58 +20,85 @@ public class TabConfig1 extends Fragment {
     private static EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     private static Switch swHab;
     private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
-                            spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5;
+                            spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5, spVolPoste, spMicPoste;
     EquipoCAPE myEquipoCAPE;
     View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.tab_config1, container, false);
+
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
         String sTipoEquipo = myEquipoCAPE.getTipoEquipo();
 
-        etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
-        etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
-        etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
-        etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
-        etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
-        swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
+        if (sTipoEquipo.contains("KP-PE050")){  //Poste SOS
+            rootView = inflater.inflate(R.layout.tab_config1_poste_sos, container, false);
+            etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
+            etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
+            etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
+            etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
+            swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
 
-        String[] listaNumeros = {"1","2","3","4","5"};
-        ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
+            String[] listaNumeros = {"0","1","2","3","4","5","6","7"};
+            ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
 
-        spSecLlamada1 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_1);
-        spSecLlamada1.setAdapter(adapterSec);
+            spVolPoste = (Spinner)rootView.findViewById(R.id.spinner_vol_poste);
+            spVolPoste.setAdapter(adapterSec);
 
-        spSecLlamada2 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_2);
-        spSecLlamada2.setAdapter(adapterSec);
+            String[] listaNumerosMic = {"0","1","2","3","4","5","6","7","8","9","10"};
+            ArrayAdapter adapterSecMic = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
 
-        spSecLlamada3 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_3);
-        spSecLlamada3.setAdapter(adapterSec);
+            spMicPoste = (Spinner)rootView.findViewById(R.id.spinner_mic_poste);
+            spMicPoste.setAdapter(adapterSec);
 
-        spSecLlamada4 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_4);
-        spSecLlamada4.setAdapter(adapterSec);
+        }
+        else {
+            rootView = inflater.inflate(R.layout.tab_config1, container, false);
+            etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
+            etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
+            etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
+            etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
+            etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
+            swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
 
-        spSecLlamada5 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_5);
-        spSecLlamada5.setAdapter(adapterSec);
+            String[] listaNumeros = {"0","1","2","3","4","5"};
+            ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
 
-        spSecAlarma1 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_1);
-        spSecAlarma1.setAdapter(adapterSec);
+            spSecLlamada1 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_1);
+            spSecLlamada1.setAdapter(adapterSec);
 
-        spSecAlarma2 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_2);
-        spSecAlarma2.setAdapter(adapterSec);
+            spSecLlamada2 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_2);
+            spSecLlamada2.setAdapter(adapterSec);
 
-        spSecAlarma3 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_3);
-        spSecAlarma3.setAdapter(adapterSec);
+            spSecLlamada3 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_3);
+            spSecLlamada3.setAdapter(adapterSec);
 
-        spSecAlarma4 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_4);
-        spSecAlarma4.setAdapter(adapterSec);
+            spSecLlamada4 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_4);
+            spSecLlamada4.setAdapter(adapterSec);
 
-        spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
-        spSecAlarma5.setAdapter(adapterSec);
+            spSecLlamada5 = (Spinner)rootView.findViewById(R.id.spinner_sec_llamada_5);
+            spSecLlamada5.setAdapter(adapterSec);
+
+            spSecAlarma1 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_1);
+            spSecAlarma1.setAdapter(adapterSec);
+
+            spSecAlarma2 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_2);
+            spSecAlarma2.setAdapter(adapterSec);
+
+            spSecAlarma3 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_3);
+            spSecAlarma3.setAdapter(adapterSec);
+
+            spSecAlarma4 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_4);
+            spSecAlarma4.setAdapter(adapterSec);
+
+            spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
+            spSecAlarma5.setAdapter(adapterSec);
+        }
+
+
+
 
         return rootView;
 //        return inflater.inflate(R.layout.tab_config1, container, false);
@@ -117,9 +144,9 @@ public class TabConfig1 extends Fragment {
     }
 
 
-    public static void SetControles(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,
-                                    int iSecLlamada1,int iSecLlamada2,int iSecLlamada3,int iSecLlamada4,int iSecLlamada5,
-                                    int iSecAlarma1,int iSecAlarma2,int iSecAlarma3,int iSecAlarma4,int iSecAlarma5 )
+    public static void SetControlesInterfazPortero(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,
+                                                   int iSecLlamada1, int iSecLlamada2, int iSecLlamada3, int iSecLlamada4, int iSecLlamada5,
+                                                   int iSecAlarma1, int iSecAlarma2, int iSecAlarma3, int iSecAlarma4, int iSecAlarma5)
     {
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1);
@@ -137,6 +164,14 @@ public class TabConfig1 extends Fragment {
         spSecAlarma3.setSelection(iSecAlarma3-1);
         spSecAlarma4.setSelection(iSecAlarma4-1);
         spSecAlarma5.setSelection(iSecAlarma5-1);
+    }
+    public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR )
+    {
+        swHab.setChecked(bSwitchHab);
+        etTe1.setText(sTe1);
+        etTe2.setText(sTe2);
+        etTe3.setText(sTe3);
+        etTe4.setText(sTeR);
     }
 
 }

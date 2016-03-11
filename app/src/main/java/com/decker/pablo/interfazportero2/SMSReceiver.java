@@ -111,26 +111,51 @@ public class SMSReceiver extends BroadcastReceiver {
                             iSecLlamada4 = Integer.parseInt(sAux);
                             sAux = sMensaje.substring(sMensaje.indexOf("secll:")+14,sMensaje.indexOf("secll:")+15 );
                             iSecLlamada5 = Integer.parseInt(sAux);
-                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+6,sMensaje.indexOf("secll:")+7);
+
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+6,sMensaje.indexOf("secal:")+7);
                             iSecAlarma1 = Integer.parseInt(sAux);
-                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+8,sMensaje.indexOf("secll:")+9);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+8,sMensaje.indexOf("secal:")+9);
                             iSecAlarma2 = Integer.parseInt(sAux);
-                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+10,sMensaje.indexOf("secll:")+11);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+10,sMensaje.indexOf("secal:")+11);
                             iSecAlarma3 = Integer.parseInt(sAux);
-                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+12,sMensaje.indexOf("secll:")+13);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+12,sMensaje.indexOf("secal:")+13);
                             iSecAlarma4 = Integer.parseInt(sAux);
-                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+14,sMensaje.indexOf("secll:")+15);
+                            sAux = sMensaje.substring(sMensaje.indexOf("secal:")+14,sMensaje.indexOf("secal:")+15);
                             iSecAlarma5 = Integer.parseInt(sAux);
 
                         }
 
-                        TabConfig1.SetControles(bHab,sTe1, sTe2, sTe3, sTe4, sTe5,
-                                                iSecLlamada1,iSecLlamada2,iSecLlamada3,iSecLlamada4,iSecLlamada5,
-                                                iSecAlarma1,iSecAlarma2,iSecAlarma3,iSecAlarma4,iSecAlarma5 );
+                        TabConfig1.SetControlesInterfazPortero(bHab, sTe1, sTe2, sTe3, sTe4, sTe5,
+                                iSecLlamada1, iSecLlamada2, iSecLlamada3, iSecLlamada4, iSecLlamada5,
+                                iSecAlarma1, iSecAlarma2, iSecAlarma3, iSecAlarma4, iSecAlarma5);
                     }
                     if ( sMensaje.contains("config") && sMensaje.contains("en1:")){
 
 
+                    }
+                }
+                //poste SOS
+                else if (sTipoEquipoSelcccionado.contains("KP-PE050") ){
+                    if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "";
+                        Boolean bHab = false;
+                        if (sMensaje.contains("hab:si"))
+                            bHab = true;
+                        String sMensajeBack = sMensaje;
+                        if(sMensaje.contains("te1:"))
+                            sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
+                        if(sMensaje.contains("te2:"))
+                            sTe2 = sMensaje.substring(sMensaje.indexOf("te2:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te2:")));
+                        if(sMensaje.contains("te3:"))
+                            sTe3 = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
+                        if(sMensaje.contains("ter:"))
+                            sTeR = sMensaje.substring(sMensaje.indexOf("ter:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("ter:")));
+                        String sAux = sMensaje.substring(sMensaje.indexOf("vol:")+4,sMensaje.indexOf("vol:")+5);
+                        int iVol = Integer.parseInt(sAux);
+                        sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
+                        int iMic = Integer.parseInt(sAux);
+
+                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR);
                     }
                 }
 
