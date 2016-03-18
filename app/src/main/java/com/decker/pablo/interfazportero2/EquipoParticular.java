@@ -119,7 +119,8 @@ public class EquipoParticular extends AppCompatActivity {
 
                 //Estados
                 if (iTabPosition == 0){
-
+                    if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
+                        enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
                 }
                 //Salidas
                 else if (iTabPosition == 1){

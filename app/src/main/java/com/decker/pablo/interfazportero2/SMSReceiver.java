@@ -137,25 +137,44 @@ public class SMSReceiver extends BroadcastReceiver {
                 //poste SOS
                 else if (sTipoEquipoSelcccionado.contains("KP-PE050") ){
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
-                        String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "";
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "";
                         Boolean bHab = false;
-                        if (sMensaje.contains("hab:si"))
-                            bHab = true;
-                        String sMensajeBack = sMensaje;
-                        if(sMensaje.contains("te1:"))
-                            sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
-                        if(sMensaje.contains("te2:"))
-                            sTe2 = sMensaje.substring(sMensaje.indexOf("te2:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te2:")));
-                        if(sMensaje.contains("te3:"))
-                            sTe3 = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
-                        if(sMensaje.contains("ter:"))
-                            sTeR = sMensaje.substring(sMensaje.indexOf("ter:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("ter:")));
+                        try{
+                            if (sMensaje.contains("hab:si"))
+                                bHab = true;
+                            String sMensajeBack = sMensaje;
+                            if(sMensaje.contains("emp:"))
+                                sEmp = sMensaje.substring(sMensaje.indexOf("emp:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("emp:")+4));
+                            if(sMensaje.contains("te1:"))
+                                sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
+                            if(sMensaje.contains("te2:"))
+                                sTe2 = sMensaje.substring(sMensaje.indexOf("te2:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te2:")));
+                            if(sMensaje.contains("te3:"))
+                                sTe3 = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
+                            if(sMensaje.contains("ter:"))
+                                sTeR = sMensaje.substring(sMensaje.indexOf("ter:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("ter:")));
+                            if(sMensaje.contains("tcom:"))
+                                sTcom = sMensaje.substring(sMensaje.indexOf("tcom:")+5, sMensaje.indexOf("s",sMensaje.indexOf("tcom:")+5));
+                            if(sMensaje.contains("bat:"))
+                                sBat = sMensaje.substring(sMensaje.indexOf("bat:")+4, sMensaje.indexOf("v",sMensaje.indexOf("bat:")+4));
+                            if(sMensaje.contains("sgn:"))
+                                sSgn = sMensaje.substring(sMensaje.indexOf("sgn:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("sgn:")+4));
+                            if(sMensaje.contains("trsms:")) {
+                                sTrep = sMensaje.substring(sMensaje.indexOf("trsms:") + 6, sMensaje.indexOf("m\r", sMensaje.indexOf("trsms:" + 5) ));
+                            }
+                        }
+                        catch(Exception ex){
+                            Toast.makeText(context,"Exeption:" + ex.toString() , Toast.LENGTH_SHORT).show();
+                        }
+
+
+
                         String sAux = sMensaje.substring(sMensaje.indexOf("vol:")+4,sMensaje.indexOf("vol:")+5);
                         int iVol = Integer.parseInt(sAux);
                         sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
                         int iMic = Integer.parseInt(sAux);
 
-                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR);
+                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp);
                     }
                 }
 

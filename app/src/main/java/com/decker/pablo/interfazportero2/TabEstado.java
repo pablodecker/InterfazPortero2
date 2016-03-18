@@ -5,13 +5,32 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 /**
  * Created by Pablo on 03/01/2016.
  */
 public class TabEstado extends Fragment {
 
+    private static TextView tvEstadoEquipoPoste;
+    String sTipoEquipo;
+    EquipoCAPE myEquipoCAPE;
+    View rootView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_estado, container, false);
+
+        if (sTipoEquipo.contains("KP-PE050")) {  //Poste SOS
+            rootView = inflater.inflate(R.layout.tab_estado_poste, container, false);
+            tvEstadoEquipoPoste = (TextView)rootView.findViewById(R.id.textViewEstadoEquipoPoste);
+        }
+        else
+            rootView = inflater.inflate(R.layout.tab_estado, container, false);
+
+        return rootView;
+    }
+    public static void SetEstadoPosteSOS(String sEstado)
+    {
+        tvEstadoEquipoPoste.setText(sEstado);
     }
 }

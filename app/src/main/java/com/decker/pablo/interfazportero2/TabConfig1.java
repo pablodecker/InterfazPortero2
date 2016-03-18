@@ -11,27 +11,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by Pablo on 03/01/2016.
  */
 public class TabConfig1 extends Fragment {
-    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5;
+    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa;
     private static Switch swHab;
     private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
                             spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5, spVolPoste, spMicPoste;
+    private static TextView tvSgn, tvBat;
+    String sTipoEquipo;
     EquipoCAPE myEquipoCAPE;
     View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-
         // Calling Application class (see application tag in AndroidManifest.xml)
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
-        String sTipoEquipo = myEquipoCAPE.getTipoEquipo();
+        sTipoEquipo = myEquipoCAPE.getTipoEquipo();
 
         if (sTipoEquipo.contains("KP-PE050")){  //Poste SOS
             rootView = inflater.inflate(R.layout.tab_config1_poste_sos, container, false);
@@ -39,7 +40,13 @@ public class TabConfig1 extends Fragment {
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
             etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
             etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
+            etTiempoCom = (EditText) rootView.findViewById(R.id.etTiempoComunicacion);
+            etTiempoReporte = (EditText) rootView.findViewById(R.id.etTiempoReporte);
+            etEmpresa = (EditText) rootView.findViewById(R.id.etEmpresaPoste);
             swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
+
+            tvSgn = (TextView)rootView.findViewById(R.id.textViewSgn);
+            tvBat = (TextView)rootView.findViewById(R.id.textViewBat);
 
             String[] listaNumeros = {"0","1","2","3","4","5","6","7"};
             ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
@@ -97,9 +104,6 @@ public class TabConfig1 extends Fragment {
             spSecAlarma5.setAdapter(adapterSec);
         }
 
-
-
-
         return rootView;
 //        return inflater.inflate(R.layout.tab_config1, container, false);
     }
@@ -116,15 +120,35 @@ public class TabConfig1 extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 String phoneNo = myEquipoCAPE.getNumTel();
-                String sHab = " Hab:No";
-                if(swHab.isChecked())
-                    sHab = " Hab:Si";
-                String sms = "Config:" + sHab +
-                        " Te1:" + etTe1.getText().toString() +
-                        " Te2:" + etTe2.getText().toString() +
-                        " Te3:" + etTe3.getText().toString() +
-                        " Te4:" + etTe4.getText().toString() +
-                        " Te5:" + etTe5.getText().toString();
+                String sms = "";
+                if (sTipoEquipo.contains("KP-PE050")){  //Poste SOS
+
+                    String sHab = " Hab:No";
+                    if(swHab.isChecked())
+                        sHab = " Hab:Si";
+                    sms = "Config:" + sHab +
+                            " Te1:" + etTe1.getText().toString() +
+                            " Te2:" + etTe2.getText().toString() +
+                            " Te3:" + etTe3.getText().toString() +
+                            " TeR:" + etTe4.getText().toString() +
+                            " Vol:" + spVolPoste.getSelectedItem().toString() +
+                            " Mic:" + spMicPoste.getSelectedItem().toString() +
+                            " TCom:" + etTiempoCom.getText() +
+                            " Trep:" + etTiempoReporte.getText() +
+                            " emp:" + etEmpresa.getText();
+                }
+                else if (sTipoEquipo.contains("KP-PE015")){ //INTERFAZ PORTERO
+
+                    String sHab = " Hab:No";
+                    if(swHab.isChecked())
+                        sHab = " Hab:Si";
+                    sms = "Config:" + sHab +
+                            " Te1:" + etTe1.getText().toString() +
+                            " Te2:" + etTe2.getText().toString() +
+                            " Te3:" + etTe3.getText().toString() +
+                            " Te4:" + etTe4.getText().toString() +
+                            " Te5:" + etTe5.getText().toString();
+                }
                 enviar_sms_config(phoneNo, sms);
             }
 
@@ -135,7 +159,7 @@ public class TabConfig1 extends Fragment {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sNumero, null, sTextoSMS, null, null);
-            Toast.makeText(getActivity(),"SMS Enviado",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "SMS Enviado",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
             Toast.makeText(getActivity(),"No se pudo enviar el SMS",Toast.LENGTH_SHORT).show();
@@ -165,13 +189,21 @@ public class TabConfig1 extends Fragment {
         spSecAlarma4.setSelection(iSecAlarma4-1);
         spSecAlarma5.setSelection(iSecAlarma5-1);
     }
-    public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR )
+    public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
+                                            String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa)
     {
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1);
         etTe2.setText(sTe2);
         etTe3.setText(sTe3);
         etTe4.setText(sTeR);
+        etTiempoCom.setText(sTcom);
+        etTiempoReporte.setText(sTRep);
+        tvSgn.setText("Señal: " + sSgn);
+        tvBat.setText("Bat: " + sBat + "v");
+        spMicPoste.setSelection(iMic);
+        spVolPoste.setSelection(iVol);
+        etEmpresa.setText(sEmpresa);
     }
 
 }

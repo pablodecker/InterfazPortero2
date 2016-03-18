@@ -21,7 +21,7 @@ public class TabConfig2 extends Fragment {
         // Calling Application class (see application tag in AndroidManifest.xml)
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
         String sInfo = myEquipoCAPE.getTipoEquipo();// + "\r\n" + c.getString(2);
-        if (sInfo.contains("KP-PE015")){
+        if (sInfo.contains("KP-PE015")){ //INTERFAZ PORTERO
             rootView = inflater.inflate(R.layout.tab_config2_portero_cfgadmin, container, false);
 
             Spinner spTipoEntrada1;
