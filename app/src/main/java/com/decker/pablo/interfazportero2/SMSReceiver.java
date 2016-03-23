@@ -54,9 +54,11 @@ public class SMSReceiver extends BroadcastReceiver {
 
             String sNumEquipoSeleccionado = myEquipoCAPE.getNumTel();
             String sTipoEquipoSelcccionado = myEquipoCAPE.getTipoEquipo();
-            if (sNumeroOrigen.contains(sNumEquipoSeleccionado)){
+            if (sNumeroOrigen.contains(sNumEquipoSeleccionado))
+            {
 
-                if (sTipoEquipoSelcccionado.contains("KP-PE015") ){
+                if (sTipoEquipoSelcccionado.contains("KP-PE015") )//PORTERO COMMAX
+                {
 
                     if ( sMensaje.contains("salida"))
                     {
@@ -70,7 +72,8 @@ public class SMSReceiver extends BroadcastReceiver {
                             bSalida3 = true;
                         TabSalidas.SetEstadoButtons(bSalida1,bSalida2,bSalida3);
                     }
-                    if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
+                    if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
+                    {
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "";
                         Boolean bHab = false;
                         if (sMensaje.contains("hab:si"))
@@ -100,7 +103,8 @@ public class SMSReceiver extends BroadcastReceiver {
                         int iSecLlamada1 = 1,iSecLlamada2 = 1 ,iSecLlamada3 = 1,iSecLlamada4 = 1,iSecLlamada5 = 1,
                             iSecAlarma1 = 1,iSecAlarma2 = 1,iSecAlarma3 = 1,iSecAlarma4 = 1,iSecAlarma5 = 1;
                         //secll:1,2,3,4,5
-                        if (sMensaje.contains("secll:")){
+                        if (sMensaje.contains("secll:"))
+                        {
                             String sAux = sMensaje.substring(sMensaje.indexOf("secll:")+6,sMensaje.indexOf("secll:")+7);
                             iSecLlamada1 = Integer.parseInt(sAux);
                             sAux = sMensaje.substring(sMensaje.indexOf("secll:")+8,sMensaje.indexOf("secll:")+9);
@@ -122,27 +126,74 @@ public class SMSReceiver extends BroadcastReceiver {
                             iSecAlarma4 = Integer.parseInt(sAux);
                             sAux = sMensaje.substring(sMensaje.indexOf("secal:")+14,sMensaje.indexOf("secal:")+15);
                             iSecAlarma5 = Integer.parseInt(sAux);
-
                         }
 
                         TabConfig1.SetControlesInterfazPortero(bHab, sTe1, sTe2, sTe3, sTe4, sTe5,
                                 iSecLlamada1, iSecLlamada2, iSecLlamada3, iSecLlamada4, iSecLlamada5,
                                 iSecAlarma1, iSecAlarma2, iSecAlarma3, iSecAlarma4, iSecAlarma5);
                     }
-                    if ( sMensaje.contains("config") && sMensaje.contains("en1:")){
+                    if ( sMensaje.contains("config") && sMensaje.contains("en1:"))
+                    {
+                        boolean bHabEn1, bHabEn2, bHabEn3, bLlamar1, bLlamar2, bLlamar3,bSMS1, bSMS2, bSMS3;
+                        String sTipoEn1,sTipoEn2, sTipoEn3,sTxtSMS1, sTxtSMS2,sTxtSMS3;
+                        int iVolTel, iMicTel, iVolFrente, iMicFrente;
 
+                        String sAux = sMensaje.substring(sMensaje.indexOf("en1:")+4,sMensaje.indexOf("en1:")+5);
+                        bHabEn1 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en2:") + 4, sMensaje.indexOf("en2:") + 5);
+                        bHabEn2 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en3:") + 4, sMensaje.indexOf("en3:") + 5);
+                        bHabEn3 = sAux.contains("1");
+
+                        sTipoEn1 = sMensaje.substring(sMensaje.indexOf("en1:") + 6, sMensaje.indexOf("en1:") + 7);
+                        sTipoEn2 = sMensaje.substring(sMensaje.indexOf("en2:") + 6, sMensaje.indexOf("en2:") + 7);
+                        sTipoEn3 = sMensaje.substring(sMensaje.indexOf("en3:") + 6, sMensaje.indexOf("en3:") + 7);
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("en1:") + 8, sMensaje.indexOf("en1:") + 9);
+                        bLlamar1 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en2:") + 8, sMensaje.indexOf("en2:") + 9);
+                        bLlamar2 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en3:") + 8, sMensaje.indexOf("en3:") + 9);
+                        bLlamar3 = sAux.contains("1");
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("en1:") + 10, sMensaje.indexOf("en1:") + 11);
+                        bSMS1 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en2:") + 10, sMensaje.indexOf("en2:") + 11);
+                        bSMS2 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("en3:") + 10, sMensaje.indexOf("en3:") + 11);
+                        bSMS3 = sAux.contains("1");
+
+                        sTxtSMS1 = sMensaje.substring(sMensaje.indexOf("en1:") + 12, sMensaje.indexOf("\r", sMensaje.indexOf("en1:") + 12));
+                        sTxtSMS2 = sMensaje.substring(sMensaje.indexOf("en2:") + 12, sMensaje.indexOf("\r", sMensaje.indexOf("en2:") + 12));
+                        sTxtSMS3 = sMensaje.substring(sMensaje.indexOf("en3:") + 12, sMensaje.indexOf("\r", sMensaje.indexOf("en3:") + 12));
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("audio:") + 6, sMensaje.indexOf("audio:") + 7);
+                        iVolFrente = Integer.parseInt(sAux);
+                        sAux = sMensaje.substring(sMensaje.indexOf("audio:") + 8, sMensaje.indexOf("audio:") + 9);
+                        iMicFrente = Integer.parseInt(sAux);
+                        sAux = sMensaje.substring(sMensaje.indexOf("audio:") + 10, sMensaje.indexOf("audio:") + 11);
+                        iVolTel = Integer.parseInt(sAux);
+                        sAux = sMensaje.substring(sMensaje.indexOf("audio:") + 12, sMensaje.indexOf("audio:") + 13);
+                        iMicTel = Integer.parseInt(sAux);
+
+
+                        TabConfig2.SetControlesInterfazPortero(bHabEn1, bHabEn2, bHabEn3, bLlamar1, bLlamar2, bLlamar3, bSMS1, bSMS2, bSMS3, sTipoEn1, sTipoEn2, sTipoEn3,
+                                sTxtSMS1, sTxtSMS2, sTxtSMS3, iVolTel, iMicTel, iVolFrente, iMicFrente);
 
                     }
                 }
                 //poste SOS
-                else if (sTipoEquipoSelcccionado.contains("KP-PE050") ){
+                else if (sTipoEquipoSelcccionado.contains("KP-PE050") )
+                {
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
-                        String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "";
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "",sID = "";
                         Boolean bHab = false;
                         try{
                             if (sMensaje.contains("hab:si"))
                                 bHab = true;
                             String sMensajeBack = sMensaje;
+                            if(sMensaje.contains("id:"))
+                                sID = sMensaje.substring(sMensaje.indexOf("id:")+3, sMensaje.indexOf("\r",sMensaje.indexOf("id:")+3));
                             if(sMensaje.contains("emp:"))
                                 sEmp = sMensaje.substring(sMensaje.indexOf("emp:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("emp:")+4));
                             if(sMensaje.contains("te1:"))
@@ -167,24 +218,21 @@ public class SMSReceiver extends BroadcastReceiver {
                             Toast.makeText(context,"Exeption:" + ex.toString() , Toast.LENGTH_SHORT).show();
                         }
 
-
-
                         String sAux = sMensaje.substring(sMensaje.indexOf("vol:")+4,sMensaje.indexOf("vol:")+5);
                         int iVol = Integer.parseInt(sAux);
                         sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
                         int iMic = Integer.parseInt(sAux);
 
-                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp);
+                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
+                    }
+                    else if (sMensaje.contains("equipo:"))
+                    {
+                        sMensaje = sMensaje.replace("\r","\r\n");
+                        TabEstado.SetEstadoPosteSOS(sMensaje);
                     }
                 }
-
             }
 
-
-
-
-
-            // log .d = debug
             Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
             Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
         }

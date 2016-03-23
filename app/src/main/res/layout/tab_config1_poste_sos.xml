@@ -21,18 +21,55 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rowCount="8"
+        android:rowCount="9"
         android:columnCount="3"
         android:id="@+id/gridTelefonos"
         android:layout_gravity="center_horizontal">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="ID Poste"
+            android:id="@+id/textViewIdPoste"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:gravity="center" />
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:ems="10"
+            android:id="@+id/etIDPoste"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:numeric="integer" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Empresa"
+            android:id="@+id/textViewEmpresa"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:gravity="center" />
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:ems="10"
+            android:id="@+id/etEmpresaPoste"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:numeric="integer" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Telefono1"
             android:id="@+id/textView1"
-            android:layout_row="1"
+            android:layout_row="2"
             android:layout_column="0" />
         <EditText
             android:layout_width="150dp"
@@ -42,89 +79,15 @@
             android:ems="10"
             android:id="@+id/etTelefono1"
             android:layout_gravity="center_horizontal"
-            android:layout_row="1"
-            android:layout_column="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono2"
-            android:id="@+id/textView2"
-            android:layout_row="2"
-            android:layout_column="0" />
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/etTelefono2"
-            android:layout_gravity="center_horizontal"
             android:layout_row="2"
             android:layout_column="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono3"
-            android:id="@+id/textView3"
-            android:layout_row="3"
-            android:layout_column="0" />
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/etTelefono3"
-            android:layout_gravity="center_horizontal"
-            android:layout_row="3"
-            android:layout_column="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono\nReporte"
-            android:id="@+id/textView4"
-            android:layout_row="4"
-            android:layout_column="0" />
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/etTelefono4"
-            android:layout_gravity="center_horizontal"
-            android:layout_row="4"
-            android:layout_column="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Tiempo\nComunicacion"
-            android:id="@+id/textViewTCom"
-            android:layout_row="5"
-            android:layout_column="0"
-            android:gravity="center" />
-        <EditText
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/etTiempoComunicacion"
-            android:layout_gravity="center_horizontal"
-            android:layout_row="5"
-            android:layout_column="1"
-            android:numeric="integer" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Tiempo\nReporte"
             android:id="@+id/textViewTiempoReporte"
-            android:layout_row="6"
+            android:layout_row="3"
             android:layout_column="0"
             android:gravity="center" />
         <EditText
@@ -135,28 +98,85 @@
             android:ems="10"
             android:id="@+id/etTiempoReporte"
             android:layout_gravity="center_horizontal"
-            android:layout_row="6"
+            android:layout_row="3"
             android:layout_column="1"
             android:numeric="integer" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Empresa"
-            android:id="@+id/textViewEmpresa"
+            android:text="Telefono2"
+            android:id="@+id/textView2"
+            android:layout_row="4"
+            android:layout_column="0" />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/etTelefono2"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="4"
+            android:layout_column="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Telefono3"
+            android:id="@+id/textView3"
+            android:layout_row="5"
+            android:layout_column="0" />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/etTelefono3"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="5"
+            android:layout_column="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Telefono\nReporte"
+            android:id="@+id/textView4"
+            android:layout_row="6"
+            android:layout_column="0" />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/etTelefono4"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="6"
+            android:layout_column="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Tiempo\nComunicacion"
+            android:id="@+id/textViewTCom"
             android:layout_row="7"
             android:layout_column="0"
             android:gravity="center" />
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:inputType="number"
             android:ems="10"
-            android:id="@+id/etEmpresaPoste"
+            android:id="@+id/etTiempoComunicacion"
             android:layout_gravity="center_horizontal"
             android:layout_row="7"
             android:layout_column="1"
             android:numeric="integer" />
+
+
     </GridLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -206,7 +226,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Señal: xx"
             android:id="@+id/textViewSgn"
             android:paddingRight="10dp" />
@@ -214,7 +234,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Batería: xxv"
             android:id="@+id/textViewBat"
             android:paddingLeft="10dp" />
@@ -224,7 +244,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/configurar"
-        android:id="@+id/buttonConfigurar"
+        android:id="@+id/buttonConfigurarConfig1"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
 </ScrollView>

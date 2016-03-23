@@ -7,7 +7,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical|center_horizontal">
+    android:gravity="center_vertical|center_horizontal"
+    android:id="@+id/linearLConfig1InterfazPortero"
+    android:longClickable="true">
 
     <Switch
         android:layout_width="wrap_content"
@@ -129,7 +131,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Secuencia\r\n de Llamada"
-            android:id="@+id/textViewSecLlamada"/>
+            android:id="@+id/textViewSecLlamada"
+            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"/>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +169,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Secuencia\r\n de Alarmas"
-            android:id="@+id/textViewSecalarma"/>
+            android:id="@+id/textViewSecalarma"
+            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"/>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -190,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/configurar"
-        android:id="@+id/buttonConfigurar"
+        android:id="@+id/buttonConfigurarConfig1"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
 </ScrollView>

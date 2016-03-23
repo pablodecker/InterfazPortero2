@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 /**
  * Created by Pablo on 03/01/2016.
  */
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapterPostes extends FragmentStatePagerAdapter {
     int mNumOfTabs;
     EquipoCAPE myEquipoCAPE;
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public PagerAdapterPostes(FragmentManager fm, int NumOfTabs) {
 
 
         super(fm);
@@ -24,17 +24,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 TabEstado tabEstado = new TabEstado();
                 return tabEstado;
             case 1:
-                TabSalidas tabSalidas = new TabSalidas();
-                return tabSalidas;
-            case 2:
                 TabConfig1 tabConfig1 = new TabConfig1();
                 return tabConfig1;
-            case 3:
-                TabConfig2 tabConfig2 = new TabConfig2();
-                return tabConfig2;
-            case 4:
-                TabComandos tabComandos = new TabComandos();
-                return tabComandos;
             default:
                 return null;
         }

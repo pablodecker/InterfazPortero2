@@ -55,27 +55,60 @@ public class EquipoParticular extends AppCompatActivity {
         etTe5 = (EditText) findViewById(R.id.etTelefono5);
         swHab = (Switch)   findViewById(R.id.switchHabilitacion);
 
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
         //esto es para crear los Tabs
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Estado"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-        tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
-        if (sTipoEquipo.contains("KP-PE015")) {
+        if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
+        {
+            tabLayout.addTab(tabLayout.newTab().setText("Est"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
+            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
             tabLayout.addTab(tabLayout.newTab().setText("Conf A").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("CMD"));
+            //esta es la clase que cree para crear un adaptador y luego pasar
+            final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            //le seteo el adaptador al viewpager
+            viewPager.setAdapter(adapter);
         }
-        else if(sTipoEquipo.contains("KP-AL911")){
+        else if(sTipoEquipo.contains("KP-AL911"))
+        {
+            tabLayout.addTab(tabLayout.newTab().setText("Est"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
+            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings));
             tabLayout.addTab(tabLayout.newTab().setText("GPRS").setIcon(R.drawable.ic_action_communication_import_export));
+            tabLayout.addTab(tabLayout.newTab().setText("CMD"));
+            //esta es la clase que cree para crear un adaptador y luego pasar
+            final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            //le seteo el adaptador al viewpager
+            viewPager.setAdapter(adapter);
         }
-        else{
+        else if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
+        {
+            tabLayout.addTab(tabLayout.newTab().setText("Est"));
+//            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
+            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
+//            tabLayout.addTab(tabLayout.newTab().setText("Conf2").setIcon(R.drawable.ic_action_action_settings));
+            //esta es la clase que cree para crear un adaptador y luego pasar
+            final PagerAdapterPostes adapter = new PagerAdapterPostes(getSupportFragmentManager(), tabLayout.getTabCount());
+            //le seteo el adaptador al viewpager
+            viewPager.setAdapter(adapter);
+        }
+        else
+        {
+            tabLayout.addTab(tabLayout.newTab().setText("Est"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
+            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
             tabLayout.addTab(tabLayout.newTab().setText("Conf2").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("CMD"));
+            //esta es la clase que cree para crear un adaptador y luego pasar
+            final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            //le seteo el adaptador al viewpager
+            viewPager.setAdapter(adapter);
         }
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        //esta es la clase que cree para crear un adaptador y luego pasar
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        //le seteo el adaptador al viewpager
-        viewPager.setAdapter(adapter);
         //le agrego el tabLayout al viewpager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -83,17 +116,23 @@ public class EquipoParticular extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                   iTabPosition = tab.getPosition();
-//                switch (tab.getPosition()) {
-//                    case 0:
-//                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_LONG).show();
-//                        break;
-//                    case 1:
-//                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_LONG).show();
-//                        break;
-//                    case 2:
-//                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_LONG).show();
-//                        break;
-//                }
+                switch (tab.getPosition()) {
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Tab 4", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "Tab 5", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
 
             @Override
@@ -116,41 +155,37 @@ public class EquipoParticular extends AppCompatActivity {
                         .setAction("Action", null).show();
 
                 Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
+                if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
+                {   //tengo solo 2 pestanas en los postes
+                    if (iTabPosition == 0) {
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
+                    }
+                    else
+                    {
+                            view.setEnabled(false); // Or whatever you want to do with the view.
+                    }
+                    myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                }
+                else if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
+                {
+                    if (iTabPosition == 1)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
+                    else if (iTabPosition == 2)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                    else if (iTabPosition == 3)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Cfgadmin?");
+                }
+                else if (sTipoEquipo.contains("KP-AL911"))
+                {
+                    if (iTabPosition == 1)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
+                    else if (iTabPosition == 2)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                }
 
-                //Estados
-                if (iTabPosition == 0){
-                    if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
-                        enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
-                }
-                //Salidas
-                else if (iTabPosition == 1){
-                    enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
-                }
-                //Config1
-                else if (iTabPosition == 2){
-                    enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
-                }
-                //Config2
-                else if (iTabPosition == 3){
-
-                }
 
             }
         });
-    }
-
-    public void enviar_sms(String sNumTel, String sTxtSMS){
-//        String phoneNo = "3415555781";//textPhoneNo.getText().toString();
-//        String sms = "Config: Te1:" + etTe1.getText().toString() + etTe2.getText().toString();
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
-            Toast.makeText(getApplicationContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
-        }
-        catch (Exception e) {
-            Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
     }
 
 }

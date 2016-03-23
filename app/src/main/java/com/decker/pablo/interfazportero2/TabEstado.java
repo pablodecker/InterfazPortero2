@@ -20,8 +20,13 @@ public class TabEstado extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (sTipoEquipo.contains("KP-PE050")) {  //Poste SOS
-            rootView = inflater.inflate(R.layout.tab_estado_poste, container, false);
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
+        sTipoEquipo = myEquipoCAPE.getTipoEquipo();
+
+        if (sTipoEquipo.contains("KP-PE050")) //Poste SOS
+        {
+            rootView = inflater.inflate(R.layout.tab_estado_equipo, container, false);
             tvEstadoEquipoPoste = (TextView)rootView.findViewById(R.id.textViewEstadoEquipoPoste);
         }
         else
@@ -33,4 +38,5 @@ public class TabEstado extends Fragment {
     {
         tvEstadoEquipoPoste.setText(sEstado);
     }
+
 }

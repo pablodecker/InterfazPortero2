@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -18,13 +19,15 @@ import android.widget.Toast;
  * Created by Pablo on 03/01/2016.
  */
 public class TabConfig1 extends Fragment {
-    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa;
+    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa, etIDPoste;
     private static Switch swHab;
     private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
                             spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5, spVolPoste, spMicPoste;
     private static TextView tvSgn, tvBat;
+    private static LinearLayout myLayoutConfig1Portero;
     String sTipoEquipo;
     EquipoCAPE myEquipoCAPE;
+
     View rootView;
 
     @Override
@@ -43,26 +46,32 @@ public class TabConfig1 extends Fragment {
             etTiempoCom = (EditText) rootView.findViewById(R.id.etTiempoComunicacion);
             etTiempoReporte = (EditText) rootView.findViewById(R.id.etTiempoReporte);
             etEmpresa = (EditText) rootView.findViewById(R.id.etEmpresaPoste);
+            etIDPoste = (EditText) rootView.findViewById(R.id.etIDPoste);
             swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
 
             tvSgn = (TextView)rootView.findViewById(R.id.textViewSgn);
             tvBat = (TextView)rootView.findViewById(R.id.textViewBat);
 
-            String[] listaNumeros = {"0","1","2","3","4","5","6","7"};
-            ArrayAdapter adapterSec = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
+            String[] listaNumerosVol = {"0","1","2","3","4","5","6","7"};
+            ArrayAdapter adapterSecVol = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumerosVol);
 
             spVolPoste = (Spinner)rootView.findViewById(R.id.spinner_vol_poste);
-            spVolPoste.setAdapter(adapterSec);
+            spVolPoste.setAdapter(adapterSecVol);
 
             String[] listaNumerosMic = {"0","1","2","3","4","5","6","7","8","9","10"};
-            ArrayAdapter adapterSecMic = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumeros);
+            ArrayAdapter adapterSecMic = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumerosMic);
 
             spMicPoste = (Spinner)rootView.findViewById(R.id.spinner_mic_poste);
-            spMicPoste.setAdapter(adapterSec);
+            spMicPoste.setAdapter(adapterSecMic);
 
         }
-        else {
-            rootView = inflater.inflate(R.layout.tab_config1, container, false);
+        //INTERFAZ PORTERO
+        else
+        {
+            rootView = inflater.inflate(R.layout.tab_config1_interfaz_portero, container, false);
+
+            myLayoutConfig1Portero = (LinearLayout)rootView.findViewById(R.id.linearLConfig1InterfazPortero);
+
             etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
             etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
@@ -105,28 +114,28 @@ public class TabConfig1 extends Fragment {
         }
 
         return rootView;
-//        return inflater.inflate(R.layout.tab_config1, container, false);
     }
 
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button b = (Button) rootView.findViewById(R.id.buttonConfigurar);
+        Button b = (Button) rootView.findViewById(R.id.buttonConfigurarConfig1);
         b.setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 String phoneNo = myEquipoCAPE.getNumTel();
                 String sms = "";
-                if (sTipoEquipo.contains("KP-PE050")){  //Poste SOS
-
+                if (sTipoEquipo.contains("KP-PE050"))//Poste SOS
+                {
                     String sHab = " Hab:No";
                     if(swHab.isChecked())
                         sHab = " Hab:Si";
                     sms = "Config:" + sHab +
+                            " Id:" + etIDPoste.getText().toString() +
+                            " emp:" + etEmpresa.getText() +
                             " Te1:" + etTe1.getText().toString() +
                             " Te2:" + etTe2.getText().toString() +
                             " Te3:" + etTe3.getText().toString() +
@@ -134,11 +143,10 @@ public class TabConfig1 extends Fragment {
                             " Vol:" + spVolPoste.getSelectedItem().toString() +
                             " Mic:" + spMicPoste.getSelectedItem().toString() +
                             " TCom:" + etTiempoCom.getText() +
-                            " Trep:" + etTiempoReporte.getText() +
-                            " emp:" + etEmpresa.getText();
+                            " Trep:" + etTiempoReporte.getText();
                 }
-                else if (sTipoEquipo.contains("KP-PE015")){ //INTERFAZ PORTERO
-
+                else if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
+                {
                     String sHab = " Hab:No";
                     if(swHab.isChecked())
                         sHab = " Hab:Si";
@@ -147,56 +155,51 @@ public class TabConfig1 extends Fragment {
                             " Te2:" + etTe2.getText().toString() +
                             " Te3:" + etTe3.getText().toString() +
                             " Te4:" + etTe4.getText().toString() +
-                            " Te5:" + etTe5.getText().toString();
+                            " Te5:" + etTe5.getText().toString() + "\r\n";
+                    sms += "secll:";
+                    sms += spSecLlamada1.getSelectedItem().toString() + ",";
+                    sms += spSecLlamada2.getSelectedItem().toString() + ",";
+                    sms += spSecLlamada3.getSelectedItem().toString() + ",";
+                    sms += spSecLlamada4.getSelectedItem().toString() + ",";
+                    sms += spSecLlamada5.getSelectedItem().toString() + "\r\n";
+
+                    sms += "secal:";
+                    sms += spSecAlarma1.getSelectedItem().toString() + ",";
+                    sms += spSecAlarma2.getSelectedItem().toString() + ",";
+                    sms += spSecAlarma3.getSelectedItem().toString() + ",";
+                    sms += spSecAlarma4.getSelectedItem().toString() + ",";
+                    sms += spSecAlarma5.getSelectedItem().toString();
+
+
+                    for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ){
+                        View view = myLayoutConfig1Portero.getChildAt(i);
+                        view.setEnabled(false); // Or whatever you want to do with the view.
+                    }
                 }
-                enviar_sms_config(phoneNo, sms);
+                myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
 
         });
     }
 
-    public void enviar_sms_config(String sNumero, String sTextoSMS){
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(sNumero, null, sTextoSMS, null, null);
-            Toast.makeText(getActivity(), "SMS Enviado",Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e) {
-            Toast.makeText(getActivity(),"No se pudo enviar el SMS",Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-
     public static void SetControlesInterfazPortero(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,
                                                    int iSecLlamada1, int iSecLlamada2, int iSecLlamada3, int iSecLlamada4, int iSecLlamada5,
                                                    int iSecAlarma1, int iSecAlarma2, int iSecAlarma3, int iSecAlarma4, int iSecAlarma5)
     {
+        for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ) {
+            View view = myLayoutConfig1Portero.getChildAt(i);
+            view.setEnabled(true); // Or whatever you want to do with the view.
+        }
         swHab.setChecked(bSwitchHab);
-        etTe1.setText(sTe1);
-        etTe2.setText(sTe2);
-        etTe3.setText(sTe3);
-        etTe4.setText(sTe4);
-        etTe5.setText(sTe5);
-        spSecLlamada1.setSelection(iSecLlamada1-1);
-        spSecLlamada2.setSelection(iSecLlamada2-1);
-        spSecLlamada3.setSelection(iSecLlamada3-1);
-        spSecLlamada4.setSelection(iSecLlamada4-1);
-        spSecLlamada5.setSelection(iSecLlamada5-1);
-        spSecAlarma1.setSelection(iSecAlarma1-1);
-        spSecAlarma2.setSelection(iSecAlarma2-1);
-        spSecAlarma3.setSelection(iSecAlarma3-1);
-        spSecAlarma4.setSelection(iSecAlarma4-1);
-        spSecAlarma5.setSelection(iSecAlarma5-1);
+        etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
+        spSecLlamada1.setSelection(iSecLlamada1); spSecLlamada2.setSelection(iSecLlamada2); spSecLlamada3.setSelection(iSecLlamada3); spSecLlamada4.setSelection(iSecLlamada4); spSecLlamada5.setSelection(iSecLlamada5);
+        spSecAlarma1.setSelection(iSecAlarma1); spSecAlarma2.setSelection(iSecAlarma2); spSecAlarma3.setSelection(iSecAlarma3); spSecAlarma4.setSelection(iSecAlarma4); spSecAlarma5.setSelection(iSecAlarma5);
     }
     public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
-                                            String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa)
+                                            String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa, String sID)
     {
         swHab.setChecked(bSwitchHab);
-        etTe1.setText(sTe1);
-        etTe2.setText(sTe2);
-        etTe3.setText(sTe3);
-        etTe4.setText(sTeR);
+        etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTeR);
         etTiempoCom.setText(sTcom);
         etTiempoReporte.setText(sTRep);
         tvSgn.setText("Señal: " + sSgn);
@@ -204,6 +207,7 @@ public class TabConfig1 extends Fragment {
         spMicPoste.setSelection(iMic);
         spVolPoste.setSelection(iVol);
         etEmpresa.setText(sEmpresa);
+        etIDPoste.setText(sID);
     }
 
 }

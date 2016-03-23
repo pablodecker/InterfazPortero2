@@ -33,8 +33,6 @@ public class TabSalidas extends Fragment {
         toggleSal2 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida2);
         toggleSal3 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida3);
 
-        // Calling Application class (see application tag in AndroidManifest.xml)
-        myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
         //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
         toggleSal1.setTextOff(myEquipoCAPE.getSal1() + " OFF");
         toggleSal1.setTextOn(myEquipoCAPE.getSal1() + " ON");
@@ -57,7 +55,7 @@ public class TabSalidas extends Fragment {
                     sms = "salida1:1";
                 else
                     sms = "salida1:0";
-                enviar_sms(phoneNo, sms);
+                myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
 
         });
@@ -73,7 +71,7 @@ public class TabSalidas extends Fragment {
                     sms = "salida2:1";
                 else
                     sms = "salida2:0";
-                enviar_sms(phoneNo, sms);
+                myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
 
         });
@@ -89,7 +87,7 @@ public class TabSalidas extends Fragment {
                     sms = "salida3:1";
                 else
                     sms = "salida3:0";
-                enviar_sms(phoneNo, sms);
+                myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
 
         });
@@ -109,17 +107,17 @@ public class TabSalidas extends Fragment {
         toggleSal2.setChecked(bEstadoSalida2);
         toggleSal3.setChecked(bEstadoSalida3);
     }
-    public void enviar_sms(String sNumTel, String sTxtSMS){
-//        String phoneNo = "3415555781";//textPhoneNo.getText().toString();
-//        String sms = "Config: Te1:" + etTe1.getText().toString() + etTe2.getText().toString();
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
-            Toast.makeText(getContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
-        }
-        catch (Exception e) {
-            Toast.makeText(getContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }
+//    public void enviar_sms(String sNumTel, String sTxtSMS){
+////        String phoneNo = "3415555781";//textPhoneNo.getText().toString();
+////        String sms = "Config: Te1:" + etTe1.getText().toString() + etTe2.getText().toString();
+//        try {
+//            SmsManager smsManager = SmsManager.getDefault();
+//            smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
+//            Toast.makeText(getContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
+//        }
+//        catch (Exception e) {
+//            Toast.makeText(getContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
+//            e.printStackTrace();
+//        }
+//    }
 }

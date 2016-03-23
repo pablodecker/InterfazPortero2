@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         iImagenes[i] = R.drawable.ic_interfaz1;
                     else if(sInfo.contains("KP-PE050"))
                         iImagenes[i] = R.drawable.ic_poste_nuevo_02;
+                    else if(sInfo.contains("KP-AL911"))
+                        iImagenes[i] = R.drawable.ic_kp_al911;
                     i++;
 
             }while (c.moveToNext());
