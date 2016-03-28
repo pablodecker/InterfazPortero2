@@ -122,6 +122,10 @@ public class EquipoParticular extends AppCompatActivity {
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
+                        if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
+                        {
+                            TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
+                        }
                         break;
                     case 2:
                         Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();

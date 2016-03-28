@@ -46,13 +46,29 @@
                     android:id="@+id/textView7"
                     android:layout_gravity="center_horizontal" />
 
-                <EditText
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/editTextNumTelEquipo"
-                    android:gravity="center"/>
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:layout_width="254dp"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:id="@+id/editTextNumTelEquipo"
+                        android:gravity="center"
+                        android:layout_weight="0.56" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageButtonSeleccionarContacto"
+                        android:src="@drawable/ic_action_account_box"
+                        android:onClick="buscar_contacto" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

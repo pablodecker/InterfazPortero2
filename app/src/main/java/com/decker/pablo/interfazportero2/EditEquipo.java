@@ -1,13 +1,18 @@
 package com.decker.pablo.interfazportero2;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,6 +28,13 @@ public class EditEquipo extends AppCompatActivity {
     int iEditar = 0;
     EquipoCAPE myEquipoCAPE;
     int id;
+    // Declare
+    static final int PICK_CONTACT=1;
+    private static final String TAG = "Pablito";
+    private static final int REQUEST_CODE_PICK_CONTACTS = 1;
+    private Uri uriContact;
+    private String contactID;     // contacts unique ID
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,4 +167,103 @@ public class EditEquipo extends AppCompatActivity {
             }
         }
     }
+
+    public void buscar_contacto(View v){
+//        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK,  ContactsContract.Contacts.CONTENT_URI);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_CONTACT);
+        // using native contacts selection
+        // Intent.ACTION_PICK = Pick an item from the data, returning what was selected.
+//        startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CODE_PICK_CONTACTS);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // check whether the result is ok
+        if (resultCode == RESULT_OK) {
+            // Check for the request code, we might be usign multiple startActivityForReslut
+            switch (requestCode) {
+                case PICK_CONTACT:
+                    Cursor cursor = null;
+                    try {
+                        String phoneNo = null ;
+                        String name = null;
+                        Uri uri = data.getData();
+                        cursor = getContentResolver().query(uri, null, null, null, null);
+                        cursor.moveToFirst();
+                        int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                        phoneNo = cursor.getString(phoneIndex);
+
+                        etNumTel.setText(phoneNo);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        } else {
+            Log.e("MainActivity", "Failed to pick contact");
+        }
+    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_CODE_PICK_CONTACTS && resultCode == RESULT_OK) {
+//            Log.d(TAG, "Response: " + data.toString());
+//            uriContact = data.getData();
+//
+//            retrieveContactName();
+//            retrieveContactNumber();
+////            retrieveContactPhoto();
+//
+//        }
+//    }
+
+//    private void retrieveContactPhoto() {
+//
+//        Bitmap photo = null;
+//
+//        try {
+//            InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(getContentResolver(),
+//                    ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, new Long(contactID)));
+//
+//            if (inputStream != null) {
+//                photo = BitmapFactory.decodeStream(inputStream);
+//                ImageView imageView = (ImageView) findViewById(R.id.img_contact);
+//                imageView.setImageBitmap(photo);
+//            }
+//
+//            assert inputStream != null;
+//            inputStream.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+
+
+//    @Override
+//    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+//        super.onActivityResult(reqCode, resultCode, data);
+//
+//        switch (reqCode) {
+//            case (PICK_CONTACT) :
+//                if (resultCode == Activity.RESULT_OK) {
+//                    Uri contactData = data.getData();
+//                    Cursor c =  getContentResolver().query(contactData, null, null, null, null);
+//                    if (c.moveToFirst()) {
+//                        String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+//                        String sNumber = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+//                        etNumTel.setText(sNumber);
+//                        // TODO Whatever you want to do with the selected contact name.
+//                    }
+//                }
+//                break;
+//        }
+//    }
+
+
 }

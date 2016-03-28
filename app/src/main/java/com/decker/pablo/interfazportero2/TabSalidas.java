@@ -34,15 +34,10 @@ public class TabSalidas extends Fragment {
         toggleSal3 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida3);
 
         //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
-        toggleSal1.setTextOff(myEquipoCAPE.getSal1() + " OFF");
-        toggleSal1.setTextOn(myEquipoCAPE.getSal1() + " ON");
-        toggleSal2.setTextOff(myEquipoCAPE.getSal2() + " OFF");
-        toggleSal2.setTextOn(myEquipoCAPE.getSal2() + " ON");
-        toggleSal3.setTextOff(myEquipoCAPE.getSal3() + " OFF");
-        toggleSal3.setTextOn(myEquipoCAPE.getSal3() + " ON");
-        toggleSal1.setEnabled(false);
-        toggleSal2.setEnabled(false);
-        toggleSal3.setEnabled(false);
+
+//        toggleSal1.setEnabled(false);
+//        toggleSal2.setEnabled(false);
+//        toggleSal3.setEnabled(false);
 
         toggleSal1.setOnClickListener(new View.OnClickListener() {
 
@@ -120,4 +115,13 @@ public class TabSalidas extends Fragment {
 //            e.printStackTrace();
 //        }
 //    }
+
+    public static void SetTextoSalidas(String sTxtSalida1, String sTxtSalida2,String sTxtSalida3){
+        toggleSal1.setTextOff(sTxtSalida1 + " OFF");
+        toggleSal1.setTextOn(sTxtSalida1 + " ON");
+        toggleSal2.setTextOff(sTxtSalida2 + " OFF");
+        toggleSal2.setTextOn(sTxtSalida2 + " ON");
+        toggleSal3.setTextOff(sTxtSalida3 + " OFF");
+        toggleSal3.setTextOn(sTxtSalida3 + " ON");
+    }
 }
