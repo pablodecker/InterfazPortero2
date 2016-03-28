@@ -118,10 +118,10 @@ public class EquipoParticular extends AppCompatActivity {
                   iTabPosition = tab.getPosition();
                 switch (tab.getPosition()) {
                     case 0:
-                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
                         if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
                         {
                             TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
