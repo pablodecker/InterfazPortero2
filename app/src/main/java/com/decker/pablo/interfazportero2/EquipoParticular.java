@@ -124,17 +124,18 @@ public class EquipoParticular extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
                         if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
                         {
+                            Toast.makeText(getApplicationContext(), "Set Salidas", Toast.LENGTH_SHORT).show();
                             TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
                         }
                         break;
                     case 2:
-                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(getApplicationContext(), "Tab 4", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Tab 4", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        Toast.makeText(getApplicationContext(), "Tab 5", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Tab 5", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

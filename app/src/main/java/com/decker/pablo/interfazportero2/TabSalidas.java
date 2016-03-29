@@ -35,9 +35,9 @@ public class TabSalidas extends Fragment {
 
         //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
 
-//        toggleSal1.setEnabled(false);
-//        toggleSal2.setEnabled(false);
-//        toggleSal3.setEnabled(false);
+        toggleSal1.setEnabled(false);
+        toggleSal2.setEnabled(false);
+        toggleSal3.setEnabled(false);
 
         toggleSal1.setOnClickListener(new View.OnClickListener() {
 
@@ -117,6 +117,13 @@ public class TabSalidas extends Fragment {
 //    }
 
     public static void SetTextoSalidas(String sTxtSalida1, String sTxtSalida2,String sTxtSalida3){
+
+
+
+
+        toggleSal1.setText(sTxtSalida1);
+        toggleSal2.setText(sTxtSalida2);
+        toggleSal3.setText(sTxtSalida3);
         toggleSal1.setTextOff(sTxtSalida1 + " OFF");
         toggleSal1.setTextOn(sTxtSalida1 + " ON");
         toggleSal2.setTextOff(sTxtSalida2 + " OFF");
