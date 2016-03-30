@@ -61,10 +61,10 @@ public class EquipoParticular extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
         {
-            tabLayout.addTab(tabLayout.newTab().setText("Est"));
-            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
-            tabLayout.addTab(tabLayout.newTab().setText("Conf A").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("EST"));
+            tabLayout.addTab(tabLayout.newTab().setText("SAL"));
+            tabLayout.addTab( tabLayout.newTab().setText("CFG").setIcon(R.drawable.ic_action_action_settings) );
+            tabLayout.addTab(tabLayout.newTab().setText("CFG A").setIcon(R.drawable.ic_action_action_settings));
             tabLayout.addTab(tabLayout.newTab().setText("CMD"));
             //esta es la clase que cree para crear un adaptador y luego pasar
             final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -73,9 +73,9 @@ public class EquipoParticular extends AppCompatActivity {
         }
         else if(sTipoEquipo.contains("KP-AL911"))
         {
-            tabLayout.addTab(tabLayout.newTab().setText("Est"));
-            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("EST"));
+            tabLayout.addTab(tabLayout.newTab().setText("SAL"));
+            tabLayout.addTab( tabLayout.newTab().setText("CFG").setIcon(R.drawable.ic_action_action_settings));
             tabLayout.addTab(tabLayout.newTab().setText("GPRS").setIcon(R.drawable.ic_action_communication_import_export));
             tabLayout.addTab(tabLayout.newTab().setText("CMD"));
             //esta es la clase que cree para crear un adaptador y luego pasar
@@ -85,10 +85,8 @@ public class EquipoParticular extends AppCompatActivity {
         }
         else if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
         {
-            tabLayout.addTab(tabLayout.newTab().setText("Est"));
-//            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
-//            tabLayout.addTab(tabLayout.newTab().setText("Conf2").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("EST"));
+            tabLayout.addTab( tabLayout.newTab().setText("CFG").setIcon(R.drawable.ic_action_action_settings) );
             //esta es la clase que cree para crear un adaptador y luego pasar
             final PagerAdapterPostes adapter = new PagerAdapterPostes(getSupportFragmentManager(), tabLayout.getTabCount());
             //le seteo el adaptador al viewpager
@@ -96,10 +94,10 @@ public class EquipoParticular extends AppCompatActivity {
         }
         else
         {
-            tabLayout.addTab(tabLayout.newTab().setText("Est"));
-            tabLayout.addTab(tabLayout.newTab().setText("Sal"));
-            tabLayout.addTab( tabLayout.newTab().setText("Conf").setIcon(R.drawable.ic_action_action_settings) );
-            tabLayout.addTab(tabLayout.newTab().setText("Conf2").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("EST"));
+            tabLayout.addTab(tabLayout.newTab().setText("SAL"));
+            tabLayout.addTab( tabLayout.newTab().setText("CFG").setIcon(R.drawable.ic_action_action_settings) );
+            tabLayout.addTab(tabLayout.newTab().setText("CFG2").setIcon(R.drawable.ic_action_action_settings));
             tabLayout.addTab(tabLayout.newTab().setText("CMD"));
             //esta es la clase que cree para crear un adaptador y luego pasar
             final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -115,18 +113,18 @@ public class EquipoParticular extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                  iTabPosition = tab.getPosition();
-                switch (tab.getPosition()) {
+                iTabPosition = tab.getPosition();
+                switch (tab.getPosition())
+                {
                     case 0:
 //                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-//                        Toast.makeText(getApplicationContext(), "Tab 2", Toast.LENGTH_SHORT).show();
-                        if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ COMMAX
-                        {
-                            Toast.makeText(getApplicationContext(), "Set Salidas", Toast.LENGTH_SHORT).show();
-                            TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
-                        }
+//                        if (sTipoEquipo.contains("KP-PE015") ) //INTERFAZ COMMAX
+//                        {
+//                            Toast.makeText(getApplicationContext(), "Set Salidas", Toast.LENGTH_SHORT).show();
+//                            TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
+//                        }
                         break;
                     case 2:
 //                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();
@@ -162,18 +160,23 @@ public class EquipoParticular extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
                 if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
                 {   //tengo solo 2 pestanas en los postes
-                    if (iTabPosition == 0) {
+                    //EST | CFG
+                    if (iTabPosition == 0)
+                    {
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
                     }
                     else
                     {
-                            view.setEnabled(false); // Or whatever you want to do with the view.
+                        view.setEnabled(false); // Or whatever you want to do with the view.
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
                     }
-                    myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+
                 }
                 else if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
                 {
-                    if (iTabPosition == 1)
+                    if (iTabPosition == 0)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
+                    else if (iTabPosition == 1)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
                     else if (iTabPosition == 2)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
@@ -182,15 +185,14 @@ public class EquipoParticular extends AppCompatActivity {
                 }
                 else if (sTipoEquipo.contains("KP-AL911"))
                 {
-                    if (iTabPosition == 1)
+                    if (iTabPosition == 0)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
+                    else if (iTabPosition == 1)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
                     else if (iTabPosition == 2)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
                 }
-
-
             }
         });
     }
-
 }

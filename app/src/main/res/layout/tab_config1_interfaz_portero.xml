@@ -31,10 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono1"
+            android:text="Telefono 1"
             android:id="@+id/textView1"
             android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginRight="10dp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -49,11 +50,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono2"
+            android:text="Telefono 2"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
             android:layout_row="2"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginRight="10dp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -68,10 +70,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono3"
+            android:text="Telefono 3"
             android:id="@+id/textView3"
             android:layout_row="3"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginRight="10dp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -86,10 +89,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono4"
+            android:text="Telefono 4"
             android:id="@+id/textView4"
             android:layout_row="4"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginRight="10dp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -104,10 +108,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Telefono5"
+            android:text="Telefono 5"
             android:id="@+id/textView5"
             android:layout_row="5"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginRight="10dp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"

@@ -24,17 +24,19 @@ public class TabEstado extends Fragment {
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
         sTipoEquipo = myEquipoCAPE.getTipoEquipo();
 
-        if (sTipoEquipo.contains("KP-PE050")) //Poste SOS
-        {
-            rootView = inflater.inflate(R.layout.tab_estado_equipo, container, false);
-            tvEstadoEquipoPoste = (TextView)rootView.findViewById(R.id.textViewEstadoEquipoPoste);
-        }
-        else
-            rootView = inflater.inflate(R.layout.tab_estado, container, false);
+        rootView = inflater.inflate(R.layout.tab_estado_equipo, container, false);
+//
+//        if (sTipoEquipo.contains("KP-PE050")) //Poste SOS
+//        {
+//            rootView = inflater.inflate(R.layout.tab_estado_equipo, container, false);
+//            tvEstadoEquipoPoste = (TextView)rootView.findViewById(R.id.textViewEstadoEquipoPoste);
+//        }
+//        else
+//            rootView = inflater.inflate(R.layout.tab_estado, container, false);
 
         return rootView;
     }
-    public static void SetEstadoPosteSOS(String sEstado)
+    public static void SetEstadoEquipo(String sEstado)
     {
         tvEstadoEquipoPoste.setText(sEstado);
     }

@@ -39,6 +39,13 @@ public class TabSalidas extends Fragment {
         toggleSal2.setEnabled(false);
         toggleSal3.setEnabled(false);
 
+
+        toggleSal1.setText(myEquipoCAPE.getSal1());
+        toggleSal2.setText(myEquipoCAPE.getSal2());
+        toggleSal3.setText(myEquipoCAPE.getSal3());
+
+
+
         toggleSal1.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -117,8 +124,6 @@ public class TabSalidas extends Fragment {
 //    }
 
     public static void SetTextoSalidas(String sTxtSalida1, String sTxtSalida2,String sTxtSalida3){
-
-
 
 
         toggleSal1.setText(sTxtSalida1);

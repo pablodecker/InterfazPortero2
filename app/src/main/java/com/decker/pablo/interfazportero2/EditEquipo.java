@@ -59,7 +59,8 @@ public class EditEquipo extends AppCompatActivity {
         b = this.getIntent().getExtras();
         if (b != null){
             iEditar = b.getInt("Editar");
-            if (iEditar == 1){
+            if (iEditar == 1)
+            {
                 id = myEquipoCAPE.getIdDB();
                 etNombre.setText(myEquipoCAPE.getNombre());
                 etNumTel.setText(myEquipoCAPE.getNumTel());
@@ -146,8 +147,12 @@ public class EditEquipo extends AppCompatActivity {
             registronuevo.put("Sal3",etSal3.getText().toString());
             String sAux = spTipoEquipo.getSelectedItem().toString();
             registronuevo.put("TipoEquipo",sAux);
-            if (db.insert("Equipos",null,registronuevo) > 0){
-                Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
+            if (db.insert("Equipos",null,registronuevo) > 0)
+            {
+                Toast.makeText(this, "Equipo Guardado Con Exito", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditEquipo.this,MainActivity.class);
+                startActivity(intent);
+                this.finish();
             }
         }
     }
@@ -162,8 +167,12 @@ public class EditEquipo extends AppCompatActivity {
             registronuevo.put("Sal2",etSal2.getText().toString());
             registronuevo.put("Sal3",etSal3.getText().toString());
             registronuevo.put("TipoEquipo",spTipoEquipo.getSelectedItem().toString());
-            if (db.update("Equipos", registronuevo, "Id=" + id, null) > 0){
-                Toast.makeText(this, "Datos Guardados Con Exito", Toast.LENGTH_SHORT).show();
+            if (db.update("Equipos", registronuevo, "Id=" + id, null) > 0)
+            {
+                Toast.makeText(this, "Equipo Guardado Con Exito", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditEquipo.this,MainActivity.class);
+                startActivity(intent);
+                this.finish();
             }
         }
     }
@@ -177,7 +186,7 @@ public class EditEquipo extends AppCompatActivity {
         // Intent.ACTION_PICK = Pick an item from the data, returning what was selected.
 //        startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CODE_PICK_CONTACTS);
     }
-
+    //Para obtener el numero del contacto seleccionado
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check whether the result is ok

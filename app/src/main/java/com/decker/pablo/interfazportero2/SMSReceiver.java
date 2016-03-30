@@ -50,6 +50,16 @@ public class SMSReceiver extends BroadcastReceiver {
             }
             // log .d = debug
             Log.d(TAG, "Llego antes de lowercase");
+
+            //Si llego un equipo: no lo paso a minuscula
+            if (sMensaje.contains("equipo:"))
+            {
+                sMensaje = sMensaje.replace("\r","\r\n");
+                TabEstado.SetEstadoEquipo(sMensaje);
+                Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
+                Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
+                return;
+            }
             sMensaje = sMensaje.toLowerCase();
 
             String sNumEquipoSeleccionado = myEquipoCAPE.getNumTel();
@@ -185,7 +195,8 @@ public class SMSReceiver extends BroadcastReceiver {
                 //poste SOS
                 else if (sTipoEquipoSelcccionado.contains("KP-PE050") )
                 {
-                    if ( sMensaje.contains("config") && sMensaje.contains("te1:")){
+                    if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
+                    {
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "",sID = "";
                         Boolean bHab = false;
                         try{
@@ -228,7 +239,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     else if (sMensaje.contains("equipo:"))
                     {
                         sMensaje = sMensaje.replace("\r","\r\n");
-                        TabEstado.SetEstadoPosteSOS(sMensaje);
+                        TabEstado.SetEstadoEquipo(sMensaje);
                     }
                 }
             }

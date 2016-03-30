@@ -28,7 +28,7 @@ public class TabConfig1 extends Fragment {
     String sTipoEquipo;
     EquipoCAPE myEquipoCAPE;
 
-    View rootView;
+    private static View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +37,8 @@ public class TabConfig1 extends Fragment {
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
         sTipoEquipo = myEquipoCAPE.getTipoEquipo();
 
-        if (sTipoEquipo.contains("KP-PE050")){  //Poste SOS
+        if (sTipoEquipo.contains("KP-PE050"))
+        {  //Poste SOS
             rootView = inflater.inflate(R.layout.tab_config1_poste_sos, container, false);
             etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
@@ -70,7 +71,6 @@ public class TabConfig1 extends Fragment {
         {
             rootView = inflater.inflate(R.layout.tab_config1_interfaz_portero, container, false);
 
-            myLayoutConfig1Portero = (LinearLayout)rootView.findViewById(R.id.linearLConfig1InterfazPortero);
 
             etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
@@ -111,11 +111,28 @@ public class TabConfig1 extends Fragment {
 
             spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
             spSecAlarma5.setAdapter(adapterSec);
+
+            if (etTe1.getText().toString() == "")
+                setViewAndChildrenEnabled(rootView, false);
+//            for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ){
+//                View child = myLayoutConfig1Portero.getChildAt(i);
+//                child.setEnabled(false); // Or whatever you want to do with the view.
+//            }
         }
 
         return rootView;
     }
-
+    //funcion para habilitar o deshabilitar todos los controles
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -170,11 +187,8 @@ public class TabConfig1 extends Fragment {
                     sms += spSecAlarma4.getSelectedItem().toString() + ",";
                     sms += spSecAlarma5.getSelectedItem().toString();
 
+                    setViewAndChildrenEnabled(rootView, false);
 
-                    for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ){
-                        View view = myLayoutConfig1Portero.getChildAt(i);
-                        view.setEnabled(false); // Or whatever you want to do with the view.
-                    }
                 }
                 myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
@@ -186,10 +200,8 @@ public class TabConfig1 extends Fragment {
                                                    int iSecLlamada1, int iSecLlamada2, int iSecLlamada3, int iSecLlamada4, int iSecLlamada5,
                                                    int iSecAlarma1, int iSecAlarma2, int iSecAlarma3, int iSecAlarma4, int iSecAlarma5)
     {
-        for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ) {
-            View view = myLayoutConfig1Portero.getChildAt(i);
-            view.setEnabled(true); // Or whatever you want to do with the view.
-        }
+        setViewAndChildrenEnabled(rootView, true);
+
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
         spSecLlamada1.setSelection(iSecLlamada1); spSecLlamada2.setSelection(iSecLlamada2); spSecLlamada3.setSelection(iSecLlamada3); spSecLlamada4.setSelection(iSecLlamada4); spSecLlamada5.setSelection(iSecLlamada5);
@@ -198,6 +210,9 @@ public class TabConfig1 extends Fragment {
     public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
                                             String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa, String sID)
     {
+
+        setViewAndChildrenEnabled(rootView, true);
+
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTeR);
         etTiempoCom.setText(sTcom);
