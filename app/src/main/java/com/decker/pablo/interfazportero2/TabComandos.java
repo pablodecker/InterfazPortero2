@@ -19,7 +19,7 @@ import android.widget.ToggleButton;
 public class TabComandos extends Fragment {
 
     private static Button btnConectar, btnLlamar;
-    View rootView;
+    private static View rootView;
     EquipoCAPE myEquipoCAPE;
 
     @Override

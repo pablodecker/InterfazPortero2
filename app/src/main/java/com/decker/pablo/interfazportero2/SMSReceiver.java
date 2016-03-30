@@ -66,12 +66,11 @@ public class SMSReceiver extends BroadcastReceiver {
             String sTipoEquipoSelcccionado = myEquipoCAPE.getTipoEquipo();
             if (sNumeroOrigen.contains(sNumEquipoSeleccionado))
             {
-
                 if (sTipoEquipoSelcccionado.contains("KP-PE015") )//PORTERO COMMAX
                 {
-
                     if ( sMensaje.contains("salida"))
                     {
+                        myEquipoCAPE.setbRecibioSalidas(true);
                         boolean bSalida1 = false, bSalida2 = false, bSalida3 = false;
                         Log.d(TAG, "Conmutar salidas");
                         if (sMensaje.contains("salida1:1"))
@@ -84,6 +83,8 @@ public class SMSReceiver extends BroadcastReceiver {
                     }
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
                     {
+                        myEquipoCAPE.setbRecibioConfig1(true);
+
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "";
                         Boolean bHab = false;
                         if (sMensaje.contains("hab:si"))
@@ -144,6 +145,8 @@ public class SMSReceiver extends BroadcastReceiver {
                     }
                     if ( sMensaje.contains("config") && sMensaje.contains("en1:"))
                     {
+                        myEquipoCAPE.setbRecibioConfig2(true);
+
                         boolean bHabEn1, bHabEn2, bHabEn3, bLlamar1, bLlamar2, bLlamar3,bSMS1, bSMS2, bSMS3;
                         String sTipoEn1,sTipoEn2, sTipoEn3,sTxtSMS1, sTxtSMS2,sTxtSMS3;
                         int iVolTel, iMicTel, iVolFrente, iMicFrente;
@@ -197,6 +200,8 @@ public class SMSReceiver extends BroadcastReceiver {
                 {
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
                     {
+                        myEquipoCAPE.setbRecibioConfig1(true);
+
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "",sID = "";
                         Boolean bHab = false;
                         try{
@@ -235,11 +240,6 @@ public class SMSReceiver extends BroadcastReceiver {
                         int iMic = Integer.parseInt(sAux);
 
                         TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
-                    }
-                    else if (sMensaje.contains("equipo:"))
-                    {
-                        sMensaje = sMensaje.replace("\r","\r\n");
-                        TabEstado.SetEstadoEquipo(sMensaje);
                     }
                 }
             }

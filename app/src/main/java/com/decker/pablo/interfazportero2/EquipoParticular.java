@@ -48,12 +48,18 @@ public class EquipoParticular extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        etTe1 = (EditText) findViewById(R.id.etTelefono1);
-        etTe2 = (EditText) findViewById(R.id.etTelefono2);
-        etTe3 = (EditText) findViewById(R.id.etTelefono3);
-        etTe4 = (EditText) findViewById(R.id.etTelefono4);
-        etTe5 = (EditText) findViewById(R.id.etTelefono5);
-        swHab = (Switch)   findViewById(R.id.switchHabilitacion);
+        myEquipoCAPE.setbRecibioEstado(false);
+        myEquipoCAPE.setbRecibioSalidas(false);
+        myEquipoCAPE.setbRecibioConfig1(false);
+        myEquipoCAPE.setbRecibioConfig2(false);
+        myEquipoCAPE.setbRecibioComandos(false);
+
+//        etTe1 = (EditText) findViewById(R.id.etTelefono1);
+//        etTe2 = (EditText) findViewById(R.id.etTelefono2);
+//        etTe3 = (EditText) findViewById(R.id.etTelefono3);
+//        etTe4 = (EditText) findViewById(R.id.etTelefono4);
+//        etTe5 = (EditText) findViewById(R.id.etTelefono5);
+//        swHab = (Switch)   findViewById(R.id.switchHabilitacion);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -120,11 +126,11 @@ public class EquipoParticular extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(), "Tab 1", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-//                        if (sTipoEquipo.contains("KP-PE015") ) //INTERFAZ COMMAX
-//                        {
+                        if (sTipoEquipo.contains("KP-PE015") ) //INTERFAZ COMMAX
+                        {
 //                            Toast.makeText(getApplicationContext(), "Set Salidas", Toast.LENGTH_SHORT).show();
-//                            TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
-//                        }
+                            TabSalidas.SetTextoSalidas(myEquipoCAPE.getSal1(), myEquipoCAPE.getSal2(), myEquipoCAPE.getSal3());
+                        }
                         break;
                     case 2:
 //                        Toast.makeText(getApplicationContext(), "Tab 3", Toast.LENGTH_SHORT).show();
@@ -167,7 +173,7 @@ public class EquipoParticular extends AppCompatActivity {
                     }
                     else
                     {
-                        view.setEnabled(false); // Or whatever you want to do with the view.
+//                        view.setEnabled(false); // Or whatever you want to do with the view.
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
                     }
 

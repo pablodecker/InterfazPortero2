@@ -18,7 +18,7 @@ public class TabSalidas extends Fragment {
     private static ToggleButton toggleSal1,toggleSal2,toggleSal3;
     private TextView tv1;
     private static TabSalidas ins;
-    View rootView;
+    private static View rootView;
     EquipoCAPE myEquipoCAPE;
 
     @Override
@@ -34,11 +34,6 @@ public class TabSalidas extends Fragment {
         toggleSal3 = (ToggleButton) rootView.findViewById(R.id.toggleButtonSalida3);
 
         //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
-
-        toggleSal1.setEnabled(false);
-        toggleSal2.setEnabled(false);
-        toggleSal3.setEnabled(false);
-
 
         toggleSal1.setText(myEquipoCAPE.getSal1());
         toggleSal2.setText(myEquipoCAPE.getSal2());
@@ -94,12 +89,24 @@ public class TabSalidas extends Fragment {
 
         });
 
-
+        if (myEquipoCAPE.getRecibioConfig1() == false)
+            setViewAndChildrenEnabled(rootView, false);
         return rootView;
 
 //        return inflater.inflate(R.layout.tab_salidas, container, false);
     }
 
+    //funcion para habilitar o deshabilitar todos los controles
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
+    }
 
     public static void SetEstadoButtons(boolean bEstadoSalida1, boolean bEstadoSalida2, boolean bEstadoSalida3 ){
         toggleSal1.setEnabled(true);

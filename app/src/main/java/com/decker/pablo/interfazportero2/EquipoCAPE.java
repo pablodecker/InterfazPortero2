@@ -12,6 +12,7 @@ public class EquipoCAPE extends Application{
 
     private String sNombre, sNumTel, sSal1, sSal2, sSal3, sTipoEquipo;
     private int iIdDB;
+    private boolean bRecibioEstado, bRecibioSalidas, bRecibioConfig1, bRecibioConfig2, bRecibioComandos;
     //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
     public void setIdDB(int iIdDB){
         this.iIdDB = iIdDB;
@@ -30,6 +31,21 @@ public class EquipoCAPE extends Application{
     }
     public void setSal3(String sSal3){
         this.sSal3 = sSal3;
+    }
+    public void setbRecibioEstado(boolean bRecibioEstado){
+        this.bRecibioEstado = bRecibioEstado;
+    }
+    public void setbRecibioSalidas(boolean bRecibioSalidas){
+        this.bRecibioSalidas = bRecibioSalidas;
+    }
+    public void setbRecibioConfig1(boolean bRecibioConfig1){
+        this.bRecibioConfig1 = bRecibioConfig1;
+    }
+    public void setbRecibioConfig2(boolean bRecibioConfig2){
+        this.bRecibioConfig2 = bRecibioConfig2;
+    }
+    public void setbRecibioComandos(boolean bRecibioComandos){
+        this.bRecibioComandos = bRecibioComandos;
     }
 
 //    public void setTipoEquipo(int iTipoEquipo){
@@ -60,9 +76,23 @@ public class EquipoCAPE extends Application{
     public String getTipoEquipo(){
         return sTipoEquipo;
     }
-//    public int getTipoEquipo(){
-//        return iTipoEquipo;
-//    }
+    public boolean getRecibioEstado(){
+        return bRecibioEstado;
+    }
+    public boolean getRecibioConfig1(){
+        return bRecibioConfig1;
+    }
+    public boolean getRecibioConfig2(){
+        return bRecibioConfig2;
+    }
+    public boolean getRecibioSalidas(){
+        return bRecibioSalidas;
+    }
+    public boolean getRecibioComandos(){
+        return bRecibioComandos;
+    }
+
+
     public void enviar_sms(String sNumTel, String sTxtSMS)
     {
         try {

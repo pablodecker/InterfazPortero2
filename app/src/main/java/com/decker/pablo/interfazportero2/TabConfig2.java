@@ -18,7 +18,7 @@ import android.widget.Toast;
  */
 public class TabConfig2 extends Fragment {
     EquipoCAPE myEquipoCAPE;
-    View rootView;
+    private static View rootView;
     private static Spinner spVolTel, spMicTel, spVolFrente, spMicFrente,spTipoEntrada1, spTipoEntrada2, spTipoEntrada3;
     private static CheckBox chkHabEn1,chkHabEn2,chkHabEn3, chkLlamar1,chkLlamar2,chkLlamar3,chkSMS1,chkSMS2,chkSMS3;
     private static EditText etSMS1,etSMS2,etSMS3;
@@ -149,25 +149,34 @@ public class TabConfig2 extends Fragment {
         }
         else
             rootView = inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
+
+        if (myEquipoCAPE.getRecibioConfig2() == false)
+            setViewAndChildrenEnabled(rootView, false);
+
+
         return rootView;
     }
-//
-//    public void enviar_sms(String sNumTel, String sTxtSMS){
-//        try {
-//            SmsManager smsManager = SmsManager.getDefault();
-//            smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
-//            Toast.makeText(getContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
-//        }
-//        catch (Exception e) {
-//            Toast.makeText(getContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();
-//            e.printStackTrace();
-//        }
-//    }
+
+    //funcion para habilitar o deshabilitar todos los controles
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
+    }
+
 
     public static void SetControlesInterfazPortero(boolean bHabEn1,boolean bHabEn2,boolean bHabEn3,boolean bLlamar1,boolean bLlamar2,boolean bLlamar3,
                                                    boolean bSMS1,boolean bSMS2,boolean bSMS3,String sTipoEn1,String sTipoEn2,String sTipoEn3,
                                                    String sTxtSMS1,String sTxtSMS2,String sTxtSMS3,int iVolTel,int iMicTel, int iVolFrente, int iMicFrente)
     {
+
+        setViewAndChildrenEnabled(rootView, true);
+
         chkHabEn1.setChecked(bHabEn1);
         chkHabEn2.setChecked(bHabEn2);
         chkHabEn3.setChecked(bHabEn3);

@@ -112,13 +112,15 @@ public class TabConfig1 extends Fragment {
             spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
             spSecAlarma5.setAdapter(adapterSec);
 
-            if (etTe1.getText().toString() == "")
-                setViewAndChildrenEnabled(rootView, false);
+
 //            for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ){
 //                View child = myLayoutConfig1Portero.getChildAt(i);
 //                child.setEnabled(false); // Or whatever you want to do with the view.
 //            }
         }
+
+        if (myEquipoCAPE.getRecibioConfig1() == false)
+            setViewAndChildrenEnabled(rootView, false);
 
         return rootView;
     }
@@ -190,7 +192,6 @@ public class TabConfig1 extends Fragment {
                     setViewAndChildrenEnabled(rootView, false);
 
                 }
-                myEquipoCAPE.enviar_sms(phoneNo, sms);
             }
 
         });
