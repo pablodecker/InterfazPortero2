@@ -52,7 +52,7 @@ public class SMSReceiver extends BroadcastReceiver {
             Log.d(TAG, "Llego antes de lowercase");
 
             //Si llego un equipo: no lo paso a minuscula
-            if (sMensaje.contains("equipo:"))
+            if (sMensaje.contains("fw:"))
             {
                 sMensaje = sMensaje.replace("\r","\r\n");
                 TabEstado.SetEstadoEquipo(sMensaje);

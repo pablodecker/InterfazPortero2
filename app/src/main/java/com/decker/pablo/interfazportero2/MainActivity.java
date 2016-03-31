@@ -225,7 +225,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (item.getItemId() == R.id.menu_delete){
+            if (item.getItemId() == R.id.menu_delete)
+            {
                 borrar_datos_db(idSeleccionado);
                 cargar_datos_db_listview();
                 mode.finish();

@@ -64,7 +64,6 @@ public class TabConfig1 extends Fragment {
 
             spMicPoste = (Spinner)rootView.findViewById(R.id.spinner_mic_poste);
             spMicPoste.setAdapter(adapterSecMic);
-
         }
         //INTERFAZ PORTERO
         else
