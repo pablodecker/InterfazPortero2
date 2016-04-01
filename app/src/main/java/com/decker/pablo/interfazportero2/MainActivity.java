@@ -1,10 +1,13 @@
 package com.decker.pablo.interfazportero2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 //                setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
                 mActionMode = MainActivity.this.startSupportActionMode(amc);
                 view.setSelected(true);
+                //para colorear el item seleccionado
+                view.setBackgroundColor(Color.parseColor("#222222"));
                 return true;
             }
         });
@@ -227,8 +232,29 @@ public class MainActivity extends AppCompatActivity {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             if (item.getItemId() == R.id.menu_delete)
             {
-                borrar_datos_db(idSeleccionado);
-                cargar_datos_db_listview();
+                //http://www.journaldev.com/9463/android-alertdialog-example-tutorial
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Eliminar Equipo");
+                builder.setMessage("¿Esta Seguro que desea eliminar el Equipo?");
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+//                        Toast.makeText(getApplicationContext(), "No is clicked", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+//                        Toast.makeText(getApplicationContext(), "Yes is clicked", Toast.LENGTH_LONG).show();
+                        borrar_datos_db(idSeleccionado);
+                        cargar_datos_db_listview();
+
+                    }
+                });
+                builder.show();
+
                 mode.finish();
                 return true;
             }
