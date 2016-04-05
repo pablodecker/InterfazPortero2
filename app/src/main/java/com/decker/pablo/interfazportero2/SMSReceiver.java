@@ -242,6 +242,32 @@ public class SMSReceiver extends BroadcastReceiver {
                         TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
                     }
                 }
+                //KP-AL911
+                else if (sTipoEquipoSelcccionado.contains("KP-AL911") )
+                {
+                    if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
+                    {
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "";
+                        Boolean bHab = false;
+                        if(sMensaje.contains("te1:"))
+                            sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
+                        if(sMensaje.contains("te2:"))
+                            sTe2 = sMensaje.substring(sMensaje.indexOf("te2:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te2:")));
+                        if(sMensaje.contains("te3:"))
+                            sTe3 = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
+                        if(sMensaje.contains("te4:"))
+                            sTe4 = sMensaje.substring(sMensaje.indexOf("te4:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te4:")));
+                        if(sMensaje.contains("te5:"))
+                            sTe5 = sMensaje.substring(sMensaje.indexOf("te5:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te5:")));
+
+                        if(sMensaje.contains("bat:"))
+                            sBat = sMensaje.substring(sMensaje.indexOf("bat:")+4, sMensaje.indexOf("v",sMensaje.indexOf("bat:")+4));
+                        if(sMensaje.contains("sgn:"))
+                            sSgn = sMensaje.substring(sMensaje.indexOf("sgn:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("sgn:")+4));
+
+                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat);
+                    }
+                }
             }
 
             Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);

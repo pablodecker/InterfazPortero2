@@ -66,7 +66,7 @@ public class TabConfig1 extends Fragment {
             spMicPoste.setAdapter(adapterSecMic);
         }
         //INTERFAZ PORTERO
-        else
+        else if (sTipoEquipo.contains("KP-PE015"))
         {
             rootView = inflater.inflate(R.layout.tab_config1_interfaz_portero, container, false);
 
@@ -111,11 +111,19 @@ public class TabConfig1 extends Fragment {
             spSecAlarma5 = (Spinner)rootView.findViewById(R.id.spinner_sec_alarma_5);
             spSecAlarma5.setAdapter(adapterSec);
 
-
-//            for ( int i = 0; i < myLayoutConfig1Portero.getChildCount();  i++ ){
-//                View child = myLayoutConfig1Portero.getChildAt(i);
-//                child.setEnabled(false); // Or whatever you want to do with the view.
-//            }
+        }
+        //Alarma
+        else
+        {
+            rootView = inflater.inflate(R.layout.tab_config1_alarma, container, false);
+            etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
+            etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
+            etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
+            etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
+            etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
+            swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
+            tvSgn = (TextView)rootView.findViewById(R.id.textViewSgn);
+            tvBat = (TextView)rootView.findViewById(R.id.textViewBat);
         }
 
         if (myEquipoCAPE.getRecibioConfig1() == false)
@@ -206,6 +214,15 @@ public class TabConfig1 extends Fragment {
         etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
         spSecLlamada1.setSelection(iSecLlamada1); spSecLlamada2.setSelection(iSecLlamada2); spSecLlamada3.setSelection(iSecLlamada3); spSecLlamada4.setSelection(iSecLlamada4); spSecLlamada5.setSelection(iSecLlamada5);
         spSecAlarma1.setSelection(iSecAlarma1); spSecAlarma2.setSelection(iSecAlarma2); spSecAlarma3.setSelection(iSecAlarma3); spSecAlarma4.setSelection(iSecAlarma4); spSecAlarma5.setSelection(iSecAlarma5);
+    }
+    public static void SetControlesAlarma(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,String sSgn, String sBat )
+    {
+        setViewAndChildrenEnabled(rootView, true);
+
+        swHab.setChecked(bSwitchHab);
+        etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
+        tvSgn.setText("Señal: " + sSgn);
+        tvBat.setText("Bat: " + sBat + "v");
     }
     public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
                                             String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa, String sID)

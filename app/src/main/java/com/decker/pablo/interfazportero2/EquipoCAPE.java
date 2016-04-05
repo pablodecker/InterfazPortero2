@@ -12,7 +12,8 @@ public class EquipoCAPE extends Application{
 
     private String sNombre, sNumTel, sSal1, sSal2, sSal3, sTipoEquipo;
     private int iIdDB;
-    private boolean bRecibioEstado, bRecibioSalidas, bRecibioConfig1, bRecibioConfig2, bRecibioComandos;
+    private boolean bRecibioEstado, bRecibioSalidas, bRecibioConfig1, bRecibioConfig2, bRecibioComandos,
+            bEnvioEstado, bEnvioSalidas, bEnvioConfig1, bEnvioConfig2, bEnvioComandos;
     //TablaEquipos: Id, Nombre, NumTel, Sal1, Sal2, Sal3, TipoEquipo
     public void setIdDB(int iIdDB){
         this.iIdDB = iIdDB;
@@ -32,6 +33,23 @@ public class EquipoCAPE extends Application{
     public void setSal3(String sSal3){
         this.sSal3 = sSal3;
     }
+
+    public void setbEnvioEstado(boolean bEnvioEstado){
+        this.bEnvioEstado = bEnvioEstado;
+    }
+    public void setbEnvioSalidas(boolean bEnvioSalidas){
+        this.bEnvioSalidas = bEnvioSalidas;
+    }
+    public void setbEnvioConfig1(boolean bEnvioConfig1){
+        this.bEnvioConfig1 = bEnvioConfig1;
+    }
+    public void setbEnvioConfig2(boolean bEnvioConfig2){
+        this.bEnvioConfig2 = bEnvioConfig2;
+    }
+    public void setbEnvioComandos(boolean bEnvioComandos){
+        this.bEnvioComandos = bEnvioComandos;
+    }
+
     public void setbRecibioEstado(boolean bRecibioEstado){
         this.bRecibioEstado = bRecibioEstado;
     }
@@ -76,6 +94,23 @@ public class EquipoCAPE extends Application{
     public String getTipoEquipo(){
         return sTipoEquipo;
     }
+
+    public boolean getEnvioEstado(){
+        return bEnvioEstado;
+    }
+    public boolean getEnvioConfig1(){
+        return bEnvioConfig1;
+    }
+    public boolean getEnvioConfig2(){
+        return bEnvioConfig2;
+    }
+    public boolean getEnvioSalidas(){
+        return bEnvioSalidas;
+    }
+    public boolean getEnvioComandos(){
+        return bEnvioComandos;
+    }
+
     public boolean getRecibioEstado(){
         return bRecibioEstado;
     }
@@ -91,6 +126,8 @@ public class EquipoCAPE extends Application{
     public boolean getRecibioComandos(){
         return bRecibioComandos;
     }
+
+
 
 
     public void enviar_sms(String sNumTel, String sTxtSMS)
