@@ -213,46 +213,12 @@ public class TabConfig2 extends Fragment {
         spVolFrente.setSelection(iVolFrente);
         spMicFrente.setSelection(iMicFrente);
     }
-    public static void SetControlesInterfazPortero(boolean bHabEn1,boolean bHabEn2,boolean bHabEn3,boolean bLlamar1,boolean bLlamar2,boolean bLlamar3,
-                                                   boolean bSMS1,boolean bSMS2,boolean bSMS3,String sTipoEn1,String sTipoEn2,String sTipoEn3,
-                                                   String sTxtSMS1,String sTxtSMS2,String sTxtSMS3,int iVolTel,int iMicTel, int iVolFrente, int iMicFrente)
+    public static void SetControlesAlarma(String sIP,String sPuerto,String sTiempoReporte)
     {
-
         setViewAndChildrenEnabled(rootView, true);
-
-        chkHabEn1.setChecked(bHabEn1);
-        chkHabEn2.setChecked(bHabEn2);
-        chkHabEn3.setChecked(bHabEn3);
-
-        chkLlamar1.setChecked(bLlamar1);
-        chkLlamar2.setChecked(bLlamar2);
-        chkLlamar3.setChecked(bLlamar3);
-
-        chkSMS1.setChecked(bSMS1);
-        chkSMS2.setChecked(bSMS2);
-        chkSMS3.setChecked(bSMS3);
-
-        if(sTipoEn1.contains("a"))
-            spTipoEntrada1.setSelection(0);
-
-        if(sTipoEn2.contains("a"))
-            spTipoEntrada2.setSelection(0);
-        else if(sTipoEn2.contains("h"))
-            spTipoEntrada2.setSelection(1);
-
-        if(sTipoEn3.contains("a"))
-            spTipoEntrada3.setSelection(0);
-        else if(sTipoEn3.contains("h"))
-            spTipoEntrada3.setSelection(1);
-
-        etSMS1.setText(sTxtSMS1);
-        etSMS2.setText(sTxtSMS2);
-        etSMS3.setText(sTxtSMS3);
-
-        spVolTel.setSelection(iVolTel);
-        spMicTel.setSelection(iMicTel);
-        spVolFrente.setSelection(iVolFrente);
-        spMicFrente.setSelection(iMicFrente);
+        etIP.setText(sIP);
+        etPuerto.setText(sPuerto);
+        etTReporte.setText(sTiempoReporte);
     }
 
 }

@@ -238,7 +238,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
                         int iMic = Integer.parseInt(sAux);
 
-                        TabConfig1.S1etControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
+                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
                     }
                 }
                 //KP-AL911
@@ -275,12 +275,10 @@ public class SMSReceiver extends BroadcastReceiver {
                             sIP = sMensaje.substring(sMensaje.indexOf("ip:")+3, sMensaje.indexOf("\r",sMensaje.indexOf("ip:")+3));
                         if(sMensaje.contains("puerto:"))
                             sPuerto = sMensaje.substring(sMensaje.indexOf("puerto:")+7, sMensaje.indexOf("\r",sMensaje.indexOf("puerto:")+7));
-                        if(sMensaje.contains("te3:"))
-                            sTReporte = sMensaje.substring(sMensaje.indexOf("te3:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te3:")));
-
-                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat);
+                        if(sMensaje.contains("trep:"))
+                            sTReporte = sMensaje.substring(sMensaje.indexOf("trep:")+5, sMensaje.indexOf("\r",sMensaje.indexOf("trep:")+5));
+                        TabConfig2.SetControlesAlarma(sIP,sPuerto,sTReporte);
                     }
-
                 }
             }
 
