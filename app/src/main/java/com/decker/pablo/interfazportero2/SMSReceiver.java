@@ -189,7 +189,6 @@ public class SMSReceiver extends BroadcastReceiver {
                         sAux = sMensaje.substring(sMensaje.indexOf("audio:") + 12, sMensaje.indexOf("audio:") + 13);
                         iMicTel = Integer.parseInt(sAux);
 
-
                         TabConfig2.SetControlesInterfazPortero(bHabEn1, bHabEn2, bHabEn3, bLlamar1, bLlamar2, bLlamar3, bSMS1, bSMS2, bSMS3, sTipoEn1, sTipoEn2, sTipoEn3,
                                 sTxtSMS1, sTxtSMS2, sTxtSMS3, iVolTel, iMicTel, iVolFrente, iMicFrente);
 
@@ -239,7 +238,7 @@ public class SMSReceiver extends BroadcastReceiver {
                         sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
                         int iMic = Integer.parseInt(sAux);
 
-                        TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
+                        TabConfig1.S1etControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
                     }
                 }
                 //KP-AL911
@@ -247,7 +246,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 {
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
                     {
-                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "";
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "", sTRepe = "";
                         Boolean bHab = false;
                         if(sMensaje.contains("te1:"))
                             sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
@@ -264,8 +263,10 @@ public class SMSReceiver extends BroadcastReceiver {
                             sBat = sMensaje.substring(sMensaje.indexOf("bat:")+4, sMensaje.indexOf("v",sMensaje.indexOf("bat:")+4));
                         if(sMensaje.contains("sgn:"))
                             sSgn = sMensaje.substring(sMensaje.indexOf("sgn:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("sgn:")+4));
+                       if(sMensaje.contains("trepe:"))
+                           sTRepe = sMensaje.substring(sMensaje.indexOf("trepe:")+6, sMensaje.indexOf("\r",sMensaje.indexOf("trepe:")+6));
 
-                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat);
+                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat,sTRepe);
                     }
                     if ( sMensaje.contains("config") && sMensaje.contains("ip:"))
                     {

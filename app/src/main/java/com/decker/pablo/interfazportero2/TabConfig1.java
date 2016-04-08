@@ -19,7 +19,7 @@ import android.widget.Toast;
  * Created by Pablo on 03/01/2016.
  */
 public class TabConfig1 extends Fragment {
-    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa, etIDPoste;
+    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa, etIDPoste, etTiempoRepe;
     private static Switch swHab;
     private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
                             spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5, spVolPoste, spMicPoste;
@@ -121,6 +121,7 @@ public class TabConfig1 extends Fragment {
             etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
             etTe4 = (EditText) rootView.findViewById(R.id.etTelefono4);
             etTe5 = (EditText) rootView.findViewById(R.id.etTelefono5);
+            etTiempoRepe = (EditText) rootView.findViewById(R.id.etTiempoRepeticion);
             swHab = (Switch) rootView.findViewById(R.id.switchHabilitacion);
             tvSgn = (TextView)rootView.findViewById(R.id.textViewSgn);
             tvBat = (TextView)rootView.findViewById(R.id.textViewBat);
@@ -215,12 +216,14 @@ public class TabConfig1 extends Fragment {
         spSecLlamada1.setSelection(iSecLlamada1); spSecLlamada2.setSelection(iSecLlamada2); spSecLlamada3.setSelection(iSecLlamada3); spSecLlamada4.setSelection(iSecLlamada4); spSecLlamada5.setSelection(iSecLlamada5);
         spSecAlarma1.setSelection(iSecAlarma1); spSecAlarma2.setSelection(iSecAlarma2); spSecAlarma3.setSelection(iSecAlarma3); spSecAlarma4.setSelection(iSecAlarma4); spSecAlarma5.setSelection(iSecAlarma5);
     }
-    public static void SetControlesAlarma(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,String sSgn, String sBat )
+    public static void SetControlesAlarma(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,String sSgn,
+                                          String sBat, String sTiempoRepe )
     {
         setViewAndChildrenEnabled(rootView, true);
 
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
+        etTiempoRepe.setText(sTiempoRepe);
         tvSgn.setText("Señal: " + sSgn);
         tvBat.setText("Bat: " + sBat + "v");
     }
