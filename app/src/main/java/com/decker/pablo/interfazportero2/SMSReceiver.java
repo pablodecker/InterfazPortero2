@@ -63,7 +63,13 @@ public class SMSReceiver extends BroadcastReceiver {
             sMensaje = sMensaje.toLowerCase();
 
             String sNumEquipoSeleccionado = myEquipoCAPE.getNumTel();
+            //remuevo todos los caracteres que no son numeros
+            sNumEquipoSeleccionado = sNumEquipoSeleccionado.replaceAll("[\\D]", "");
+
             String sTipoEquipoSelcccionado = myEquipoCAPE.getTipoEquipo();
+
+
+
             if (sNumeroOrigen.contains(sNumEquipoSeleccionado))
             {
                 if (sTipoEquipoSelcccionado.contains("KP-PE015") )//PORTERO COMMAX
@@ -275,8 +281,8 @@ public class SMSReceiver extends BroadcastReceiver {
                             sIP = sMensaje.substring(sMensaje.indexOf("ip:")+3, sMensaje.indexOf("\r",sMensaje.indexOf("ip:")+3));
                         if(sMensaje.contains("puerto:"))
                             sPuerto = sMensaje.substring(sMensaje.indexOf("puerto:")+7, sMensaje.indexOf("\r",sMensaje.indexOf("puerto:")+7));
-                        if(sMensaje.contains("trep:"))
-                            sTReporte = sMensaje.substring(sMensaje.indexOf("trep:")+5, sMensaje.indexOf("\r",sMensaje.indexOf("trep:")+5));
+                        if(sMensaje.contains("trgprs:"))
+                            sTReporte = sMensaje.substring(sMensaje.indexOf("trgprs:")+7, sMensaje.indexOf("\r",sMensaje.indexOf("trgprs:")+7));
                         TabConfig2.SetControlesAlarma(sIP,sPuerto,sTReporte);
                     }
                 }

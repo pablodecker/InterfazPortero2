@@ -197,6 +197,8 @@ public class EquipoParticular extends AppCompatActivity {
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
                     else if (iTabPosition == 2)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                    else if (iTabPosition == 3)
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Confgprs?");
                 }
             }
         });

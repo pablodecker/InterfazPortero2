@@ -172,6 +172,19 @@ public class TabConfig1 extends Fragment {
                             " TCom:" + etTiempoCom.getText() +
                             " Trep:" + etTiempoReporte.getText();
                 }
+                else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
+                {
+                    String sHab = " Hab:No";
+                    if(swHab.isChecked())
+                        sHab = " Hab:Si";
+                    sms = "Config:" + sHab +
+                            " Te1:" + etTe1.getText().toString() +
+                            " Te2:" + etTe2.getText().toString() +
+                            " Te3:" + etTe3.getText().toString() +
+                            " Te4:" + etTe4.getText().toString() +
+                            " Te5:" + etTe5.getText().toString() +
+                            " Trepe:" + etTiempoReporte.getText().toString();
+                }
                 else if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
                 {
                     String sHab = " Hab:No";
@@ -196,10 +209,8 @@ public class TabConfig1 extends Fragment {
                     sms += spSecAlarma3.getSelectedItem().toString() + ",";
                     sms += spSecAlarma4.getSelectedItem().toString() + ",";
                     sms += spSecAlarma5.getSelectedItem().toString();
-
-                    setViewAndChildrenEnabled(rootView, false);
-
                 }
+                setViewAndChildrenEnabled(rootView, false);
             }
 
         });

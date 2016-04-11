@@ -22,6 +22,7 @@ public class TabConfig2 extends Fragment {
     private static Spinner spVolTel, spMicTel, spVolFrente, spMicFrente,spTipoEntrada1, spTipoEntrada2, spTipoEntrada3;
     private static CheckBox chkHabEn1,chkHabEn2,chkHabEn3, chkLlamar1,chkLlamar2,chkLlamar3,chkSMS1,chkSMS2,chkSMS3;
     private static EditText etSMS1,etSMS2,etSMS3, etIP,etPuerto, etTReporte;
+    String sTipoEquipo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Calling Application class (see application tag in AndroidManifest.xml)
@@ -81,64 +82,71 @@ public class TabConfig2 extends Fragment {
                     // TODO Auto-generated method stub
                     String phoneNo = myEquipoCAPE.getNumTel();
                     String sms = "";
+                    if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
+                    {
                         String sHab = " Hab:No";
                         //En1:1
-                    sms = "Config:\r\n";
-                    sms += " En1:";
-                    if (chkHabEn1.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += spTipoEntrada1.getSelectedItem().toString() + ",";
-                    if (chkLlamar1.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    if (chkSMS1.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += etSMS1.getText() + "\r\n";
+                        sms = "Config:\r\n";
+                        sms += " En1:";
+                        if (chkHabEn1.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += spTipoEntrada1.getSelectedItem().toString() + ",";
+                        if (chkLlamar1.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        if (chkSMS1.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += etSMS1.getText() + "\r\n";
 
-                    sms += " En2:";
-                    if (chkHabEn2.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += spTipoEntrada2.getSelectedItem().toString() + ",";
-                    if (chkLlamar2.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    if (chkSMS2.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += etSMS2.getText() + "\r\n";
+                        sms += " En2:";
+                        if (chkHabEn2.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += spTipoEntrada2.getSelectedItem().toString() + ",";
+                        if (chkLlamar2.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        if (chkSMS2.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += etSMS2.getText() + "\r\n";
 
-                    sms += " En3:";
-                    if (chkHabEn3.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += spTipoEntrada3.getSelectedItem().toString() + ",";
-                    if (chkLlamar3.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    if (chkSMS3.isChecked())
-                        sms += "1,";
-                    else
-                        sms += "0,";
-                    sms += etSMS3.getText() + "\r\n";
+                        sms += " En3:";
+                        if (chkHabEn3.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += spTipoEntrada3.getSelectedItem().toString() + ",";
+                        if (chkLlamar3.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        if (chkSMS3.isChecked())
+                            sms += "1,";
+                        else
+                            sms += "0,";
+                        sms += etSMS3.getText() + "\r\n";
 
-                    sms += "audio:";
-                    sms += spVolFrente.getSelectedItem().toString() + ",";
-                    sms += spMicFrente.getSelectedItem().toString() + ",";
-                    sms += spVolTel.getSelectedItem().toString() + ",";
-                    sms += spMicTel.getSelectedItem().toString();
+                        sms += "audio:";
+                        sms += spVolFrente.getSelectedItem().toString() + ",";
+                        sms += spMicFrente.getSelectedItem().toString() + ",";
+                        sms += spVolTel.getSelectedItem().toString() + ",";
+                        sms += spMicTel.getSelectedItem().toString();
 
-                    myEquipoCAPE.enviar_sms(phoneNo, sms);
+                        myEquipoCAPE.enviar_sms(phoneNo, sms);
+                    }
+                    else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
+                    {
+
+                    }
                 }
 
             });
@@ -148,10 +156,13 @@ public class TabConfig2 extends Fragment {
 
             rootView = inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
             etIP = (EditText)rootView.findViewById(R.id.etURL);
+            etPuerto = (EditText)rootView.findViewById(R.id.etPuerto);
+            etTReporte = (EditText)rootView.findViewById(R.id.etTiempoReporte);
         }
         else
+        {
             rootView = inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
-
+        }
         if (myEquipoCAPE.getRecibioConfig2() == false)
             setViewAndChildrenEnabled(rootView, false);
 
