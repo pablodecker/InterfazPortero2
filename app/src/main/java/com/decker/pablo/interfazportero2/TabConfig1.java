@@ -145,11 +145,13 @@ public class TabConfig1 extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
         Button b = (Button) rootView.findViewById(R.id.buttonConfigurarConfig1);
         b.setOnClickListener(new View.OnClickListener()
         {
+            //Boton configurar
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -171,6 +173,7 @@ public class TabConfig1 extends Fragment {
                             " Mic:" + spMicPoste.getSelectedItem().toString() +
                             " TCom:" + etTiempoCom.getText() +
                             " Trep:" + etTiempoReporte.getText();
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
                 }
                 else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
                 {
@@ -184,6 +187,7 @@ public class TabConfig1 extends Fragment {
                             " Te4:" + etTe4.getText().toString() +
                             " Te5:" + etTe5.getText().toString() +
                             " Trepe:" + etTiempoReporte.getText().toString();
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
                 }
                 else if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
                 {
@@ -209,6 +213,7 @@ public class TabConfig1 extends Fragment {
                     sms += spSecAlarma3.getSelectedItem().toString() + ",";
                     sms += spSecAlarma4.getSelectedItem().toString() + ",";
                     sms += spSecAlarma5.getSelectedItem().toString();
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
                 }
                 setViewAndChildrenEnabled(rootView, false);
             }
@@ -255,5 +260,4 @@ public class TabConfig1 extends Fragment {
         etEmpresa.setText(sEmpresa);
         etIDPoste.setText(sID);
     }
-
 }

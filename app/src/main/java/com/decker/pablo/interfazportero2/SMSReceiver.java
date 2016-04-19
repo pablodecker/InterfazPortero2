@@ -68,8 +68,6 @@ public class SMSReceiver extends BroadcastReceiver {
 
             String sTipoEquipoSelcccionado = myEquipoCAPE.getTipoEquipo();
 
-
-
             if (sNumeroOrigen.contains(sNumEquipoSeleccionado))
             {
                 if (sTipoEquipoSelcccionado.contains("KP-PE015") )//PORTERO COMMAX
@@ -254,6 +252,8 @@ public class SMSReceiver extends BroadcastReceiver {
                     {
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "", sTRepe = "";
                         Boolean bHab = false;
+                        if (sMensaje.contains("hab:si"))
+                            bHab = true;
                         if(sMensaje.contains("te1:"))
                             sTe1 = sMensaje.substring(sMensaje.indexOf("te1:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te1:")));
                         if(sMensaje.contains("te2:"))
