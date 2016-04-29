@@ -160,8 +160,8 @@ public class EquipoParticular extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
 
                 Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
                 if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS

@@ -36,7 +36,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
             messages = new SmsMessage[pdus.length];
 
-            for (int i = 0; i < messages.length; i++)
+            for ( int i = 0; i < messages.length; i++ )
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     String format = myBundle.getString("format");
@@ -250,7 +250,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 {
                     if ( sMensaje.contains("config") && sMensaje.contains("te1:"))
                     {
-                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "", sTRepe = "";
+                        String sTe1 = "",sTe2 = "",sTe3 = "",sTe4 = "",sTe5 = "",sSgn = "",sBat = "", sTRepe = "", sNombre = "";
                         Boolean bHab = false;
                         if (sMensaje.contains("hab:si"))
                             bHab = true;
@@ -264,6 +264,8 @@ public class SMSReceiver extends BroadcastReceiver {
                             sTe4 = sMensaje.substring(sMensaje.indexOf("te4:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te4:")));
                         if(sMensaje.contains("te5:"))
                             sTe5 = sMensaje.substring(sMensaje.indexOf("te5:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te5:")));
+                        if(sMensaje.contains("nombre:"))
+                            sNombre = sMensaje.substring(sMensaje.indexOf("nombre:")+7, sMensaje.indexOf("\r",sMensaje.indexOf("nombre:")+7));
 
                         if(sMensaje.contains("bat:"))
                             sBat = sMensaje.substring(sMensaje.indexOf("bat:")+4, sMensaje.indexOf("v",sMensaje.indexOf("bat:")+4));
@@ -272,7 +274,7 @@ public class SMSReceiver extends BroadcastReceiver {
                        if(sMensaje.contains("trepe:"))
                            sTRepe = sMensaje.substring(sMensaje.indexOf("trepe:")+6, sMensaje.indexOf("\r",sMensaje.indexOf("trepe:")+6));
 
-                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat,sTRepe);
+                        TabConfig1.SetControlesAlarma(bHab, sTe1, sTe2, sTe3, sTe4,sTe5, sSgn,sBat,sTRepe, sNombre);
                     }
                     if ( sMensaje.contains("config") && sMensaje.contains("ip:"))
                     {

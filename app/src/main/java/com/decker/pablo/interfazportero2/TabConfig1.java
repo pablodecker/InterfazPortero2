@@ -19,14 +19,15 @@ import android.widget.Toast;
  * Created by Pablo on 03/01/2016.
  */
 public class TabConfig1 extends Fragment {
-    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa, etIDPoste, etTiempoRepe;
+    private static EditText etTe1,etTe2,etTe3,etTe4,etTe5, etTiempoCom, etTiempoReporte, etEmpresa, etIDPoste, etTiempoRepe, etNombreEquipoAlarma;
     private static Switch swHab;
     private static Spinner spSecLlamada1,spSecLlamada2,spSecLlamada3,spSecLlamada4,spSecLlamada5,
                             spSecAlarma1,spSecAlarma2,spSecAlarma3,spSecAlarma4,spSecAlarma5, spVolPoste, spMicPoste;
     private static TextView tvSgn, tvBat;
     private static LinearLayout myLayoutConfig1Portero;
-    String sTipoEquipo;
+    private static String sTipoEquipo;
     EquipoCAPE myEquipoCAPE;
+
 
     private static View rootView;
 
@@ -116,6 +117,7 @@ public class TabConfig1 extends Fragment {
         else
         {
             rootView = inflater.inflate(R.layout.tab_config1_alarma, container, false);
+            etNombreEquipoAlarma = (EditText) rootView.findViewById(R.id.etNombreEquipoAlarma);
             etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
             etTe3 = (EditText) rootView.findViewById(R.id.etTelefono3);
@@ -181,6 +183,7 @@ public class TabConfig1 extends Fragment {
                     if(swHab.isChecked())
                         sHab = " Hab:Si";
                     sms = "Config:" + sHab +
+                            " Nombre:" + etNombreEquipoAlarma.getText().toString() +
                             " Te1:" + etTe1.getText().toString() +
                             " Te2:" + etTe2.getText().toString() +
                             " Te3:" + etTe3.getText().toString() +
@@ -233,15 +236,25 @@ public class TabConfig1 extends Fragment {
         spSecAlarma1.setSelection(iSecAlarma1); spSecAlarma2.setSelection(iSecAlarma2); spSecAlarma3.setSelection(iSecAlarma3); spSecAlarma4.setSelection(iSecAlarma4); spSecAlarma5.setSelection(iSecAlarma5);
     }
     public static void SetControlesAlarma(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTe4, String sTe5,String sSgn,
-                                          String sBat, String sTiempoRepe )
+                                          String sBat, String sTiempoRepe , String sNombreEquipo )
     {
         setViewAndChildrenEnabled(rootView, true);
 
         swHab.setChecked(bSwitchHab);
         etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTe4); etTe5.setText(sTe5);
         etTiempoRepe.setText(sTiempoRepe);
-        tvSgn.setText("Señal: " + sSgn);
-        tvBat.setText("Bat: " + sBat + "v");
+        etNombreEquipoAlarma.setText(sNombreEquipo);
+
+        if (sTipoEquipo.contains("KP-TM005"))
+        {
+            tvSgn.setText("Señal: " + sSgn);
+            tvBat.setText("Bat: " + sBat + "v");
+        }
+        else
+        {
+            tvSgn.setVisibility(View.INVISIBLE);
+            tvBat.setVisibility(View.INVISIBLE);
+        }
     }
     public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
                                             String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa, String sID)
