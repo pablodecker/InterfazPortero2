@@ -192,7 +192,7 @@ public class EquipoParticular extends AppCompatActivity {
                 else if (sTipoEquipo.contains("KP-AL911"))
                 {
                     if (iTabPosition == 0)
-                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Activas?");
                     else if (iTabPosition == 1)
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Salidas?");
                     else if (iTabPosition == 2)

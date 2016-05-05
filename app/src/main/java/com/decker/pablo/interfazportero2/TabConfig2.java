@@ -145,10 +145,13 @@ public class TabConfig2 extends Fragment {
                     }
                     else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
                     {
-
+                        sms = "Config:\r\n";
+                        sms += "ip:" + etIP.getText() + "\r\n";
+                        sms += "puerto:" + etPuerto.getText() + "\r\n";
+                        sms += "trgprs:" + etTReporte.getText() + "\r\n";
+                        myEquipoCAPE.enviar_sms(phoneNo, sms);
                     }
                 }
-
             });
 
         }
