@@ -60,7 +60,9 @@ public class TabConfig1 extends Fragment {
             spVolPoste = (Spinner)rootView.findViewById(R.id.spinner_vol_poste);
             spVolPoste.setAdapter(adapterSecVol);
 
-            String[] listaNumerosMic = {"0","1","2","3","4","5","6","7","8","9","10"};
+            String[] listaNumerosMic = {"0","1","2","3","4","5","6","7","8","9",
+                                        "10","11","12","13","14","15","16","17","18","19",
+                                        "20","21","22","23","24","25","26","27","28","29","30","31"};
             ArrayAdapter adapterSecMic = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_spinner_dropdown_item, listaNumerosMic);
 
             spMicPoste = (Spinner)rootView.findViewById(R.id.spinner_mic_poste);
@@ -70,7 +72,6 @@ public class TabConfig1 extends Fragment {
         else if (sTipoEquipo.contains("KP-PE015"))
         {
             rootView = inflater.inflate(R.layout.tab_config1_interfaz_portero, container, false);
-
 
             etTe1 = (EditText) rootView.findViewById(R.id.etTelefono1);
             etTe2 = (EditText) rootView.findViewById(R.id.etTelefono2);
@@ -131,6 +132,8 @@ public class TabConfig1 extends Fragment {
 
         if (myEquipoCAPE.getRecibioConfig1() == false)
             setViewAndChildrenEnabled(rootView, false);
+        else
+            setViewAndChildrenEnabled(rootView, true);
 
         return rootView;
     }
@@ -174,7 +177,7 @@ public class TabConfig1 extends Fragment {
                             " Vol:" + spVolPoste.getSelectedItem().toString() +
                             " Mic:" + spMicPoste.getSelectedItem().toString() +
                             " TCom:" + etTiempoCom.getText() +
-                            " Trep:" + etTiempoReporte.getText();
+                            " TrSMS:" + etTiempoReporte.getText();
                     myEquipoCAPE.enviar_sms(phoneNo, sms);
                 }
                 else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
@@ -218,7 +221,7 @@ public class TabConfig1 extends Fragment {
                     sms += spSecAlarma5.getSelectedItem().toString();
                     myEquipoCAPE.enviar_sms(phoneNo, sms);
                 }
-                setViewAndChildrenEnabled(rootView, false);
+//                setViewAndChildrenEnabled(rootView, false);
             }
 
         });
@@ -259,18 +262,22 @@ public class TabConfig1 extends Fragment {
     public static void SetControlesPosteSOS(boolean bSwitchHab, String sTe1, String sTe2, String sTe3, String sTeR, int iMic, int iVol,
                                             String sTcom, String sTRep, String sSgn, String sBat, String sEmpresa, String sID)
     {
+        try{
+            setViewAndChildrenEnabled(rootView, true);
 
-        setViewAndChildrenEnabled(rootView, true);
-
-        swHab.setChecked(bSwitchHab);
-        etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTeR);
-        etTiempoCom.setText(sTcom);
-        etTiempoReporte.setText(sTRep);
-        tvSgn.setText("Señal: " + sSgn);
-        tvBat.setText("Bat: " + sBat + "v");
-        spMicPoste.setSelection(iMic);
-        spVolPoste.setSelection(iVol);
-        etEmpresa.setText(sEmpresa);
-        etIDPoste.setText(sID);
+            swHab.setChecked(bSwitchHab);
+            etTe1.setText(sTe1); etTe2.setText(sTe2); etTe3.setText(sTe3); etTe4.setText(sTeR);
+            etTiempoCom.setText(sTcom);
+            etTiempoReporte.setText(sTRep);
+            tvSgn.setText("Señal: " + sSgn);
+            tvBat.setText("Bat: " + sBat + "v");
+            spMicPoste.setSelection(iMic);
+            spVolPoste.setSelection(iVol);
+            etEmpresa.setText(sEmpresa);
+            etIDPoste.setText(sID);
+        }
+        catch(Exception ex){
+//            Toast.makeText(this,"Exeption22:" + ex.toString() , Toast.LENGTH_SHORT).show();
+        }
     }
 }

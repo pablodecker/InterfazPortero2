@@ -10,6 +10,11 @@
         <item name="colorAccent">@android:color/holo_orange_dark</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:textColorSecondary">@color/colorPrimaryDark</item>
+        <item name="android:textColorSecondaryInverse">@color/accent_material_light</item>
+    </style>
+    <style name="BaseText" parent="@android:style/TextAppearance.Small">
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">#AA7755</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

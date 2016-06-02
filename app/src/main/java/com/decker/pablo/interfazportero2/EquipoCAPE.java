@@ -2,6 +2,7 @@ package com.decker.pablo.interfazportero2;
 
 import android.app.Application;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -11,6 +12,7 @@ import android.widget.Toast;
 public class EquipoCAPE extends Application{
 
     private String sNombre, sNumTel, sSal1, sSal2, sSal3, sTipoEquipo;
+    private String TAG = "Pablito";
     private int iIdDB;
     private boolean bRecibioEstado, bRecibioSalidas, bRecibioConfig1, bRecibioConfig2, bRecibioComandos,
             bEnvioEstado, bEnvioSalidas, bEnvioConfig1, bEnvioConfig2, bEnvioComandos;
@@ -136,6 +138,7 @@ public class EquipoCAPE extends Application{
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(sNumTel, null, sTxtSMS, null, null);
             Toast.makeText(getApplicationContext(), "SMS Enviado - Num:" + sNumTel + "\r\nSMS:" + sTxtSMS, Toast.LENGTH_LONG).show();
+            Log.d(TAG,  "SMS Enviado - Num:" + sNumTel + " - SMS:" + sTxtSMS);
         }
         catch (Exception e) {
             Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",Toast.LENGTH_LONG).show();

@@ -17,12 +17,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="@android:style/TextAppearance.Small"
                     android:text="URL"
                     android:id="@+id/textView1"
                     android:layout_row="1"
                     android:layout_column="0"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="left|center_horizontal" />
                 <EditText
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -35,10 +35,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="@android:style/TextAppearance.Small"
                     android:text="Puerto"
                     android:id="@+id/textView2"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="left|center_horizontal"
                     android:layout_row="2"
                     android:layout_column="0" />
                 <EditText
@@ -53,11 +53,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="@android:style/TextAppearance.Small"
                     android:text="T Reporte"
                     android:id="@+id/textView3"
                     android:layout_row="3"
-                    android:layout_column="0" />
+                    android:layout_column="0"
+                    android:layout_gravity="left"/>
                 <EditText
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"

@@ -35,7 +35,7 @@ public class TabComandos extends Fragment {
         btnConectar = (Button)rootView.findViewById(R.id.buttonConectar);
         btnLlamar = (Button)rootView.findViewById(R.id.buttonLlamar);
 
-        if (sTipoEquipo.contains("KP-PE015")) //INTERFAZ PORTERO
+        if (sTipoEquipo.contains("KP-PE015") || sTipoEquipo.contains("KP-PE050")) //INTERFAZ PORTERO
         {
             btnConectar.setVisibility(View.INVISIBLE);
         }

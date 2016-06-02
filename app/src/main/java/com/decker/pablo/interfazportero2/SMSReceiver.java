@@ -46,21 +46,13 @@ public class SMSReceiver extends BroadcastReceiver {
                     messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                 }
                 sNumeroOrigen =  messages[i].getOriginatingAddress();
-                sMensaje =  messages[i].getMessageBody();
+                //le pongo un += por si llega en 2 mensajes
+                sMensaje +=  messages[i].getMessageBody();
             }
             // log .d = debug
-            Log.d(TAG, "Llego antes de lowercase");
-
-            //Si llego un equipo: no lo paso a minuscula
-            if (sMensaje.contains("fw:"))
-            {
-                sMensaje = sMensaje.replace("\r","\r\n");
-                TabEstado.SetEstadoEquipo(sMensaje);
-                Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
-                Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            sMensaje = sMensaje.toLowerCase();
+//            Log.d(TAG, "Llego antes de lowercase");
+            Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
+            Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
 
             String sNumEquipoSeleccionado = myEquipoCAPE.getNumTel();
             //remuevo todos los caracteres que no son numeros
@@ -70,6 +62,18 @@ public class SMSReceiver extends BroadcastReceiver {
 
             if (sNumeroOrigen.contains(sNumEquipoSeleccionado))
             {
+                if (myEquipoCAPE.getEnvioEstado() == true)
+                {
+                    //borro el flag
+                    myEquipoCAPE.setbEnvioEstado(false);
+                    sMensaje = sMensaje.replace("\r","\r\n");
+                    TabEstado.SetEstadoEquipo(sMensaje);
+                    return;
+                }
+
+                sMensaje = sMensaje.toLowerCase();
+                //me ocultaba los \r entonces los genero yo
+                sMensaje = sMensaje.replace("\n","\r");
                 if (sTipoEquipoSelcccionado.contains("KP-PE015") )//PORTERO COMMAX
                 {
                     if ( sMensaje.contains("salida"))
@@ -206,13 +210,14 @@ public class SMSReceiver extends BroadcastReceiver {
                         myEquipoCAPE.setbRecibioConfig1(true);
 
                         String sTe1 = "",sTe2 = "",sTe3 = "",sTeR = "",sTcom = "",sTrep = "",sSgn = "",sBat = "",sEmp = "",sID = "";
+                        int iVol = 0, iMic = 0;
                         Boolean bHab = false;
                         try{
                             if (sMensaje.contains("hab:si"))
                                 bHab = true;
                             String sMensajeBack = sMensaje;
                             if(sMensaje.contains("id:"))
-                                sID = sMensaje.substring(sMensaje.indexOf("id:")+3, sMensaje.indexOf("\r",sMensaje.indexOf("id:")+3));
+                                sID = sMensaje.substring(sMensaje.indexOf("id:")+3, sMensaje.indexOf("\r",sMensaje.indexOf("id:")+4));
                             if(sMensaje.contains("emp:"))
                                 sEmp = sMensaje.substring(sMensaje.indexOf("emp:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("emp:")+4));
                             if(sMensaje.contains("te1:"))
@@ -232,17 +237,64 @@ public class SMSReceiver extends BroadcastReceiver {
                             if(sMensaje.contains("trsms:")) {
                                 sTrep = sMensaje.substring(sMensaje.indexOf("trsms:") + 6, sMensaje.indexOf("m\r", sMensaje.indexOf("trsms:" + 5) ));
                             }
+                            String sAux = sMensaje.substring(sMensaje.indexOf("vol:")+4,sMensaje.indexOf("vol:")+5);
+                            iVol = Integer.parseInt(sAux);
+                            sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("\r", sMensaje.indexOf("mic:")+4));
+                            iMic = Integer.parseInt(sAux);
                         }
                         catch(Exception ex){
                             Toast.makeText(context,"Exeption:" + ex.toString() , Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
-                        String sAux = sMensaje.substring(sMensaje.indexOf("vol:")+4,sMensaje.indexOf("vol:")+5);
-                        int iVol = Integer.parseInt(sAux);
-                        sAux = sMensaje.substring(sMensaje.indexOf("mic:")+4,sMensaje.indexOf("mic:")+5);
-                        int iMic = Integer.parseInt(sAux);
+
 
                         TabConfig1.SetControlesPosteSOS(bHab, sTe1, sTe2, sTe3, sTeR, iMic, iVol,sTcom, sTrep, sSgn,sBat, sEmp, sID);
+                    }
+                    if ( sMensaje.contains("config") && sMensaje.contains("al1:"))
+                    {
+                        myEquipoCAPE.setbRecibioConfig2(true);
+
+                        boolean bHabAlarmas, bHabDTMF, bLlamar1, bLlamar2, bLlamar3,bSMS1, bSMS2, bSMS3;
+                        String sTxtSMS1, sTxtSMS2,sTxtSMS3, sAux;
+
+//                        String sAux = sMensaje.substring(sMensaje.indexOf("en1:")+4,sMensaje.indexOf("en1:")+5);
+//                        bHabEn1 = sAux.contains("1");
+//                        sAux = sMensaje.substring(sMensaje.indexOf("en2:") + 4, sMensaje.indexOf("en2:") + 5);
+//                        bHabEn2 = sAux.contains("1");
+//                        sAux = sMensaje.substring(sMensaje.indexOf("en3:") + 4, sMensaje.indexOf("en3:") + 5);
+//                        bHabEn3 = sAux.contains("1");
+
+//                        sTipoEn1 = sMensaje.substring(sMensaje.indexOf("en1:") + 6, sMensaje.indexOf("en1:") + 7);
+//                        sTipoEn2 = sMensaje.substring(sMensaje.indexOf("en2:") + 6, sMensaje.indexOf("en2:") + 7);
+//                        sTipoEn3 = sMensaje.substring(sMensaje.indexOf("en3:") + 6, sMensaje.indexOf("en3:") + 7);
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("habal:") + 6, sMensaje.indexOf("habal:") + 7);
+                        bHabAlarmas = sAux.contains("1");
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("aldtmf:") + 7, sMensaje.indexOf("aldtmf:") + 8);
+                        bHabDTMF = sAux.contains("1");
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("al1:") + 4, sMensaje.indexOf("al1:") + 9);
+                        bLlamar1 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("al2:") + 4, sMensaje.indexOf("al2:") + 9);
+                        bLlamar2 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("al3:") + 4, sMensaje.indexOf("al3:") + 9);
+                        bLlamar3 = sAux.contains("1");
+
+                        sAux = sMensaje.substring(sMensaje.indexOf("al1:") + 6, sMensaje.indexOf("al1:") + 11);
+                        bSMS1 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("al2:") + 6, sMensaje.indexOf("al2:") + 11);
+                        bSMS2 = sAux.contains("1");
+                        sAux = sMensaje.substring(sMensaje.indexOf("al3:") + 6, sMensaje.indexOf("al3:") + 11);
+                        bSMS3 = sAux.contains("1");
+
+                        sTxtSMS1 = sMensaje.substring(sMensaje.indexOf("al1:") + 8, sMensaje.indexOf("\r", sMensaje.indexOf("al1:") + 8));
+                        sTxtSMS2 = sMensaje.substring(sMensaje.indexOf("al2:") + 8, sMensaje.indexOf("\r", sMensaje.indexOf("al2:") + 8));
+                        sTxtSMS3 = sMensaje.substring(sMensaje.indexOf("al3:") + 8, sMensaje.indexOf("\r", sMensaje.indexOf("al3:") + 8));
+
+                        TabConfig2.SetControlesPoste(bLlamar1, bLlamar2, bLlamar3, bSMS1, bSMS2, bSMS3, bHabAlarmas, bHabDTMF,
+                                sTxtSMS1, sTxtSMS2, sTxtSMS3);
                     }
                 }
                 //KP-AL911
@@ -266,7 +318,6 @@ public class SMSReceiver extends BroadcastReceiver {
                             sTe5 = sMensaje.substring(sMensaje.indexOf("te5:")+4, sMensaje.indexOf("\r",sMensaje.indexOf("te5:")));
                         if(sMensaje.contains("nombre:"))
                             sNombre = sMensaje.substring(sMensaje.indexOf("nombre:")+7, sMensaje.indexOf("\r",sMensaje.indexOf("nombre:")+7));
-
                         if(sMensaje.contains("bat:"))
                             sBat = sMensaje.substring(sMensaje.indexOf("bat:")+4, sMensaje.indexOf("v",sMensaje.indexOf("bat:")+4));
                         if(sMensaje.contains("sgn:"))
@@ -288,10 +339,9 @@ public class SMSReceiver extends BroadcastReceiver {
                         TabConfig2.SetControlesAlarma(sIP,sPuerto,sTReporte);
                     }
                 }
+                Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
+                Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
             }
-
-            Log.d(TAG, "Numero:" + sNumeroOrigen + " - SMS:" + sMensaje);
-            Toast.makeText(context, "Numero:" + sNumeroOrigen + "\r\nSMS:" + sMensaje, Toast.LENGTH_SHORT).show();
         }
     }
 

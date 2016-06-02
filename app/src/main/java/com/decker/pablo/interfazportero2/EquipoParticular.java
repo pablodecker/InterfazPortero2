@@ -54,13 +54,6 @@ public class EquipoParticular extends AppCompatActivity {
         myEquipoCAPE.setbRecibioConfig2(false);
         myEquipoCAPE.setbRecibioComandos(false);
 
-//        etTe1 = (EditText) findViewById(R.id.etTelefono1);
-//        etTe2 = (EditText) findViewById(R.id.etTelefono2);
-//        etTe3 = (EditText) findViewById(R.id.etTelefono3);
-//        etTe4 = (EditText) findViewById(R.id.etTelefono4);
-//        etTe5 = (EditText) findViewById(R.id.etTelefono5);
-//        swHab = (Switch)   findViewById(R.id.switchHabilitacion);
-
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
         //esto es para crear los Tabs
@@ -93,6 +86,8 @@ public class EquipoParticular extends AppCompatActivity {
         {
             tabLayout.addTab(tabLayout.newTab().setText("EST"));
             tabLayout.addTab( tabLayout.newTab().setText("CFG").setIcon(R.drawable.ic_action_action_settings) );
+            tabLayout.addTab(tabLayout.newTab().setText("CFG2").setIcon(R.drawable.ic_action_action_settings));
+            tabLayout.addTab(tabLayout.newTab().setText("CMD"));
             //esta es la clase que cree para crear un adaptador y luego pasar
             final PagerAdapterPostes adapter = new PagerAdapterPostes(getSupportFragmentManager(), tabLayout.getTabCount());
             //le seteo el adaptador al viewpager
@@ -163,18 +158,24 @@ public class EquipoParticular extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Consultar: " + Integer.toString(iTabPosition), Toast.LENGTH_LONG).show();
                 if (sTipoEquipo.contains("KP-PE050"))  //Poste SOS
                 {   //tengo solo 2 pestanas en los postes
                     //EST | CFG
                     if (iTabPosition == 0)
                     {
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Equipo?");
+                        myEquipoCAPE.setbEnvioEstado(true);
                     }
-                    else
+                    else if (iTabPosition == 1)
                     {
-//                        view.setEnabled(false); // Or whatever you want to do with the view.
                         myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Config?");
+                        myEquipoCAPE.setbEnvioConfig1(true);
+                    }
+                    else if (iTabPosition == 2)
+                    {
+                        myEquipoCAPE.enviar_sms(myEquipoCAPE.getNumTel(), "Confal?");
+                        myEquipoCAPE.setbEnvioConfig2(true);
                     }
 
                 }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 /**
@@ -20,15 +21,16 @@ public class TabConfig2 extends Fragment {
     EquipoCAPE myEquipoCAPE;
     private static View rootView;
     private static Spinner spVolTel, spMicTel, spVolFrente, spMicFrente,spTipoEntrada1, spTipoEntrada2, spTipoEntrada3;
-    private static CheckBox chkHabEn1,chkHabEn2,chkHabEn3, chkLlamar1,chkLlamar2,chkLlamar3,chkSMS1,chkSMS2,chkSMS3;
+    private static CheckBox chkHabEn1,chkHabEn2,chkHabEn3, chkLlamar1,chkLlamar2,chkLlamar3,chkSMS1,chkSMS2,chkSMS3, chkHabDTMF;
     private static EditText etSMS1,etSMS2,etSMS3, etIP,etPuerto, etTReporte;
+    private static Switch swHabAlarmas;
     String sTipoEquipo;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Calling Application class (see application tag in AndroidManifest.xml)
         myEquipoCAPE = (EquipoCAPE)getActivity().getApplicationContext();
-        String sInfo = myEquipoCAPE.getTipoEquipo();// + "\r\n" + c.getString(2);
-        if (sInfo.contains("KP-PE015"))//INTERFAZ PORTERO
+        sTipoEquipo = myEquipoCAPE.getTipoEquipo();// + "\r\n" + c.getString(2);
+        if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
         {
             rootView = inflater.inflate(R.layout.tab_config2_portero_cfgadmin, container, false);
 
@@ -72,91 +74,27 @@ public class TabConfig2 extends Fragment {
             etSMS2 = (EditText)rootView.findViewById(R.id.etTxtSMS2);
             etSMS3 = (EditText)rootView.findViewById(R.id.etTxtSMS3);
 
-
-            Button b = (Button) rootView.findViewById(R.id.buttonConfigurarConfig2);
-            b.setOnClickListener(new View.OnClickListener()
-            {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    String phoneNo = myEquipoCAPE.getNumTel();
-                    String sms = "";
-                    if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
-                    {
-                        String sHab = " Hab:No";
-                        //En1:1
-                        sms = "Config:\r\n";
-                        sms += " En1:";
-                        if (chkHabEn1.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += spTipoEntrada1.getSelectedItem().toString() + ",";
-                        if (chkLlamar1.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        if (chkSMS1.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += etSMS1.getText() + "\r\n";
-
-                        sms += " En2:";
-                        if (chkHabEn2.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += spTipoEntrada2.getSelectedItem().toString() + ",";
-                        if (chkLlamar2.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        if (chkSMS2.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += etSMS2.getText() + "\r\n";
-
-                        sms += " En3:";
-                        if (chkHabEn3.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += spTipoEntrada3.getSelectedItem().toString() + ",";
-                        if (chkLlamar3.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        if (chkSMS3.isChecked())
-                            sms += "1,";
-                        else
-                            sms += "0,";
-                        sms += etSMS3.getText() + "\r\n";
-
-                        sms += "audio:";
-                        sms += spVolFrente.getSelectedItem().toString() + ",";
-                        sms += spMicFrente.getSelectedItem().toString() + ",";
-                        sms += spVolTel.getSelectedItem().toString() + ",";
-                        sms += spMicTel.getSelectedItem().toString();
-
-                        myEquipoCAPE.enviar_sms(phoneNo, sms);
-                    }
-                    else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
-                    {
-                        sms = "Config:\r\n";
-                        sms += "ip:" + etIP.getText() + "\r\n";
-                        sms += "puerto:" + etPuerto.getText() + "\r\n";
-                        sms += "trgprs:" + etTReporte.getText() + "\r\n";
-                        myEquipoCAPE.enviar_sms(phoneNo, sms);
-                    }
-                }
-            });
-
         }
-        else if(sInfo.contains("KP-AL911")) {
+        if (sTipoEquipo.contains("KP-PE050"))//POSTE SOS
+        {
+            rootView = inflater.inflate(R.layout.tab_config2_poste_cfgadmin, container, false);
 
+            chkLlamar1 = (CheckBox)rootView.findViewById(R.id.checkBoxLlamar1);
+            chkLlamar2 = (CheckBox)rootView.findViewById(R.id.checkBoxLlamar2);
+            chkLlamar3 = (CheckBox)rootView.findViewById(R.id.checkBoxLlamar3);
+            chkSMS1 = (CheckBox)rootView.findViewById(R.id.checkBoxSMS1);
+            chkSMS2 = (CheckBox)rootView.findViewById(R.id.checkBoxSMS2);
+            chkSMS3 = (CheckBox)rootView.findViewById(R.id.checkBoxSMS3);
+
+            chkHabDTMF = (CheckBox)rootView.findViewById(R.id.checkBoxHabDTMF);
+            swHabAlarmas = (Switch) rootView.findViewById(R.id.switchHabilitacionAlarmas);
+
+            etSMS1 = (EditText)rootView.findViewById(R.id.etTxtSMS1);
+            etSMS2 = (EditText)rootView.findViewById(R.id.etTxtSMS2);
+            etSMS3 = (EditText)rootView.findViewById(R.id.etTxtSMS3);
+        }
+        else if(sTipoEquipo.contains("KP-AL911"))
+        {
             rootView = inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
             etIP = (EditText)rootView.findViewById(R.id.etURL);
             etPuerto = (EditText)rootView.findViewById(R.id.etPuerto);
@@ -166,9 +104,141 @@ public class TabConfig2 extends Fragment {
         {
             rootView = inflater.inflate(R.layout.tab_config2_alarma_gprs, container, false);
         }
+
+        Button b = (Button) rootView.findViewById(R.id.buttonConfigurarConfig2);
+        b.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                String phoneNo = myEquipoCAPE.getNumTel();
+                String sms = "";
+                if (sTipoEquipo.contains("KP-PE015"))//INTERFAZ PORTERO
+                {
+//                    String sHab = " Hab:No";
+                    //En1:1
+                    sms = "Config:\r\n";
+                    sms += " En1:";
+                    if (chkHabEn1.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += spTipoEntrada1.getSelectedItem().toString() + ",";
+                    if (chkLlamar1.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS1.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS1.getText() + "\r\n";
+
+                    sms += " En2:";
+                    if (chkHabEn2.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += spTipoEntrada2.getSelectedItem().toString() + ",";
+                    if (chkLlamar2.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS2.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS2.getText() + "\r\n";
+
+                    sms += " En3:";
+                    if (chkHabEn3.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += spTipoEntrada3.getSelectedItem().toString() + ",";
+                    if (chkLlamar3.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS3.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS3.getText() + "\r\n";
+
+                    sms += "audio:";
+                    sms += spVolFrente.getSelectedItem().toString() + ",";
+                    sms += spMicFrente.getSelectedItem().toString() + ",";
+                    sms += spVolTel.getSelectedItem().toString() + ",";
+                    sms += spMicTel.getSelectedItem().toString();
+
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
+                }
+                //POSTE SOS
+                else if (sTipoEquipo.contains("KP-PE050"))
+                {
+                    sms = "Config:\r\n";
+
+                    sms += " HABAL:";
+                    if (swHabAlarmas.isChecked())
+                        sms += "1";
+                    else
+                        sms += "0";
+                    sms += "\r\n ALDTMF:";
+                    if (chkHabDTMF.isChecked())
+                        sms += "1";
+                    else
+                        sms += "0";
+
+                    sms += "\r\n AL1:";
+                    if (chkLlamar1.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS1.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS1.getText() + "\r\n";
+
+                    sms += " Al2:";
+                    if (chkLlamar2.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS2.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS2.getText() + "\r\n";
+
+                    sms +=  "Al3:";
+                    if (chkLlamar3.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    if (chkSMS3.isChecked())
+                        sms += "1,";
+                    else
+                        sms += "0,";
+                    sms += etSMS3.getText() + "\r\n";
+
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
+                }
+                else if (sTipoEquipo.contains("KP-AL911"))//ALARMA
+                {
+                    sms = "Config:\r\n";
+                    sms += "ip:" + etIP.getText() + "\r\n";
+                    sms += "puerto:" + etPuerto.getText() + "\r\n";
+                    sms += "trgprs:" + etTReporte.getText() + "\r\n";
+                    myEquipoCAPE.enviar_sms(phoneNo, sms);
+                }
+            }
+        });
+
         if (myEquipoCAPE.getRecibioConfig2() == false)
             setViewAndChildrenEnabled(rootView, false);
-
 
         return rootView;
     }
@@ -226,6 +296,30 @@ public class TabConfig2 extends Fragment {
         spMicTel.setSelection(iMicTel);
         spVolFrente.setSelection(iVolFrente);
         spMicFrente.setSelection(iMicFrente);
+    }
+    public static void SetControlesPoste(boolean bLlamar1,boolean bLlamar2,boolean bLlamar3,
+                                                   boolean bSMS1,boolean bSMS2,boolean bSMS3,
+                                                   boolean bHabAlarmas,boolean bHabDTMF,
+                                                   String sTxtSMS1,String sTxtSMS2,String sTxtSMS3)
+    {
+
+        setViewAndChildrenEnabled(rootView, true);
+
+        chkLlamar1.setChecked(bLlamar1);
+        chkLlamar2.setChecked(bLlamar2);
+        chkLlamar3.setChecked(bLlamar3);
+
+        chkSMS1.setChecked(bSMS1);
+        chkSMS2.setChecked(bSMS2);
+        chkSMS3.setChecked(bSMS3);
+
+        chkHabDTMF.setChecked(bHabDTMF);
+        swHabAlarmas.setChecked(bHabAlarmas);
+
+        etSMS1.setText(sTxtSMS1);
+        etSMS2.setText(sTxtSMS2);
+        etSMS3.setText(sTxtSMS3);
+
     }
     public static void SetControlesAlarma(String sIP,String sPuerto,String sTiempoReporte)
     {

@@ -17,7 +17,8 @@
         android:text="@string/habilitacion"
         android:id="@+id/switchHabilitacion"
         android:layout_gravity="center_horizontal"
-        android:checked="false" />
+        android:checked="false"
+        />
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Telefono 1"
             android:id="@+id/textView1"
             android:layout_row="1"
@@ -39,9 +40,10 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
+
+            android:ems="15"
             android:id="@+id/etTelefono1"
             android:layout_gravity="center_horizontal"
             android:layout_row="1"
@@ -49,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Telefono 2"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
@@ -59,9 +61,10 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
+
+            android:ems="15"
             android:id="@+id/etTelefono2"
             android:layout_gravity="center_horizontal"
             android:layout_row="2"
@@ -69,7 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Telefono 3"
             android:id="@+id/textView3"
             android:layout_row="3"
@@ -78,9 +81,10 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
+
+            android:ems="15"
             android:id="@+id/etTelefono3"
             android:layout_gravity="center_horizontal"
             android:layout_row="3"
@@ -88,7 +92,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Telefono 4"
             android:id="@+id/textView4"
             android:layout_row="4"
@@ -97,9 +101,10 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
+
+            android:ems="15"
             android:id="@+id/etTelefono4"
             android:layout_gravity="center_horizontal"
             android:layout_row="4"
@@ -107,7 +112,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Telefono 5"
             android:id="@+id/textView5"
             android:layout_row="5"
@@ -116,9 +121,10 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="number"
-            android:ems="10"
+
+            android:ems="15"
             android:id="@+id/etTelefono5"
             android:layout_gravity="center_horizontal"
             android:layout_row="5"
@@ -134,7 +140,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Secuencia\r\n de Llamada"
             android:id="@+id/textViewSecLlamada"
             android:paddingBottom="10dp"
@@ -172,7 +178,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Small"
             android:text="Secuencia\r\n de Alarmas"
             android:id="@+id/textViewSecalarma"
             android:paddingBottom="10dp"

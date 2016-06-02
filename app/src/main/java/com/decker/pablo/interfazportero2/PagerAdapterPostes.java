@@ -26,6 +26,12 @@ public class PagerAdapterPostes extends FragmentStatePagerAdapter {
             case 1:
                 TabConfig1 tabConfig1 = new TabConfig1();
                 return tabConfig1;
+            case 2:
+                TabConfig2 tabConfig2 = new TabConfig2();
+                return tabConfig2;
+            case 3:
+                TabComandos tabComandos = new TabComandos();
+                return tabComandos;
             default:
                 return null;
         }

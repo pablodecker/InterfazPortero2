@@ -6,6 +6,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_height="match_parent">
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habilitacion Alarmas"
+        android:id="@+id/switchHabilitacionAlarmas"
+        android:layout_gravity="center_horizontal"
+        android:checked="false"
+        android:textAppearance="@android:style/TextAppearance.Small"/>
+
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +31,7 @@
                     android:layout_row="0"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal" />
-                <TextView
+                TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Small"
@@ -30,15 +39,6 @@
                     android:id="@+id/textViewHabEnt"
                     android:layout_row="0"
                     android:layout_column="1"
-                    android:layout_gravity="center_horizontal" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="Tipo"
-                    android:id="@+id/textViewTipoEn"
-                    android:layout_row="0"
-                    android:layout_column="2"
                     android:layout_gravity="center_horizontal" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,24 +71,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="En1"
+                    android:text="Al1"
                     android:id="@+id/textView1"
                     android:layout_row="1"
                     android:layout_column="0"
-                    android:layout_gravity="center_horizontal" />
-                <CheckBox
+                    android:layout_gravity="left|center_horizontal" />
+                CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:id="@+id/checkBoxHabEnt1"
                     android:layout_row="1"
                     android:layout_column="1"/>
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner_tipo_en1"
-                    android:layout_row="1"
-                    android:layout_column="2" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -117,24 +111,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="En2"
+                    android:text="Al2"
                     android:id="@+id/textView2"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="left|center_horizontal"
                     android:layout_row="2"
                     android:layout_column="0" />
-                <CheckBox
+                CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:id="@+id/checkBoxHabEnt2"
                     android:layout_row="2"
                     android:layout_column="1"/>
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner_tipo_en2"
-                    android:layout_row="2"
-                    android:layout_column="2" />
+
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,23 +151,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="En3"
+                    android:text="Al3"
                     android:id="@+id/textView3"
                     android:layout_row="3"
-                    android:layout_column="0" />
-                <CheckBox
+                    android:layout_column="0"
+                    android:layout_gravity="left"/>
+                CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:id="@+id/checkBoxHabEnt3"
                     android:layout_row="3"
                     android:layout_column="1"/>
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner_tipo_en3"
-                    android:layout_row="3"
-                    android:layout_column="2" />
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -202,101 +186,25 @@
                     android:gravity="center"
                     android:layout_row="3"
                     android:layout_column="5" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:text="Al DTMF"
+                    android:id="@+id/textView4"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:layout_gravity="left"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/checkBoxHabDTMF"
+                    android:layout_row="4"
+                    android:layout_column="3"/>
 
         </GridLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="Config\r\n de Audio"
-                    android:id="@+id/textViewSecalarma"
-                    android:gravity="center"
-                    android:layout_marginRight="8dp"/>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="Vol\r\nFrente"
-                    android:id="@+id/textViewVol"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"/>
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/spinner_vol_frente" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-                    <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginLeft="4dp"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                        android:text="Mic\r\nFrente"
-                    android:id="@+id/textViewVol2" />
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/spinner_mic_frente" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="Vol\r\nTel"
-                    android:id="@+id/textViewVol3" />
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/spinner_vol_telefono"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-                        <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:text="Mic\r\nTel"
-                    android:id="@+id/textViewVol4" />
-                        <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                    android:id="@+id/spinner_mic_telefono" />
-                </LinearLayout>
-        </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

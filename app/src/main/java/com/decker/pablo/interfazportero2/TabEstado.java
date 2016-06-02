@@ -25,6 +25,7 @@ public class TabEstado extends Fragment {
         sTipoEquipo = myEquipoCAPE.getTipoEquipo();
 
         rootView = inflater.inflate(R.layout.tab_estado_equipo, container, false);
+        tvEstadoEquipoPoste = (TextView)rootView.findViewById(R.id.textViewEstadoEquipoPoste);
 //
 //        if (sTipoEquipo.contains("KP-PE050")) //Poste SOS
 //        {
