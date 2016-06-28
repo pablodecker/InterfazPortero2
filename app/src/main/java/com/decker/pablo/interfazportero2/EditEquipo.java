@@ -35,6 +35,10 @@ public class EditEquipo extends AppCompatActivity {
     private Uri uriContact;
     private String contactID;     // contacts unique ID
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +103,18 @@ public class EditEquipo extends AppCompatActivity {
 
     }
     private void cargar_tipo_equipo(){
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EquipoCAPE.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EquipoCAPE.activityPaused();
     }
 
     public void RecuperarDatos(int id)

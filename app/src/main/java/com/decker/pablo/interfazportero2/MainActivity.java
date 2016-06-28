@@ -98,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
         //esto es despues del onCreate, entra tambien cuando se vuelve desde otra activity
         super.onResume();
         cargar_datos_db_listview();
+        EquipoCAPE.activityResumed();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EquipoCAPE.activityPaused();
     }
 
     public void cargar_datos_db_listview(){

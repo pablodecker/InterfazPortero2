@@ -145,4 +145,19 @@ public class EquipoCAPE extends Application{
             e.printStackTrace();
         }
     }
+
+    //to see if activities are in foreground or in background
+    public static boolean isActivityVisible() {
+        return activityVisible;
+    }
+
+    public static void activityResumed() {
+        activityVisible = true;
+    }
+
+    public static void activityPaused() {
+        activityVisible = false;
+    }
+
+    private static boolean activityVisible;
 }

@@ -1,5 +1,6 @@
 package com.decker.pablo.interfazportero2;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 
 public class EquipoParticular extends AppCompatActivity {
+
+//    private SMSReceiver interceptor;
     EditText etTe1,etTe2,etTe3,etTe4,etTe5;
     Switch swHab;
     TabLayout tabLayout;
@@ -203,5 +206,26 @@ public class EquipoParticular extends AppCompatActivity {
                 }
             }
         });
+
+//        //REGISTRO EL SMS RECEIVER EN EL COD
+//        interceptor = new SMSReceiver();
+//        IntentFilter f = new IntentFilter();
+//        f.addAction("android.intent.action.PHONE_STATE");
+//        f.addAction("android.intent.action.NEW_OUTGOING_CALL");
+//        registerReceiver(interceptor, f);
+//        setContentView(R.layout.activity_equipo_particular);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EquipoCAPE.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EquipoCAPE.activityPaused();
     }
 }
